@@ -1,0 +1,40 @@
+@import "variables";
+body{
+  margin:0;
+  display: flex;
+  justify-content: center;
+
+  *{
+    font-family: @fontFamily;
+    color: @mainColor;
+  }
+}
+
+.background{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top:0;
+  left:0;
+  z-index: -10;
+
+  img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+}
+
+main{
+  margin-top: 10vh;
+  width: 70%;
+  background:@backgroundColor ;
+  display: flex;
+  justify-content: center;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+

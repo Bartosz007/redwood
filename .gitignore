@@ -1,23 +1,33 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+redwood-frontend/node_modules
+redwood-frontend/.pnp
+redwood-frontend/.pnp.js
 
 # testing
-/coverage
+redwood-frontend/coverage
 
 # production
-/build
+redwood-frontend/build
 
 # misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+redwood-frontend/.DS_Store
+redwood-frontend/.env.local
+redwood-frontend/.env.development.local
+redwood-frontend/.env.test.local
+redwood-frontend/.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+redwood-frontend/npm-debug.log*
+redwood-frontend/yarn-debug.log*
+redwood-frontend/yarn-error.log*
+
+redwood-frontend/public/images
+
+redwood-backend/.idea
+redwood-backend/.gradle
+redwood-backend/gradlew
+redwood-backend/gradlew.bat
+
+
+
