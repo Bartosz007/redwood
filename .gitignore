@@ -28,6 +28,8 @@ redwood-backend/.idea
 redwood-backend/.gradle
 redwood-backend/gradlew
 redwood-backend/gradlew.bat
+redwood-backend/build
+redwood-backend/src/main/resources/application.properties
 
 
 
