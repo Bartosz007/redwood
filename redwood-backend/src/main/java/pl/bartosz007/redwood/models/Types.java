@@ -12,4 +12,5 @@ public enum Types {
     public int getType() {
         return type;
     }
+
 }
