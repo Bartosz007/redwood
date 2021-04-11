@@ -10,14 +10,18 @@ class SettingsPanel extends React.Component{
         super(props);
         this.state = {
             colors:[
-                "#000000ff",
-                "#ffffffA0",
-                "#fffffff0"
+                {r:0,g:0,b:0,a:1},
+                {r:255,g:255,b:255,a:0.5},
+                {r:255,g:255,b:255,a:0.7}
+
+              /*  "#ffffffA0",
+                "#fffffff0"*/
             ],
             colorPicker: false,
             actualColor: 0
         }
     }
+
 
     openColorPicker = ()=>{
         this.setState({colorPicker: true});
@@ -29,10 +33,14 @@ class SettingsPanel extends React.Component{
 
     changeColor = (color) => {
         const oldColor = this.state.colors;
-        oldColor[this.state.actualColor] = color.hex;
+        oldColor[this.state.actualColor] = this.rgbaToString(color.rgb);
         this.setState({colors: oldColor})
 
     };
+
+    rgbaToString = (rgba) =>{
+        return `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a})`;
+    }
 
     changeColorComplete = (color) => {
         console.log(color)
@@ -53,6 +61,16 @@ class SettingsPanel extends React.Component{
         this.setState({ actualColor: 2 });
     }
 
+
+    onMouseOver = (e) =>{
+        if(e.target.className == "demo_tile")
+            e.target.style.backgroundColor = this.state.colors[2];
+    }
+
+    onMouseOut = (e) =>{
+        if(e.target.className == "demo_tile")
+            e.target.style.backgroundColor = this.state.colors[1];
+    }
 
 
     render(){
@@ -83,7 +101,8 @@ class SettingsPanel extends React.Component{
                     <div
                         style={{background:this.state.colors[1].toString()}}
                         className="demo_tile"
-                        onMouseOver={console.log("bla")}>
+                        onMouseOver={this.onMouseOver}
+                        onMouseOut={this.onMouseOut}>
 
                         <p style={{color: this.state.colors[0].toString()}} className="demo_text">Demo text</p>
                     </div>

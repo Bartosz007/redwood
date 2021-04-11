@@ -1,7 +1,6 @@
 .user_section {
   display: flex;
-  width: 100%;
-  /*cos tu sie rozjechalo z szerokością */
+  width: 40vw;
   flex-direction: column;
 }
 .user_section .user {
@@ -10,7 +9,7 @@
   border-radius: 1em;
   background: rgba(255, 255, 255, 0.5);
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-bottom: 2em;
 }
 .user_section .user .user_image {
@@ -21,8 +20,8 @@
   align-items: center;
 }
 .user_section .user .user_image img {
-  width: 12em;
-  height: 12em;
+  width: 10em;
+  height: 10em;
   object-fit: cover;
   border-radius: 1em;
 }
@@ -42,6 +41,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  width: 20%;
 }
 .user_section .user .user_actions div {
   text-align: center;
@@ -65,33 +65,5 @@
 }
 .user_section .user:hover {
   background: rgba(255, 255, 255, 0.7);
-}
-.search_section {
-  width: 100%;
-  display: flex;
-  height: 5vh;
-  justify-content: center;
-  position: relative;
-  margin: 3em 0 3em 0;
-}
-.search_section .search_bar {
-  display: flex;
-}
-.search_section .search_bar img {
-  width: 70%;
-  height: 70%;
-  position: absolute;
-  top: 20%;
-  left: 7%;
-  z-index: -1;
-}
-.search_section .search_bar input {
-  text-align: center;
-  border: 0;
-  border-radius: 1em;
-  background: rgba(255, 255, 255, 0.5);
-  outline: none;
-  font-size: 1.2em;
-  font-family: "Cambria Math";
 }
 /*# sourceMappingURL=user_panel_styles.css.map */

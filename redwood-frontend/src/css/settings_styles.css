@@ -131,9 +131,6 @@
   font-family: "Cambria Math";
   cursor: pointer;
 }
-.settings_container .settings_block .color_form .demo_colors .demo_tile:hover {
-  background: rgba(255, 255, 255, 0.7);
-}
 .settings_container .settings_block .color_form .color_picker_container {
   width: 100%;
   height: 100%;

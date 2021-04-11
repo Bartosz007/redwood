@@ -50,15 +50,15 @@ class App extends React.Component {
             <Router>
                 <Switch>
 
-                    <Route path="/essey">
-                        <EssayPage/>
+                    <Route path="/essayList">
+                        <ArticlesListPage type="essay"/>
                     </Route>
 
-                    <Route path="/share">
-                        <ArticlesListPage/>
+                    <Route path="/crossList">
+                        <ArticlesListPage type="cross"/>
                     </Route>
 
-                    <Route path="/guides">
+                    <Route path="/userArticlesList">
                         <UserPanelPage/>
                         {/*     <AddArticlePage/>*/}
                     </Route>
