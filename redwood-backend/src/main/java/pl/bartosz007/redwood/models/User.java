@@ -1,7 +1,9 @@
 package pl.bartosz007.redwood.models;
 
 import com.fasterxml.jackson.annotation.*;
+
 import lombok.Data;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -30,8 +32,8 @@ public class User {
     private List<Article> articles;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+
     @JsonBackReference
     private List<Comment> comments;
-
 
 }

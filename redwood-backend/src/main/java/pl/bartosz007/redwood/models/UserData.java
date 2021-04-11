@@ -39,8 +39,6 @@ public class UserData {
     private User user;
 
 
-
-
 }
 
 
