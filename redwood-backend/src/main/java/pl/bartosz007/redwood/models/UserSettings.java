@@ -22,50 +22,8 @@ public class UserSettings{
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
-    @JoinColumn(name = "id_user_details")
-    private UserDetails userDetails;
+    @JoinColumn(name = "id_user_data")
+    private UserData userData;
 
 
-    public UserSettings() {
-    }
-
-    public long getIdUserSettings() {
-        return idUserSettings;
-    }
-
-    public void setIdUserSettings(long idUserSettings) {
-        this.idUserSettings = idUserSettings;
-    }
-
-    public String getFontColor() {
-        return fontColor;
-    }
-
-    public void setFontColor(String fontColor) {
-        this.fontColor = fontColor;
-    }
-
-    public String getFgColor() {
-        return fgColor;
-    }
-
-    public void setFgColor(String fgColor) {
-        this.fgColor = fgColor;
-    }
-
-    public String getBgColor() {
-        return bgColor;
-    }
-
-    public void setBgColor(String bgColor) {
-        this.bgColor = bgColor;
-    }
-
-    public UserDetails getUserDetails() {
-        return userDetails;
-    }
-
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
-    }
 }
