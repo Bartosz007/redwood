@@ -1,0 +1,39 @@
+redwood-backend/src/main/resources/application.properties
+
+# dependencies
+redwood-frontend/node_modules
+redwood-frontend/.pnp
+redwood-frontend/.pnp.js
+
+# testing
+redwood-frontend/coverage
+
+# production
+redwood-frontend/build
+
+# misc
+redwood-frontend/.DS_Store
+redwood-frontend/.env.local
+redwood-frontend/.env.development.local
+redwood-frontend/.env.test.local
+redwood-frontend/.env.production.local
+
+redwood-frontend/npm-debug.log*
+redwood-frontend/yarn-debug.log*
+redwood-frontend/yarn-error.log*
+
+redwood-frontend/public/images
+
+redwood-backend/.idea
+redwood-backend/.gradle
+redwood-backend/gradlew
+redwood-backend/gradlew.bat
+redwood-backend/build
+
+
+redwood-backend/HELP.md
+
+.idea
+
+
+
