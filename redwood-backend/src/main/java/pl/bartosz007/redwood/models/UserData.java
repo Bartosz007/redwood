@@ -14,6 +14,7 @@ public class UserData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idUserData;
 
+    @Column(length = 100, nullable = false)
     private String image;
 
     @Column(length = 100)
@@ -24,10 +25,10 @@ public class UserData {
     @Size(min = 5, max = 100)
     private String surname;
 
-    private int warnLevel;
+    private int warnLevel = 0;
 
-    @Enumerated(EnumType.STRING)
-    private PermisionLevels permisionLevel;
+    @Enumerated(EnumType.ORDINAL)
+    private PermissionLevels permission = PermissionLevels.USER;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userData")
     @JsonManagedReference

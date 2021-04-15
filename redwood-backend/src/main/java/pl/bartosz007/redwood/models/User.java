@@ -15,10 +15,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idUser;
 
-    @Column(length = 30)
+    @Column(length = 30, unique = true, nullable = false)
     @Size(min = 5, max = 30)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")

@@ -2,10 +2,12 @@ package pl.bartosz007.redwood.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
 @Entity
 public class ArticleType {
 
@@ -13,39 +15,13 @@ public class ArticleType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idArticleType;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private Types type;
 
     @OneToMany(mappedBy = "articleType")
     @JsonBackReference
     private Set<Article> articles;
 
-
-    public ArticleType() {
-    }
-
-    public long getIdArticleType() {
-        return idArticleType;
-    }
-
-    public void setIdArticleType(long idArticleType) {
-        this.idArticleType = idArticleType;
-    }
-
-    public Types getType() {
-        return type;
-    }
-
-    public void setType(Types type) {
-        this.type = type;
-    }
-
-    public Set<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(Set<Article> articles) {
-        this.articles = articles;
-    }
 
 }

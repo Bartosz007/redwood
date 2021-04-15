@@ -18,11 +18,11 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idArticle;
 
-    @Column(length = 255)
+    @Column(nullable = false)
     @Size(min = 50, max = 100)
     private String title;
 
-    @Column(length = 200)
+    @Column(length = 200, nullable = false)
     private String images;
 
     @Lob

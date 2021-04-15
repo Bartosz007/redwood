@@ -1,7 +1,7 @@
 package pl.bartosz007.redwood.models;
 
 public enum Types {
-    ARTYKUŁ(0), KRZYŻÓWKA(1), PORADNIK(2);
+    ESSAY(0), GUIDE(1), CROSS(2);
 
     private int type;
 
@@ -13,4 +13,8 @@ public enum Types {
         return type;
     }
 
+    @Override
+    public String toString() {
+        return this.name();
+    }
 }
