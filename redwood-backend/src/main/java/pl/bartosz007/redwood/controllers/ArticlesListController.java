@@ -6,7 +6,6 @@ import pl.bartosz007.redwood.models.Article;
 import pl.bartosz007.redwood.models.PermissionLevels;
 import pl.bartosz007.redwood.models.Types;
 import pl.bartosz007.redwood.repositories.ArticleRepository;
-import pl.bartosz007.redwood.services.ArticlesListService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,18 +38,7 @@ public class ArticlesListController {
     @GetMapping("/userArticles")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Article> getAllUserArticles(){
-      //  return articleRepository.findByUserPermissionLevel(PermissionLevels.USER.ordinal());
-        return articleRepository
-                .findAll()
-                .stream()
-                .filter(
-                        article ->
-                                article.getUser()
-                                        .getUserData()
-                                        .getPermission()
-                                        .getLevel() == PermissionLevels.USER.ordinal()
-                )
-                .collect(Collectors.toCollection(ArrayList::new));
+        return articleRepository.findByUserPermissionLevel(PermissionLevels.USER.ordinal());
     }
 
 }

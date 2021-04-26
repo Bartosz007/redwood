@@ -1,12 +1,12 @@
 package pl.bartosz007.redwood.models;
 
-public enum PermissionLevels {
+import java.io.Serializable;
+
+public enum PermissionLevels implements Serializable {
     ZBANOWANY(0),
-    ODBANOWANY(1),
-    USER(2),
-    MODERATOR(3),
-    ADMIN(4),
-    HEAD_ADMIN(5);
+    USER(1),
+    MODERATOR(2),
+    ADMIN(3);
 
     private int level;
 

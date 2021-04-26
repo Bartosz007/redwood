@@ -2,6 +2,7 @@ package pl.bartosz007.redwood.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
@@ -13,7 +14,7 @@ import org.hibernate.annotations.Type;
 
 @Data
 @Entity(name = "articles")
-public class Article {
+public class Article implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idArticle;
@@ -32,6 +33,7 @@ public class Article {
 
     private Date date;
     private Time time;
+    private boolean verificated = false;
 
     @ManyToOne
     @JoinColumn(name="id_article_type")

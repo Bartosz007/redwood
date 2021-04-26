@@ -1,6 +1,8 @@
 package pl.bartosz007.redwood.models;
 
-public enum Types {
+import java.io.Serializable;
+
+public enum Types implements Serializable {
     ESSAY(0), GUIDE(1), CROSS(2);
 
     private int type;

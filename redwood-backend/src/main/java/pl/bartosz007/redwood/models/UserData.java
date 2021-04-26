@@ -5,10 +5,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Data
 @Entity(name="users_data")
-public class UserData {
+public class UserData implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,9 +40,31 @@ public class UserData {
     @JsonBackReference
     private User user;
 
+    public UserData() {
+    }
 
+    public UserData(String image, String name, String surname){
+        this.image = image;
+        this.name = name;
+        this.surname = surname;
+        this.warnLevel = 0;
+        this.permission = PermissionLevels.USER;
+        this.userSettings = new UserSettings();
+    }
 
-
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "idUserData=" + idUserData +
+                ", image='" + image + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", warnLevel=" + warnLevel +
+                ", permission=" + permission +
+                ", userSettings=" + userSettings +
+                ", user=" + user +
+                '}';
+    }
 }
 
 

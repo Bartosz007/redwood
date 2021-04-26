@@ -2,12 +2,15 @@ package pl.bartosz007.redwood.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
-public class Tag {
+@Data
+public class Tag implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,30 +26,4 @@ public class Tag {
     private Article article;
 
 
-    public Tag() {
-    }
-
-    public long getIdTag() {
-        return idTag;
-    }
-
-    public void setIdTag(long idTag) {
-        this.idTag = idTag;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
 }
