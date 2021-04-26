@@ -5,6 +5,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -31,8 +33,8 @@ public class Article implements Serializable {
     @Size(min = 300)
     private String text;
 
-    private Date date;
-    private Time time;
+    private LocalDate date;
+    private LocalTime time;
     private boolean verificated = false;
 
     @ManyToOne
@@ -52,6 +54,28 @@ public class Article implements Serializable {
     @JoinColumn(name="id_user")
     @JsonManagedReference
     private User user;
+
+
+    public Article() {
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "idArticle=" + idArticle +
+                ", title='" + title + '\'' +
+                ", images='" + images + '\'' +
+                ", text='" + text + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", verificated=" + verificated +
+                ", articleType=" + articleType +
+                ", tags=" + tags +
+                ", comments=" + comments +
+                ", user=" + user +
+                '}';
+    }
+
 
 
 }

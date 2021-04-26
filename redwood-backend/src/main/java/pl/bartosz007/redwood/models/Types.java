@@ -3,7 +3,7 @@ package pl.bartosz007.redwood.models;
 import java.io.Serializable;
 
 public enum Types implements Serializable {
-    ESSAY(0), GUIDE(1), CROSS(2);
+    ESSAY(1), GUIDE(2), CROSS(3);
 
     private int type;
 
@@ -17,6 +17,6 @@ public enum Types implements Serializable {
 
     @Override
     public String toString() {
-        return this.name();
+        return "Types."+this.name();
     }
 }

@@ -37,5 +37,17 @@ public class Comment implements Serializable {
     @JsonManagedReference
     private User user;
 
+    public Comment() {
+    }
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "idComment=" + idComment +
+                ", text='" + text + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", user=" + user +
+                '}';
+    }
 }

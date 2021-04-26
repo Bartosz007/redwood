@@ -1,4 +1,4 @@
-package pl.bartosz007.redwood.messages;
+package pl.bartosz007.redwood.payloads.responses;
 
 import lombok.Data;
 

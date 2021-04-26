@@ -17,4 +17,11 @@ public enum PermissionLevels implements Serializable {
     public int getLevel() {
         return level;
     }
+
+    @Override
+    public String toString() {
+        return "PermissionLevels{" +
+                "level=" + level +
+                '}';
+    }
 }

@@ -2,11 +2,13 @@ package pl.bartosz007.redwood.repositories;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.bartosz007.redwood.models.Article;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -31,7 +33,9 @@ public interface ArticleRepository extends JpaRepository<Article, Long>{
             nativeQuery = true)
     List<Article> findByUserPermissionLevel(@Param("level") int level);
 
-
     @Override
     Article getOne(Long id);
+
+    @Override
+    Article save(Article article);
 }

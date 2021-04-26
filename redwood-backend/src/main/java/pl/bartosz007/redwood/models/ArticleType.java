@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -20,9 +21,23 @@ public class ArticleType implements Serializable {
     @Column(length = 20)
     private Types type;
 
-    @OneToMany(mappedBy = "articleType")
+    @OneToMany(mappedBy = "articleType", cascade=CascadeType.ALL)
     @JsonBackReference
     private Set<Article> articles;
 
+    public ArticleType() {
+    }
 
+    public ArticleType(String type) {
+        this.type = Types.valueOf(type);
+        this.idArticleType = Types.valueOf(type).getType();
+    }
+
+    @Override
+    public String toString() {
+        return "ArticleType{" +
+                "idArticleType=" + idArticleType +
+                ", type=" + type +
+                '}';
+    }
 }

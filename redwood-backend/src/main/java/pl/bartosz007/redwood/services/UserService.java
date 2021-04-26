@@ -1,12 +1,10 @@
 package pl.bartosz007.redwood.services;
 
-import lombok.SneakyThrows;
-import org.postgresql.util.PSQLException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.bartosz007.redwood.exceptions.DataInsertException;
-import pl.bartosz007.redwood.messages.PostResponseMessage;
+import pl.bartosz007.redwood.payloads.requests.UserPayload;
+import pl.bartosz007.redwood.payloads.responses.PostResponseMessage;
 import pl.bartosz007.redwood.models.User;
 import pl.bartosz007.redwood.repositories.UserRepository;
 
@@ -32,11 +30,11 @@ public class UserService {
     }
 
 
-    public PostResponseMessage addUser(String email, String password, String image, String name, String surname)
+    public PostResponseMessage addUser(UserPayload userPayload)
             throws DataInsertException {
 
         try {
-            userRepository.save(new User(email, password, image, name, surname));
+            userRepository.save(userPayload.buildUser());
         } catch (DataIntegrityViolationException e) {
             return handleInsertException(e);
         }
@@ -61,14 +59,6 @@ public class UserService {
         }
     }
 
-/*
-   public boolean addUser(User newUser){
 
-       // User newUser = new User(email, password, image, name, surname);
-        boolean registerState = userRepository.addUser(newUser.getEmail(), newUser.getPassword());
-        System.out.println(registerState);
-        return false;
-    }
-*/
 
 }

@@ -1,11 +1,13 @@
 package pl.bartosz007.redwood.models;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Data
 public class UserSettings implements Serializable {
 
     @Id

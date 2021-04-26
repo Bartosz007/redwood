@@ -3,8 +3,8 @@ package pl.bartosz007.redwood.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.bartosz007.redwood.exceptions.DataInsertException;
-import pl.bartosz007.redwood.messages.PostResponseMessage;
-import pl.bartosz007.redwood.models.User;
+import pl.bartosz007.redwood.payloads.requests.UserPayload;
+import pl.bartosz007.redwood.payloads.responses.PostResponseMessage;
 import pl.bartosz007.redwood.repositories.UserRepository;
 import pl.bartosz007.redwood.services.UserService;
 
@@ -29,14 +29,10 @@ public class SecurityController {
 
     @PostMapping("/register")
     @CrossOrigin(origins = "http://localhost:3000")
-    public PostResponseMessage register(@RequestParam String email,
-                            @RequestParam String password,
-                            @RequestParam String image,
-                            @RequestParam String name,
-                            @RequestParam String surname){
+    public PostResponseMessage register(@RequestBody UserPayload userPayload){
 
         try {
-            return userService.addUser(email, password, image, name, surname);
+            return userService.addUser(userPayload);
         } catch (DataInsertException throwables) {
             throwables.printStackTrace();
         }

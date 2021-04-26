@@ -50,11 +50,7 @@ public class User implements Serializable {
         return "User{" +
                 "idUser=" + idUser +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", userData=" + userData +
-                ", articles=" + articles +
-                ", comments=" + comments +
-                '}';
+                ", password='" + password +'}';
     }
 
 }
