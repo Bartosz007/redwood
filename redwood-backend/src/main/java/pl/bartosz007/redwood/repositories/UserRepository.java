@@ -15,13 +15,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByEmailAndPassword(String email, String password);
 
-    @Modifying
-    @Query(value = """
-            INSERT INTO users(email, password) VALUES(?,?)""",
-            nativeQuery = true)
-    void addUser(String email, String password) throws PSQLException;
 
     @Override
-    public User save(User entity);
+    User save(User entity);
+
+    @Override
+    User getOne(Long idUser);
 
 }

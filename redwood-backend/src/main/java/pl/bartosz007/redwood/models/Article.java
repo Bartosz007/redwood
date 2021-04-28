@@ -12,6 +12,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.Type;
+import pl.bartosz007.redwood.payloads.requests.ArticlePayload;
 
 
 @Data
@@ -50,13 +51,27 @@ public class Article implements Serializable {
     @JsonManagedReference
     private List<Comment> comments;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name="id_user")
     @JsonManagedReference
     private User user;
 
 
     public Article() {
+    }
+
+    public Article(long idArticle){
+        this.idArticle = idArticle;
+    }
+
+    public void editValues(ArticlePayload articlePayload) {
+        this.title = articlePayload.getTitle();
+        this.images = articlePayload.getImages();
+        this.text = articlePayload.getText();
+        this.date = LocalDate.now();
+        this.time = LocalTime.now();
+        this.articleType = articlePayload.getArticleType();
+        this.tags = articlePayload.getTags(this);
     }
 
     @Override
@@ -75,7 +90,6 @@ public class Article implements Serializable {
                 ", user=" + user +
                 '}';
     }
-
 
 
 }

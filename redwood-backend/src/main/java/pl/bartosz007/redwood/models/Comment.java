@@ -8,8 +8,8 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @Entity(name = "comments")
@@ -24,15 +24,15 @@ public class Comment implements Serializable {
     @Size(min = 5, max = 500)
     private String text;
 
-    private Date date;
-    private Time time;
+    private LocalDate date;
+    private LocalTime time;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_article")
     @JsonBackReference
     private Article article;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_user")
     @JsonManagedReference
     private User user;

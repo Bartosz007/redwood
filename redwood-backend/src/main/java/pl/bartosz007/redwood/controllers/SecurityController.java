@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.bartosz007.redwood.exceptions.DataInsertException;
 import pl.bartosz007.redwood.payloads.requests.UserPayload;
-import pl.bartosz007.redwood.payloads.responses.PostResponseMessage;
+import pl.bartosz007.redwood.payloads.responses.BasicResponseMessage;
 import pl.bartosz007.redwood.repositories.UserRepository;
 import pl.bartosz007.redwood.services.UserService;
 
@@ -23,13 +23,13 @@ public class SecurityController {
     @PostMapping("/login")
     @ResponseBody
     @CrossOrigin(origins = "http://localhost:3000")
-    public PostResponseMessage login(@RequestParam String email, @RequestParam  String password){
+    public BasicResponseMessage login(@RequestParam String email, @RequestParam  String password){
          return userService.findUser(email, password);
     }
 
     @PostMapping("/register")
     @CrossOrigin(origins = "http://localhost:3000")
-    public PostResponseMessage register(@RequestBody UserPayload userPayload){
+    public BasicResponseMessage register(@RequestBody UserPayload userPayload){
 
         try {
             return userService.addUser(userPayload);
@@ -37,13 +37,13 @@ public class SecurityController {
             throwables.printStackTrace();
         }
 
-        return new PostResponseMessage(false, "Error ?");
+        return new BasicResponseMessage(false, "Error ?");
     }
 
     @PostMapping("/logout")
     @CrossOrigin(origins = "http://localhost:3000")
-    public PostResponseMessage logout(){
-        return new PostResponseMessage(true, "Logout with success!");
+    public BasicResponseMessage logout(){
+        return new BasicResponseMessage(true, "Logout with success!");
     }
 }
 

@@ -4,8 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import pl.bartosz007.redwood.exceptions.DataInsertException;
 import pl.bartosz007.redwood.payloads.requests.UserPayload;
-import pl.bartosz007.redwood.payloads.responses.PostResponseMessage;
-import pl.bartosz007.redwood.models.User;
+import pl.bartosz007.redwood.payloads.responses.BasicResponseMessage;
 import pl.bartosz007.redwood.repositories.UserRepository;
 
 import java.sql.SQLException;
@@ -18,7 +17,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public PostResponseMessage findUser(String login, String password) {
+    public BasicResponseMessage findUser(String login, String password) {
         boolean loginState = userRepository.existsByEmailAndPassword(login, password);
         String message;
         if (loginState)
@@ -26,11 +25,11 @@ public class UserService {
         else
             message = "Login failure!";
 
-        return new PostResponseMessage(loginState, message);
+        return new BasicResponseMessage(loginState, message);
     }
 
 
-    public PostResponseMessage addUser(UserPayload userPayload)
+    public BasicResponseMessage addUser(UserPayload userPayload)
             throws DataInsertException {
 
         try {
@@ -39,13 +38,13 @@ public class UserService {
             return handleInsertException(e);
         }
 
-        return new PostResponseMessage(true, "New account has been created!");
+        return new BasicResponseMessage(true, "New account has been created!");
 
 
     }
 
 
-    private <E extends DataIntegrityViolationException> PostResponseMessage handleInsertException(E e)
+    private <E extends DataIntegrityViolationException> BasicResponseMessage handleInsertException(E e)
             throws DataInsertException {
 
         if (e.getMostSpecificCause()
@@ -53,7 +52,7 @@ public class UserService {
                 .getName().equals("org.postgresql.util.PSQLException")
                 && ((SQLException) e.getMostSpecificCause())
                 .getSQLState().equals("23505"))
-            return new PostResponseMessage(false, "User with this email already exists!");
+            return new BasicResponseMessage(false, "W bazie istnieje już użytkownik z podanym emailem!");
         else {
             throw new DataInsertException("Another problem with insert", e.getMostSpecificCause());
         }

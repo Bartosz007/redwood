@@ -1,7 +1,6 @@
 package pl.bartosz007.redwood.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,7 +22,7 @@ public class Tag implements Serializable {
     @Size(min = 3, max = 100)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_article")
     @JsonBackReference
     private Article article;

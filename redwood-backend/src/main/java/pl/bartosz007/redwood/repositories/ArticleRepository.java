@@ -34,7 +34,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long>{
     List<Article> findByUserPermissionLevel(@Param("level") int level);
 
     @Override
-    Article getOne(Long id);
+    Article getOne(Long idArticle);
 
     @Override
     Article save(Article article);
