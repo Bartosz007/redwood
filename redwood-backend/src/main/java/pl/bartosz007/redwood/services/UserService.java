@@ -1,63 +1,59 @@
 package pl.bartosz007.redwood.services;
 
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.bartosz007.redwood.exceptions.DataInsertException;
-import pl.bartosz007.redwood.payloads.requests.UserPayload;
+import pl.bartosz007.redwood.models.PermissionLevels;
+import pl.bartosz007.redwood.models.User;
+import pl.bartosz007.redwood.models.UserSettings;
+import pl.bartosz007.redwood.payloads.requests.BasicPayload;
+import pl.bartosz007.redwood.payloads.requests.ExtendedPayload;
+import pl.bartosz007.redwood.payloads.requests.UserSettingsPayload;
 import pl.bartosz007.redwood.payloads.responses.BasicResponseMessage;
 import pl.bartosz007.redwood.repositories.UserRepository;
 
-import java.sql.SQLException;
-
 @Service
 public class UserService {
+
     private UserRepository userRepository;
 
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public BasicResponseMessage findUser(String login, String password) {
-        boolean loginState = userRepository.existsByEmailAndPassword(login, password);
-        String message;
-        if (loginState)
-            message = "Success!";
-        else
-            message = "Login failure!";
+    public BasicResponseMessage updateUserSettings(UserSettingsPayload userSettingsPayload){
+        User user = userRepository.getOne(userSettingsPayload.getIdUser());
+        UserSettings userSettings = user.getUserData().getUserSettings();
+        userSettings.update(userSettingsPayload);
 
-        return new BasicResponseMessage(loginState, message);
+        userRepository.save(user);
+
+        return new BasicResponseMessage(true, "Pomyślnie zapisoano ustawienia!");
     }
 
+    public BasicResponseMessage giveBan(BasicPayload basicPayload){
+        changePermission(basicPayload.getId(), PermissionLevels.ZBANOWANY);
 
-    public BasicResponseMessage addUser(UserPayload userPayload)
-            throws DataInsertException {
-
-        try {
-            userRepository.save(userPayload.buildUser());
-        } catch (DataIntegrityViolationException e) {
-            return handleInsertException(e);
-        }
-
-        return new BasicResponseMessage(true, "New account has been created!");
-
-
+        return new BasicResponseMessage(true, "Pomyślnie zbanowano użytkownika!");
     }
 
-
-    private <E extends DataIntegrityViolationException> BasicResponseMessage handleInsertException(E e)
-            throws DataInsertException {
-
-        if (e.getMostSpecificCause()
-                .getClass()
-                .getName().equals("org.postgresql.util.PSQLException")
-                && ((SQLException) e.getMostSpecificCause())
-                .getSQLState().equals("23505"))
-            return new BasicResponseMessage(false, "W bazie istnieje już użytkownik z podanym emailem!");
-        else {
-            throw new DataInsertException("Another problem with insert", e.getMostSpecificCause());
-        }
+    public BasicResponseMessage giveWarn(BasicPayload basicPayload){
+        User user = userRepository.getOne(basicPayload.getId());
+        int actualWarnLevel = user.getUserData().getWarnLevel();
+        user.getUserData().setWarnLevel(++actualWarnLevel);
+        userRepository.save(user);
+        return new BasicResponseMessage(true, "Użytkownik otrzymał ostrzeżenie!");
     }
 
+    public BasicResponseMessage changeUserPermission(ExtendedPayload<PermissionLevels> extendedPayload){
+        changePermission(extendedPayload.getId(), extendedPayload.getAdditionalPayload());
+        return new BasicResponseMessage(true, "Pomyślnie zaktualizowano rolę!");
+    }
 
+    private void changePermission(Long idUser, PermissionLevels newLevel){
+        User user = userRepository.getOne(idUser);
+        user.getUserData().setPermission(newLevel);
+        userRepository.save(user);
+    }
 
 }

@@ -30,6 +30,7 @@ public class ArticleController {
         return articleRepository.getOne(articleId);
     }
 
+
     @PostMapping("/addArticle")
     @CrossOrigin(origins = "http://localhost:3000")
     public BasicResponseMessage addArticle(@RequestBody ArticlePayload articlePayload){
@@ -39,7 +40,7 @@ public class ArticleController {
 
     @PutMapping("/verification")
     @CrossOrigin(origins = "http://localhost:3000")
-    public BasicResponseMessage verification(@RequestBody ExtendedPayload extendedPayload){
+    public BasicResponseMessage verification(@RequestBody ExtendedPayload<Boolean> extendedPayload){
         return articleService.verification(extendedPayload);
     }
 

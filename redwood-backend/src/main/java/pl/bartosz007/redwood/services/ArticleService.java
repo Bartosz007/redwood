@@ -53,9 +53,9 @@ public class ArticleService {
         return new BasicResponseMessage(true,"Pomyślnie usunięto artykuł");
     }
 
-    public BasicResponseMessage verification( ExtendedPayload extendedPayload){
+    public BasicResponseMessage verification( ExtendedPayload<Boolean> extendedPayload){
 
-        if(extendedPayload.isState()){
+        if(extendedPayload.getAdditionalPayload()){
             Article article = articleRepository.getOne(extendedPayload.getId());
             article.setVerificated(true);
             articleRepository.save(article);
@@ -65,7 +65,6 @@ public class ArticleService {
         }
 
     }
-
 
 
 }

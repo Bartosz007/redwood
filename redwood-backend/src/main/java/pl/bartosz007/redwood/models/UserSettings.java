@@ -2,6 +2,7 @@ package pl.bartosz007.redwood.models;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
+import pl.bartosz007.redwood.payloads.requests.UserSettingsPayload;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -35,6 +36,13 @@ public class UserSettings implements Serializable {
         this.fgColor = "rgba(255,255,255,0.5)";
         this.bgColor ="rgba(255,255,255,0.7)";
     }
+
+    public void update(UserSettingsPayload userSettingsPayload){
+        this.fontColor = userSettingsPayload.getFontColor();
+        this.fgColor = userSettingsPayload.getFgColor();
+        this.bgColor = userSettingsPayload.getBgColor();
+    };
+
 
     @Override
     public String toString() {
