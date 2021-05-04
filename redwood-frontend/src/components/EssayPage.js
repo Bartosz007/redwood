@@ -1,15 +1,15 @@
 import React from 'react';
-
+import { useParams } from "react-router-dom";
 import Essay from "./essay_ingredients/Essay";
 
-class EssayPage extends React.Component{
-    render() {
-        return (
-            <main className="main_global">
-                <Essay/>
-            </main>
-        );
-    }
+function EssayPage(){
+    let { id } = useParams();
+    return (
+        <main className="main_global">
+            <Essay idArticle={id}/>
+        </main>
+    );
+
 }
 
 export default EssayPage;

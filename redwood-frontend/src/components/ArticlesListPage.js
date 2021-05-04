@@ -1,28 +1,29 @@
 import React from 'react';
 import SearchBar from "./global/SearchBar";
-import ArticleSection from "./articles_list_ingredients/ArticleSection";
+import getArticleList from "../requests/article"
 
 class ArticlesListPage extends React.Component{
 
 
     constructor(props) {
         super(props);
-        this.loadArticles()
+        this.state = {
+            articlesList: null,
+            loading: true,
+        }
+
+        getArticleList().then((data)=>{
+            console.log(data);
+        });
+
     }
 
-    loadArticles = () =>{
-    /*    fetch(`localhost:8080/${this.props.type}`)
-            .then(response => response.json())
-            .then(result =>{
-                console.log(result)
-            })*/
-    }
 
     render() {
         return (
             <main className="main_global">
                 <SearchBar/>
-                <ArticleSection type={this.props.type} />
+                {this.state.articlesList}
             </main>
         );
     }

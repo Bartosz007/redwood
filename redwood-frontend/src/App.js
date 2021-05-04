@@ -21,6 +21,7 @@ import ArticlesListPage from "./components/ArticlesListPage";
 import ArticlesListMgmtPage from "./components/ArticlesListMgmtPage";
 import UserPanelPage from "./components/UserPanelPage";
 import Settings from "./components/settings_ingredients/Settings";
+import Essay from "./components/essay_ingredients/Essay";
 
 class App extends React.Component {
 
@@ -50,19 +51,30 @@ class App extends React.Component {
             <Router>
                 <Switch>
 
-                    <Route path="/essayList">
-                        <ArticlesListPage type="essay"/>
+                    <Route
+                        path="/essayList"
+                        key="essays">
+                        <ArticlesListPage type="essays"/>
                     </Route>
 
-                    <Route path="/crossList">
-                        <ArticlesListPage type="cross"/>
+                    <Route
+                        path="/crossList"
+                        key="crosses">
+                        <ArticlesListPage type="crosses"/>
                     </Route>
 
-                    <Route path="/userArticlesList">
-                        <UserPanelPage/>
-                        {/*     <AddArticlePage/>*/}
+                    <Route
+                        path="/userArticlesList/"
+                        key="userArticles">
+                        <ArticlesListPage type="userArticles"/>
                     </Route>
 
+                    <Route
+                        path="/article/:id"
+                        key="article" >
+                        children={<EssayPage />}
+
+                    </Route>
 
                     <Route path="/about">
                         <ArticlesListMgmtPage/>
@@ -79,7 +91,6 @@ class App extends React.Component {
                 <Background/>
 
                 {this.state.settingsMenuState ? <Settings hideSettingsMenu={this.hideSettingsMenu}/> : null}
-
 
             </Router>
         )

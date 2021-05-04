@@ -54,7 +54,7 @@
 .settings_container .settings_block .register_form * {
   width: 60%;
   height: 2em;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.5);
   font-size: 1.2em;
   font-family: "Cambria Math";
   text-align: center;

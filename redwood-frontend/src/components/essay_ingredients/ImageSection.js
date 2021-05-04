@@ -3,12 +3,14 @@ import BiggerImage from "./basic_ingredients/BiggerImage";
 
 
 
-function ImageSection(){
+function ImageSection(props){
+    const images = props.images.split(",");
+
     return(
         <section className="image_section">
-            <SmallerImage/>
-            <BiggerImage/>
-            <SmallerImage/>
+            <SmallerImage source={images[0]}/>
+            <BiggerImage source={images[1]}/>
+            <SmallerImage source={images[2]}/>
         </section>
     );
 }

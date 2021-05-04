@@ -8,7 +8,7 @@ function RegisterForm(){
             <input name="password" type="password" placeholder="Podaj hasło" required/>
             <input name="repassword" type="password" placeholder="Powtórz hasło" required/>
             <input name="photo" type="file"/>
-            <button>Zaloguj</button>
+            <button>Zarejestruj się</button>
         </form>
     );
 }

@@ -1,9 +1,9 @@
 
 
-function BiggerImage(){
+function BiggerImage(props){
     return(
         <div className="bigger_image">
-            <img src="../images/plant1.jpg" alt="photo0"/>
+            <img src={`../images/${props.source}`}  alt="photo0"/>
             <p></p>
         </div>
     );

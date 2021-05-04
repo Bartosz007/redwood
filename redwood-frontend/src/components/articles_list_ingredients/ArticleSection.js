@@ -6,21 +6,29 @@ class ArticleSection extends React.Component{
 
     constructor(props) {
         super(props);
-        console.log(this.props.type)
-    }
+
+        this.state = {
+            articlesList: props.data,
+            articles: props.data.map(
+                article =>
+                    <Article
+                        articleData={article}
+                        key={article.idArticle}
+                    />
+
+            )
+        }
+
+    };
 
     render() {
         return (
             <section className="article_section">
-                <Article/>
-                <Article/>
-                <Article/>
-                <Article/>
-                <Article/>
-
+                {this.state.articles}
             </section>
         );
     }
+
 }
 
 export default ArticleSection;

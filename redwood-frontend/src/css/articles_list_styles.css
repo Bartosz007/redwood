@@ -21,8 +21,8 @@
   align-items: center;
 }
 .article_section .article .article_image img {
-  width: 10em;
-  height: 10em;
+  width: 9.5em;
+  height: 9.5em;
   object-fit: cover;
   border-radius: 1em;
 }

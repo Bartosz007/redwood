@@ -1,29 +1,43 @@
 import React from 'react';
-
+import { useLocation } from "react-router";
 
 class Article extends React.Component{
-    render() {
+    data;
+    icon;
+
+    constructor(props) {
+        super(props);
+        this.data = props.articleData;
+        this.icon = props.articleData.images.split(",")[0];
+    }
+
+    selectArticle = () =>{
+        window.location = `/article/${this.data.idArticle}`;
+    }
+
+
+    render(){
         return (
-            <div className="article">
+            <div className="article" onClick={this.selectArticle}>
                 <div className="article_image">
-                    <img src="../images/plant0.jpg" alt="plant0"/>
+                    <img src={"../images/"+this.icon} alt="plant0"/>
                 </div>
                 <div className="article_content">
-                    <div className="article_title"><h1> tyt tytulk</h1>
+                    <div className="article_title"><h1>{this.data.title}</h1>
                     </div>
-                    <div className="article_fragment">Początek artykułu zakończony trzykropkiem, może to być na
-                        przykład pierwsze 200 znaków. Piszę ten tekst, po to
-                        aby zapełnić czymś tą część...
+                    <div className="article_fragment">{this.data.text.substr(0,200)}
                     </div>
                     <div className="article_info">
-                        <p>Artykuł</p>
-                        <p>Autor: Billy Butcher</p>
-                        <p>Data publikacji: 24.03.2021</p>
+                        <p>{this.data.articleType.type}</p>
+                        <p>{this.data.user.userData.name+ " " +this.data.user.userData.surname}</p>
+                        <p>Data publikacji: <br/> {this.data.date}</p>
+
                     </div>
                 </div>
             </div>
         );
     }
+
 }
 
 export default Article;
