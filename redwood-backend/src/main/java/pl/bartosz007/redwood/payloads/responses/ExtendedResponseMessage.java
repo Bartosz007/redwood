@@ -4,8 +4,9 @@ public class ExtendedResponseMessage<T> extends BasicResponseMessage{
 
     private T additionalPayload;
 
-    public ExtendedResponseMessage(boolean state, String message) {
+    public ExtendedResponseMessage(boolean state, String message, T additionalPayload) {
         super(state, message);
+        this.additionalPayload = additionalPayload;
     }
 
     public T getAdditionalPayload() {

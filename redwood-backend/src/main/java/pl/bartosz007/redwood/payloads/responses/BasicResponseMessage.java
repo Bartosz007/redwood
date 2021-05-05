@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class BasicResponseMessage {
-    private boolean state;
+    private boolean status;
     private String message;
 
     public BasicResponseMessage(boolean state, String message) {
-        this.state = state;
+        this.status = state;
         this.message = message;
     }
 
@@ -16,7 +16,7 @@ public class BasicResponseMessage {
     @Override
     public String toString() {
         return "PostResponseMessage{" +
-                "state=" + state +
+                "state=" + status +
                 ", message='" + message + '\'' +
                 '}';
     }
