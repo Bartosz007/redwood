@@ -2,9 +2,10 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .article_section .article {
-  width: 100%;
+  width: 60vw;
   height: 30vh;
   display: flex;
   align-items: center;
@@ -101,7 +102,7 @@
   height: 70%;
   position: absolute;
   top: 20%;
-  left: 7%;
+  left: -30%;
   z-index: -1;
 }
 .search_section .search_bar input {

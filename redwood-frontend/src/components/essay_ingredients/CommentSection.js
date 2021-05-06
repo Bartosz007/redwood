@@ -1,14 +1,17 @@
 import Comment from "./basic_ingredients/Comment";
 import AddComment from "./basic_ingredients/AddComment";
+import React from "react";
 
-function CommentSection(){
+function CommentSection(props){
+    const comments = props.comments
+    console.log(comments)
     return(
         <section className="comment_section">
-            <Comment/>
-            <Comment/>
-            <Comment/>
-            <Comment/>
-            <Comment/>
+            {
+                comments.map(
+                    val => <Comment key={val.idComment} value={val}/>
+                )
+            }
             <AddComment/>
         </section>
     );

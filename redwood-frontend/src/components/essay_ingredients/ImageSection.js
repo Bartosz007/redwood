@@ -4,8 +4,9 @@ import BiggerImage from "./basic_ingredients/BiggerImage";
 
 
 function ImageSection(props){
-    const images = props.images.split(",");
 
+    const images = props.images.split(",");
+    console.log(images)
     return(
         <section className="image_section">
             <SmallerImage source={images[0]}/>

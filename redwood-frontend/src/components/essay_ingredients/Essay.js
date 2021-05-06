@@ -1,46 +1,40 @@
+import React, {useState} from "react";
+import {getArticle} from "../../requests/article";
 import ImageSection from "./ImageSection";
 import ArticleSection from "./ArticleSection";
 import CommentSection from "./CommentSection";
-import React from "react";
-import {withRouter} from 'react-router-dom';
 
-class Essay extends React.Component{
+function Essay(params) {
+    const id = params.idArticle;
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading:true,
-            imageSection:null,
-            articleSection:null,
-            commentSection:null
-        }
+    const [loading, setLoading] = useState(false);
 
-        fetch(`http://localhost:8080/article/${props.idArticle}`)
-            .then(response => response.json())
-            .then(result =>{
-                console.log(result)
-                this.setState({
-                    loading:false,
-                    imageSection:<ImageSection images={result.images}/>,
-                    articleSection: <ArticleSection articleData={result}/>,
-                    commentSection: <CommentSection comments={result.commments}/>
-                })
-            })
+    const [imageSection, setImageSection] = useState()
+    const [articleSection, setArticleSection] = useState()
+    const [commentSection, setCommentSection] = useState()
+
+    if (!loading) {
+
+        getArticle(id).then((data) => {
+            setLoading(true);
+            setImageSection(<ImageSection images={data.images}/>)
+            setArticleSection(<ArticleSection articleData={data}/>)
+            setCommentSection(<CommentSection comments={data.comments}/>)
+
+        });
 
     }
 
-    render() {
+    return (
 
-        return(
-            <article className="article_entire">
-                {this.state.imageSection}
-                {this.state.articleSection}
-                {this.state.commentSection}
-            </article>
-        );
+        <article className="article_entire">
+            { loading?imageSection : null }
+            { loading?articleSection : null }
+            { loading?commentSection : null }
+        </article>
 
-    }
-
+    );
 
 }
+
 export default Essay;

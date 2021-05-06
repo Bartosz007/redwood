@@ -1,6 +1,3 @@
-import React from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-
 import "./css/button_styles.css";
 import "./css/global_styles.css";
 import "./css/main_page_styles.css";
@@ -10,104 +7,103 @@ import "./css/articles_list_styles.css";
 import "./css/user_panel_styles.css";
 import "./css/settings_styles.css";
 
+import React, {useState} from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {useCookies} from 'react-cookie';
+
 import MenuButtons from "./components/global/MenuButtons";
 import SettingsButton from "./components/settings_ingredients/SettingsButton";
 import Background from "./components/global/Background";
 import StartPage from './components/StartPage';
-
 import EssayPage from "./components/EssayPage";
-import AddArticlePage from "./components/AddArticlePage";
 import ArticlesListPage from "./components/ArticlesListPage";
 import ArticlesListMgmtPage from "./components/ArticlesListMgmtPage";
-import UserPanelPage from "./components/UserPanelPage";
+
+
+import {loadCookies} from "./scripts/cookiesScripts";
 import Settings from "./components/settings_ingredients/Settings";
-import Essay from "./components/essay_ingredients/Essay";
 
-class App extends React.Component {
+function App() {
+    const [menuState, setMenuState] = useState(false);
+
+    const [cookies, setCookie] = useCookies(['redwood-cookie']);
+    loadCookies(cookies, setCookie)
 
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            settingsMenuState: false
+
+    //console.log(cookies);
+
+    // const mainState = useSelector(state => state)
+    // console.log(mainState)
+    //  const dispatch = useDispatch()
+    //  dispatch(setAlertState(true))
+    // console.log(mainState)
+
+
+
+    const hideSettingsMenu = (e) => {
+
+        if (e.target.className == "settings_container"){
+            setMenuState(false)
         }
+
     }
 
-    showSettingsMenu = ()=>{
-        this.setState({
-            settingsMenuState:true
-            });
-    }
+    return (
 
-    hideSettingsMenu =(e) =>{
-        if(e.target.className == "settings_container")
-            this.setState({
-                settingsMenuState:false
-            });
-    }
-    render() {
-        return (
+        <Router>
 
-            <Router>
-                <Switch>
+            <Switch>
 
-                    <Route
-                        path="/essayList"
-                        key="essays">
-                        <ArticlesListPage type="essays"/>
-                    </Route>
+                <Route
+                    path="/essayList"
+                    key="essays"
+                    children={<ArticlesListPage type="essays"/>}>
+                </Route>
 
-                    <Route
-                        path="/crossList"
-                        key="crosses">
-                        <ArticlesListPage type="crosses"/>
-                    </Route>
+                <Route
+                    path="/crossList"
+                    key="crosses"
+                    children={<ArticlesListPage type="crosses"/>}>
+                </Route>
 
-                    <Route
-                        path="/userArticlesList/"
-                        key="userArticles">
-                        <ArticlesListPage type="userArticles"/>
-                    </Route>
+                <Route
+                    path="/userArticlesList"
+                    key="userArticles"
+                    children={<ArticlesListPage type="userArticles"/>}>
+                </Route>
 
-                    <Route
-                        path="/article/:id"
-                        key="article" >
-                        children={<EssayPage />}
+                <Route
+                    path="/article/:id"
+                    key="article">
+                    children={<EssayPage/>}
+                </Route>
 
-                    </Route>
+                <Route
+                    path="/about"
+                    key="about"
+                    children={<ArticlesListMgmtPage/>}>
+                </Route>
 
-                    <Route path="/about">
-                        <ArticlesListMgmtPage/>
-                    </Route>
+                <Route path="/"
+                       key="defaultpath"
+                       children={<StartPage/>}>
+                </Route>
 
-                    <Route path="/">
-                        <StartPage/>
-                    </Route>
+            </Switch>
 
-                </Switch>
+            <MenuButtons/>
 
-                <MenuButtons/>
-                <SettingsButton showSettingsMenu={this.showSettingsMenu}/>
-                <Background/>
+            <SettingsButton showSettingsMenu={() => setMenuState(true)}/>
 
-                {this.state.settingsMenuState ? <Settings hideSettingsMenu={this.hideSettingsMenu}/> : null}
+            <Background/>
 
-            </Router>
-        )
-    }
+            {menuState ? <Settings hideSettingsMenu={hideSettingsMenu}/> : null}
+
+        </Router>
+    )
 
 }
 
-function Home() {
-  return <h2></h2>;
-}
-
-function About() {
-  return <h2></h2>;
-}
-
-function Users() {
-  return <h2></h2>;
-}
 
 export default App;

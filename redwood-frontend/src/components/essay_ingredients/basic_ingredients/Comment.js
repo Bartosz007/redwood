@@ -1,14 +1,17 @@
 
 
-function Comment(){
+function Comment(props){
+    const data = props.value
+    const user = data.user.userData
+
     return(
         <div className="comment">
 
             <div className="user_container">
                 <div className="user_photo">
-                    <img src="../images/avatar1.png" alt="user_photo"/>
+                    <img src={"../images/"+user.image} alt="user_photo"/>
                 </div>
-                <div className="user_data">Adam Driver</div>
+                <div className="user_data">{user.name+" "+user.surname}</div>
             </div>
             <div className="comment_container">
                 <div className="comment_action">
@@ -16,13 +19,11 @@ function Comment(){
                     <img src="../icons/edit.svg" alt="delete"/>
                     <img src="../icons/warn.svg" alt="delete"/>
                 </div>
-                <div className="comment_content">Komentarzz do np 2000 znaków, piszę żeby choć w pewnym
-                    stopniu zapełnić ten kontener, nie czarodzejski tylko magiczna i nie fujarka tylko flet,
-                    magiczna flet, tak bredzę, bla bla lalalaal la lal a bla la bla bla
+                <div className="comment_content">{data.text}
                 </div>
                 <div className="comment_data">
-                    <p>25.03.2021</p>
-                    <p>19.45</p>
+                    <p>{data.date}</p>
+                    <p>{data.time}</p>
                 </div>
             </div>
 

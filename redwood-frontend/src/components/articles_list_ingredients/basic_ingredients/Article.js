@@ -1,43 +1,42 @@
 import React from 'react';
-import { useLocation } from "react-router";
+import { useHistory } from "react-router-dom";
 
-class Article extends React.Component{
-    data;
-    icon;
+function ArticleShort(props) {
+    const data = props.value;
+    const icon = data.images.split(",")[0];
+    const author = data.user.userData;
 
-    constructor(props) {
-        super(props);
-        this.data = props.articleData;
-        this.icon = props.articleData.images.split(",")[0];
+    const history = useHistory();
+
+    const onArticleClick = () =>{
+        history.push("/article/"+data.idArticle)
     }
 
-    selectArticle = () =>{
-        window.location = `/article/${this.data.idArticle}`;
-    }
+    return (
 
-
-    render(){
-        return (
-            <div className="article" onClick={this.selectArticle}>
-                <div className="article_image">
-                    <img src={"../images/"+this.icon} alt="plant0"/>
-                </div>
-                <div className="article_content">
-                    <div className="article_title"><h1>{this.data.title}</h1>
-                    </div>
-                    <div className="article_fragment">{this.data.text.substr(0,200)}
-                    </div>
-                    <div className="article_info">
-                        <p>{this.data.articleType.type}</p>
-                        <p>{this.data.user.userData.name+ " " +this.data.user.userData.surname}</p>
-                        <p>Data publikacji: <br/> {this.data.date}</p>
-
-                    </div>
-                </div>
+        <div className="article" onClick={onArticleClick}>
+            <div className="article_image">
+                <img src={"../images/"+icon} alt="plant0"/>
             </div>
-        );
-    }
+            <div className="article_content">
+
+                <div className="article_title"><h1>{data.title}</h1>
+                </div>
+
+                <div className="article_fragment">{data.text.slice(0,200)}
+                </div>
+
+                <div className="article_info">
+                    <p>{data.articleType.type}</p>
+                    <p>{author.name + " " + author.surname}</p>
+                    <p>Data publikacji: <br/> {data.date}</p>
+                </div>
+
+            </div>
+        </div>
+
+    );
 
 }
 
-export default Article;
+export default ArticleShort;

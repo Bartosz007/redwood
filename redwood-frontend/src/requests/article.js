@@ -1,24 +1,11 @@
 import {JSON_FAULT, NETWORK_ERROR_MESSAGE, POST_CONFIG, URL} from "./constans"
 
-/*
 
-fetch(`http://localhost:8080/essayList/${this.props.type}`)
-            .then(response => response.json())
-            .then(result =>{
-                this.setState({
-                    loading:false,
-                    articlesList:<ArticleSection data={result}  />
-                })
-
-            })
-
- */
-
-export default async function getAllArticles() {
+export async function getArticleList(param) {
 
     try {
 
-        const response = await fetch(URL + "essayList/essays")
+        const response = await fetch(URL + "essayList/" + param)
 
         if (response.ok) {
             return response.json();
@@ -32,3 +19,20 @@ export default async function getAllArticles() {
 
 }
 
+export async function getArticle(param) {
+
+    try {
+
+        const response = await fetch(URL + "article/" + param)
+
+        if (response.ok) {
+            return response.json();
+        } else {
+            return JSON_FAULT;
+        }
+
+    } catch (error) {
+        return NETWORK_ERROR_MESSAGE;
+    }
+
+}

@@ -1,33 +1,37 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import SearchBar from "./global/SearchBar";
-import getArticleList from "../requests/article"
+import ArticleSection from "./articles_list_ingredients/ArticleSection";
+import {getArticleList} from "../requests/article"
 
-class ArticlesListPage extends React.Component{
+function ArticlesListPage(props) {
 
+    const listType = props.type
+    const [articleList, setArticleList] = useState();
+    const [loading, setLoading] = useState(false);
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            articlesList: null,
-            loading: true,
-        }
+    if (!loading) {
 
-        getArticleList().then((data)=>{
-            console.log(data);
+        getArticleList(listType).then((data) => {
+            setArticleList(data);
+            setLoading(true);
         });
 
     }
 
+    return (
+        <main className="main_global">
+            <SearchBar/>
 
-    render() {
-        return (
-            <main className="main_global">
-                <SearchBar/>
-                {this.state.articlesList}
-            </main>
-        );
-    }
+            {
+                loading ?
+                articleList.map(
+                    val => <ArticleSection key={val.idArticle} value={val}/>
+                    )
+                : null
+            }
 
+        </main>
+    );
 
 }
 
