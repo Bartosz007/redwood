@@ -28,7 +28,7 @@ public class ArticlesListController {
     @RolesAllowed(PermissionLevels.R_ADMIN)
     public List<Article> getAllEssays(){
 //        return articleRepository
-//                .findByTwoTypes(Types.ESSAY.toString(),Types.GUIDE.toString());
+//              .findByTwoTypes(Types.ESSAY.toString(),Types.GUIDE.toString());
         return articleRepository.findAll();
     }
 

@@ -18,6 +18,7 @@ import pl.bartosz007.redwood.payloads.requests.LoginPayload;
 import pl.bartosz007.redwood.payloads.requests.UserPayload;
 import pl.bartosz007.redwood.payloads.responses.BasicResponseMessage;
 import pl.bartosz007.redwood.payloads.responses.ExtendedResponseMessage;
+import pl.bartosz007.redwood.payloads.responses.LoginResponseMessage;
 import pl.bartosz007.redwood.repositories.UserRepository;
 import pl.bartosz007.redwood.services.SecurityService;
 
@@ -57,8 +58,13 @@ public class SecurityController {
 
             String token = jwtTokenUtil.generateToken(user);
 
-            ExtendedResponseMessage<String> response
-                    = new ExtendedResponseMessage<>(true, "Zalogowano pomyślnie!",token);
+            LoginResponseMessage<User, String> response
+                    = new LoginResponseMessage<>(
+                    true,
+                    "Zalogowano pomyślnie!",
+                    token,
+                    user
+            );
 
             return ResponseEntity.ok(response);
 
