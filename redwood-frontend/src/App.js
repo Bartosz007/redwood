@@ -40,8 +40,10 @@ function App() {
     const [cookies, setCookie] = useCookies(['redwood-cookie']);
 
 
-
-    loadCookies(cookies, setCookie, dispatch)
+    if(loading){
+        loadCookies(cookies, setCookie, dispatch);
+        setLoading(!loading);
+    }
 
   //  dispatch2(showAlert("test"))
 /*

@@ -9,14 +9,13 @@ import PostLoginSettings from "./PostLoginSettings";
 
 function Settings(props) {
 
-    const loginStatus =  store.getState().loginStatus
-
+    const loginStatus = store.getState().loginStatus
 
     return (
         <div className="settings_container" onClick={props.hideSettingsMenu}>
-            {   //TODO po zrobieniu drugiego panelu opcji usunac!
-               loginStatus?
-                    <PostLoginSettings/>
+            {
+                loginStatus?
+                    <PostLoginSettings hideSettingsMenu={props.hideSettingsMenu}/>
                     :
                     <PreLoginSettings hideSettingsMenu={props.hideSettingsMenu}/>
             }

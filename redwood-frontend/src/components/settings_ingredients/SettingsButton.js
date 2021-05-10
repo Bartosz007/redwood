@@ -6,7 +6,6 @@ function SettingButton(props){
             <img src="../icons/menu_button.svg" alt="Menu"/>
         </div>
     );
-
 }
 
 export default SettingButton;

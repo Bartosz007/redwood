@@ -4,7 +4,8 @@ const LIFE_TIME = 864000; //60 * 60 * 24 * 10 = 10 dni
 
 export {
     loadCookies,
-    saveCookies
+    saveCookies,
+    clearCookies
 }
 
 const loadCookies = (cookies, setCookie, dispatch) =>{
@@ -18,11 +19,17 @@ const loadCookies = (cookies, setCookie, dispatch) =>{
         save(setCookie, data);
 
     }
-
     saveCookiesInState(dispatch, cookies);
 }
 
 const saveCookies = (dispatch, setCookie, data) =>{
+
+    save(setCookie, data);
+    saveCookiesInState(dispatch, data);
+}
+
+const clearCookies = (dispatch, setCookie, data) => {
+
     console.log(data)
     save(setCookie, data);
     saveCookiesInState(dispatch, data);
@@ -39,9 +46,7 @@ const saveCookiesInState = (dispatch, data) =>{
         bgColor: data.bgColor,
         fgColor: data.fgColor
     }
-
     dispatch(setAllStates(newStore))
-
 }
 
 const save = (setCookie, data) => {
