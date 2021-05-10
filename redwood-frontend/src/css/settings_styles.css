@@ -39,11 +39,15 @@
 .settings_container .settings_block .settings_menu .settings_button {
   border-radius: 0 2em 0 0;
 }
+.settings_container .settings_block .settings_menu .settings2_button {
+  border-radius: 2em 2em 0 0;
+}
 .settings_container .settings_block .settings_menu *:hover {
   background: rgba(255, 255, 255, 0.7);
 }
 .settings_container .settings_block .login_form,
-.settings_container .settings_block .register_form {
+.settings_container .settings_block .register_form,
+.settings_container .settings_block .logout_form {
   display: flex;
   height: 80%;
   flex-direction: column;
@@ -51,7 +55,8 @@
   justify-content: center;
 }
 .settings_container .settings_block .login_form *,
-.settings_container .settings_block .register_form * {
+.settings_container .settings_block .register_form *,
+.settings_container .settings_block .logout_form * {
   width: 60%;
   height: 2em;
   background-color: rgba(255, 255, 255, 0.5);
@@ -64,17 +69,28 @@
   margin-bottom: 1em;
 }
 .settings_container .settings_block .login_form button,
-.settings_container .settings_block .register_form button {
+.settings_container .settings_block .register_form button,
+.settings_container .settings_block .logout_form button {
   width: 40%;
   cursor: pointer;
 }
 .settings_container .settings_block .login_form button:hover,
-.settings_container .settings_block .register_form button:hover {
+.settings_container .settings_block .register_form button:hover,
+.settings_container .settings_block .logout_form button:hover {
   background: rgba(255, 255, 255, 0.7);
 }
 .settings_container .settings_block .login_form input[type='file'],
-.settings_container .settings_block .register_form input[type='file'] {
-  font-size: calc(1.2em/1.5);
+.settings_container .settings_block .register_form input[type='file'],
+.settings_container .settings_block .logout_form input[type='file'] {
+  font-size: calc(1.2em / 1.5);
+}
+.settings_container .settings_block .logout_form .logout_button {
+  height: 7em;
+  background: none;
+  cursor: pointer;
+}
+.settings_container .settings_block .logout_form .logout_button:hover {
+  background: rgba(255, 255, 255, 0.7);
 }
 .settings_container .settings_block .color_form {
   width: 100%;
@@ -100,7 +116,7 @@
   width: 30%;
   cursor: pointer;
   font-family: "Cambria Math";
-  font-size: calc(1.2em/1.2);
+  font-size: calc(1.2em / 1.2);
   height: 2.5em;
 }
 .settings_container .settings_block .color_form button:hover {

@@ -4,6 +4,16 @@ import {ACTIONS} from "./actions"
 export const reducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type){
+        case ACTIONS.SET_ALL_STATES:{
+            return action.data
+        }
+        case ACTIONS.LOAD_CREDENTIALS:{
+            return state
+        }
+        case ACTIONS.SAVE_CREDENTIALS:{
+            return { ...state, alertMenu:false }
+        }
+
         case ACTIONS.HANDLE_LOGIN_MENU:{
             return { ...state, alertMenu: action.item}
         }
@@ -20,12 +30,9 @@ export const reducer = (state = INITIAL_STATE, action) => {
 }
 
 
-const INITIAL_STATE = {
-    alertMenu: false,
-    alertText: "none",
+export const INITIAL_STATE = {
     loginStatus: false,
     email: null,
-    id: null,
     token:null,
     permission: null,
     fontColor: null,

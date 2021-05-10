@@ -1,11 +1,11 @@
 import React from 'react';
-import Article from "./basic_ingredients/Article";
+import Article from "./basic_ingredients/ArticleShort";
+import ArticleShort from "./basic_ingredients/ArticleShort";
 
 function ArticleSection(props) {
-
     return (
         <section className="article_section">
-            <Article value={props.value}/>
+            <ArticleShort value={props.value}/>
         </section>
     );
 

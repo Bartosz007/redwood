@@ -22,31 +22,51 @@ import ArticlesListMgmtPage from "./components/ArticlesListMgmtPage";
 
 import {loadCookies} from "./scripts/cookiesScripts";
 import Settings from "./components/settings_ingredients/Settings";
+import {useDispatch, useSelector} from "react-redux";
+import {store} from "./storage/storage";
+import AlertScreen from "./components/global/AlertScreen";
+import { Alert } from '@material-ui/lab';
 
 function App() {
+
+    const dispatch = store.dispatch
+
+    let mainState =  store.getState()
+
+    const [loading, setLoading] = useState(true)
+
     const [menuState, setMenuState] = useState(false);
 
     const [cookies, setCookie] = useCookies(['redwood-cookie']);
-    loadCookies(cookies, setCookie)
 
 
 
-    //console.log(cookies);
+    loadCookies(cookies, setCookie, dispatch)
 
-    // const mainState = useSelector(state => state)
-    // console.log(mainState)
+  //  dispatch2(showAlert("test"))
+/*
+
+    setTimeout(()=>{
+        mainState = store.getState()
+        console.log(mainState)
+    },1000)
+*/
+
+  //  dispatch(setAllStates({val:"ds"}))
+ //   console.log(mainState)
+  //  console.log("ds");
+
+
+ //    console.log(mainState)
     //  const dispatch = useDispatch()
     //  dispatch(setAlertState(true))
     // console.log(mainState)
 
 
-
     const hideSettingsMenu = (e) => {
-
-        if (e.target.className == "settings_container"){
+        if (e == undefined || e.target.className == "settings_container") {
             setMenuState(false)
         }
-
     }
 
     return (
@@ -96,9 +116,11 @@ function App() {
 
             <SettingsButton showSettingsMenu={() => setMenuState(true)}/>
 
+            {menuState ? <Settings hideSettingsMenu={hideSettingsMenu}/> : null}
+
             <Background/>
 
-            {menuState ? <Settings hideSettingsMenu={hideSettingsMenu}/> : null}
+
 
         </Router>
     )
