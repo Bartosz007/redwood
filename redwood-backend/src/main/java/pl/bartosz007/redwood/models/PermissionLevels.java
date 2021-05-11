@@ -9,11 +9,6 @@ public enum PermissionLevels implements Serializable {
     MODERATOR(2),
     ADMIN(3);
 
-    public static final String R_ZBANOWANY = "ZBANOWANY";
-    public static final String R_USER = "USER";
-    public static final String R_MODERATOR = "MODERATOR";
-    public static final String R_ADMIN = "ADMIN";
-
     private int level;
 
     PermissionLevels(int level) {
@@ -28,4 +23,5 @@ public enum PermissionLevels implements Serializable {
     public String toString() {
         return String.valueOf(level);
     }
+
 }

@@ -9,9 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity(name="users")
@@ -80,10 +78,19 @@ public class User implements Serializable, UserDetails {
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("USER"));
-        authorities.add(new SimpleGrantedAuthority("ADMIN"));
-//        GrantedAuthority grantedAuthority = New
-//        authorities.add(grantedAuthority);
+        authorities.add(new SimpleGrantedAuthority(PermissionLevels.ZBANOWANY.name()));
+
+        if(userData.getPermission() == PermissionLevels.USER){
+            authorities.add(new SimpleGrantedAuthority(PermissionLevels.USER.name()));
+        }else if(userData.getPermission() == PermissionLevels.MODERATOR){
+            authorities.add(new SimpleGrantedAuthority(PermissionLevels.USER.name()));
+            authorities.add(new SimpleGrantedAuthority(PermissionLevels.MODERATOR.name()));
+        }else if(userData.getPermission() == PermissionLevels.ADMIN){
+            authorities.add(new SimpleGrantedAuthority(PermissionLevels.USER.name()));
+            authorities.add(new SimpleGrantedAuthority(PermissionLevels.MODERATOR.name()));
+            authorities.add(new SimpleGrantedAuthority(PermissionLevels.ADMIN.name()));
+        }
+
         return authorities;
     }
 

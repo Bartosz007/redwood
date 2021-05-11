@@ -13,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pl.bartosz007.redwood.models.PermissionLevels;
 import pl.bartosz007.redwood.services.SecurityService;
 
 @Configuration
@@ -48,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/login", "/register").permitAll()
                 .antMatchers("/essayList/**", "/article/**").permitAll()
+                .antMatchers("/userList").hasAuthority("USER")
                // .antMatchers(HttpMethod.GET, "/essayList/essays").hasAuthority("USER")
               //  .antMatchers(HttpMethod.GET, "/essayList/essays").hasRole("TEST")
                 .anyRequest().authenticated()

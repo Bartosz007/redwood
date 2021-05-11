@@ -1,9 +1,12 @@
 package pl.bartosz007.redwood.payloads.requests;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 import pl.bartosz007.redwood.models.User;
 import pl.bartosz007.redwood.models.UserData;
 import pl.bartosz007.redwood.models.UserSettings;
+
+import java.awt.*;
 
 
 @Data

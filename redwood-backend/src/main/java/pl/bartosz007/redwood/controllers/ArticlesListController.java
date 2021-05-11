@@ -25,7 +25,6 @@ public class ArticlesListController {
 
     @GetMapping("/essays")
     @CrossOrigin(origins = "http://localhost:3000")
-    @RolesAllowed(PermissionLevels.R_ADMIN)
     public List<Article> getAllEssays(){
 //        return articleRepository
 //              .findByTwoTypes(Types.ESSAY.toString(),Types.GUIDE.toString());
@@ -34,7 +33,6 @@ public class ArticlesListController {
 
     @GetMapping("/crosses")
     @CrossOrigin(origins = "http://localhost:3000")
-    @RolesAllowed(PermissionLevels.R_ADMIN)
     public List<Article> getAllCrosses(){
         return articleRepository
                 .findByType(Types.CROSS.toString());

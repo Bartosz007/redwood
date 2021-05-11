@@ -10,6 +10,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pl.bartosz007.redwood.config.JwtTokenUtil;
 import pl.bartosz007.redwood.exceptions.DataInsertException;
@@ -20,6 +21,7 @@ import pl.bartosz007.redwood.payloads.responses.BasicResponseMessage;
 import pl.bartosz007.redwood.payloads.responses.ExtendedResponseMessage;
 import pl.bartosz007.redwood.payloads.responses.LoginResponseMessage;
 import pl.bartosz007.redwood.repositories.UserRepository;
+import pl.bartosz007.redwood.services.FileDecoder;
 import pl.bartosz007.redwood.services.SecurityService;
 
 import javax.annotation.security.RolesAllowed;
@@ -33,17 +35,20 @@ public class SecurityController {
     private final SecurityService securityService;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public SecurityController(UserRepository userRepository,
                               SecurityService securityService,
                               JwtTokenUtil jwtTokenUtil,
-                              AuthenticationManager authenticationManager) {
+                              AuthenticationManager authenticationManager,
+                              PasswordEncoder passwordEncoder) {
 
         this.userRepository = userRepository;
         this.securityService = securityService;
         this.jwtTokenUtil = jwtTokenUtil;
         this.authenticationManager = authenticationManager;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -90,6 +95,7 @@ public class SecurityController {
     @PostMapping("/register")
     public BasicResponseMessage register(@RequestBody UserPayload userPayload) {
 
+        userPayload.setPassword(passwordEncoder.encode(userPayload.getPassword()));
         try {
             return securityService.addUser(userPayload);
         } catch (DataInsertException e) {
@@ -99,9 +105,4 @@ public class SecurityController {
         return new BasicResponseMessage(false, "Error ?");
     }
 
-    @PostMapping("/logout")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public BasicResponseMessage logout() {
-        return new BasicResponseMessage(true, "Logout with success!");
-    }
 }
