@@ -10,11 +10,12 @@ import PostLoginSettings from "./PostLoginSettings";
 function Settings(props) {
 
     const loginStatus = store.getState().loginStatus
+    const login = (loginStatus == "true" || loginStatus == true)
 
     return (
         <div className="settings_container" onClick={props.hideSettingsMenu}>
             {
-                loginStatus?
+                login?
                     <PostLoginSettings hideSettingsMenu={props.hideSettingsMenu}/>
                     :
                     <PreLoginSettings hideSettingsMenu={props.hideSettingsMenu}/>

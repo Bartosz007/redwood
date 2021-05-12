@@ -2,10 +2,10 @@
      height="83" viewBox="0 0 83 83">
     <path id="Path_3" data-name="Path 3"
           d="M32.475,22.988A9.488,9.488,0,1,1,22.988,13.5,9.488,9.488,0,0,1,32.475,22.988Z"
-          transform="translate(18.512 18.512)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"
+          transform="translate(18.512 18.512)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"
           stroke-width="3"/>
     <path id="Path_4" data-name="Path 4"
           d="M68.409,52.409a6,6,0,0,0,1.2,6.618l.218.218A7.277,7.277,0,1,1,59.536,69.536l-.218-.218a6.049,6.049,0,0,0-10.255,4.291v.618a7.273,7.273,0,0,1-14.545,0V73.9a6,6,0,0,0-3.927-5.491,6,6,0,0,0-6.618,1.2l-.218.218A7.277,7.277,0,1,1,13.464,59.536l.218-.218A6.049,6.049,0,0,0,9.391,49.064H8.773a7.273,7.273,0,1,1,0-14.545H9.1a6,6,0,0,0,5.491-3.927,6,6,0,0,0-1.2-6.618l-.218-.218A7.277,7.277,0,1,1,23.464,13.464l.218.218a6,6,0,0,0,6.618,1.2h.291a6,6,0,0,0,3.636-5.491V8.773a7.273,7.273,0,1,1,14.545,0V9.1a6.049,6.049,0,0,0,10.255,4.291l.218-.218A7.277,7.277,0,1,1,69.536,23.464l-.218.218a6,6,0,0,0-1.2,6.618v.291a6,6,0,0,0,5.491,3.636h.618a7.273,7.273,0,0,1,0,14.545H73.9a6,6,0,0,0-5.491,3.636Z"
-          transform="translate(0 0)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"
+          transform="translate(0 0)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"
           stroke-width="3"/>
 </svg>

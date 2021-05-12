@@ -1,19 +1,15 @@
 import React from 'react';
-
-
-
-import Search from "./global/SearchBar";
 import MgmtArticleSection from "./articles_list_ingredients/MgmtArticleSection";
+import {getArticleListToVerification} from "../requests/article";
 
-class ArticlesListMgmtPage extends React.Component{
-    render() {
-        return (
-            <main className="main_global">
-                <Search/>
-                <MgmtArticleSection/>
-            </main>
-        );
-    }
+function ArticlesListMgmtPage() {
+
+    return (
+        <main className="main_global">
+            <MgmtArticleSection/>
+        </main>
+    );
+
 }
 
 export default ArticlesListMgmtPage;

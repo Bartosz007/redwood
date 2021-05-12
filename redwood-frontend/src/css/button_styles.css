@@ -10,7 +10,7 @@ header a {
   text-decoration: none;
   color: black;
   background: rgba(255, 255, 255, 0.5);
-  width: 20%;
+  width: 25%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -21,10 +21,11 @@ header a {
 header a:hover {
   background: rgba(255, 255, 255, 0.7);
 }
-.menu_button {
+.menu_button,
+.user_mgmt_button,
+.user_article_mgmt_button {
   position: fixed;
   right: 0;
-  bottom: 10%;
   width: 6em;
   height: 6em;
   background: rgba(255, 255, 255, 0.5);
@@ -33,5 +34,19 @@ header a:hover {
   justify-content: center;
   align-items: center;
   border-radius: 1em 0 0 1em;
+}
+.menu_button:hover,
+.user_mgmt_button:hover,
+.user_article_mgmt_button:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.menu_button {
+  bottom: 10%;
+}
+.user_article_mgmt_button {
+  bottom: 30%;
+}
+.user_mgmt_button {
+  bottom: 50%;
 }
 /*# sourceMappingURL=button_styles.css.map */

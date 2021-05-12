@@ -1,9 +1,39 @@
+import {store} from "../../../storage/storage";
+import {delComm} from "../../../requests/article";
+import {changeAlertText, getCustomAlert} from "../../../scripts/alert";
+import {useHistory} from "react-router-dom";
+import {giveWarn} from "../../../requests/user";
 
 
 function Comment(props){
     const data = props.value
     const user = data.user.userData
+    const history = useHistory();
+    const permsBasic = store.getState().permission;
+    const perms = (permsBasic == "ADMIN") ||  (permsBasic == "MODERATOR")
 
+    const deleteComment = () =>{
+        delComm(data.idComment).then((data)=>{
+            if(data.status){
+                let alertBox = getCustomAlert("Pomyślnie usuniętko komentarz!");
+                document.body.append(alertBox)
+                history.go(0);
+            }else{
+                let alertBox = getCustomAlert("Błą z usuwaniem!");
+                document.body.append(alertBox)
+            }
+        })
+    }
+
+    const onGiveWarn = () =>{
+        let alertBox = getCustomAlert("...");
+        document.body.append(alertBox)
+
+        giveWarn(data.user.idUser).then((data)=>{
+            changeAlertText(data.message)
+        })
+
+    }
     return(
         <div className="comment">
 
@@ -15,9 +45,17 @@ function Comment(props){
             </div>
             <div className="comment_container">
                 <div className="comment_action">
-                    <img src="../icons/delete.svg" alt="delete"/>
-                    <img src="../icons/edit.svg" alt="delete"/>
-                    <img src="../icons/warn.svg" alt="delete"/>
+                    {
+                        perms ?
+                            <img onClick={deleteComment} src="../icons/delete.svg" alt="delete"/> :
+                            null
+                    }
+                    {
+                        perms ?
+                            <img onClick={onGiveWarn} src="../icons/warn.svg" alt="delete"/>:
+                            null
+                    }
+
                 </div>
                 <div className="comment_content">{data.text}
                 </div>

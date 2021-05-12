@@ -20,7 +20,6 @@ function ArticlesListPage(props) {
 
     return (
         <main className="main_global">
-            <SearchBar/>
 
             {
                 loading ?

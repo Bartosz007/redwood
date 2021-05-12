@@ -1,34 +1,64 @@
 import React from 'react';
+import {Link, useHistory} from "react-router-dom";
+import {verificateArticle} from "../../../requests/article";
+import {getCustomAlert} from "../../../scripts/alert";
 
 
-class MgmtArticle extends React.Component{
-    render() {
-        return (
-            <div className="article">
-                <div className="article_image">
-                    <img src="../images/plant0.jpg" alt="plant0"/>
+function MgmtArticle(props) {
+    const data = props.value
+    const image = data.images.split(",")[0];
+    const user = data.user.userData
+    const history = useHistory();
+
+    const verificationArticle = (state) =>{
+        verificateArticle(state, data.idArticle).then((data) =>{
+            let alertBox = getCustomAlert(data.message);
+            document.body.append(alertBox)
+        })
+    }
+
+    const acceptArticle = () =>{
+        verificationArticle(true)
+    }
+
+    const denyArticle = () =>{
+        verificationArticle(false)
+    }
+
+    const goToArticle = () =>{
+        history.push(`/article/${data.idArticle}`)
+    }
+
+    return (
+        <div className="article">
+            <div className="article_image">
+                <img src={"../images/"+image} alt="{image}"/>
+            </div>
+            <div className="article_content">
+                <div className="article_title"><h1>{data.title}</h1>
                 </div>
-                <div className="article_content">
-                    <div className="article_title"><h1> tyt tytulk</h1>
-                    </div>
-                    <div className="article_fragment">Początek artykułu zakończony trzykropkiem, może to być na
-                        przykład pierwsze 200 znaków. Piszę ten tekst, po to
-                        aby zapełnić czymś tą część...
-                    </div>
-                    <div className="article_info">
-                        <p>Artykuł</p>
-                        <p>Autor: Billy Butcher</p>
-                        <p>Data publikacji: 24.03.2021</p>
-                    </div>
+                <div className="article_fragment">{data.title.slice(0,200)}
                 </div>
-                <div className="article_action">
-                    <div className="action_button"><a href="#">Przeglądaj</a></div>
-                    <div className="action_button"><a href="#">Zatwierdź</a></div>
-                    <div className="action_button"><a href="#">Usuń</a></div>
+                <div className="article_info">
+                    <p>{data.articleType.type}</p>
+                    <p>Autor: {user.name + " " + user.surname}</p>
+                    <p>Data publikacji: {data.date}</p>
                 </div>
             </div>
-        );
-    }
+            <div className="article_action">
+                <div onClick={goToArticle} className="action_button">
+                    <a href="#">Przeglądaj</a>
+                </div>
+                <div onClick={acceptArticle} className="action_button">
+                    <a href="#">Zatwierdź</a>
+                </div>
+                <div onClick={denyArticle} className="action_button">
+                    <a href="#">Usuń</a>
+                </div>
+            </div>
+        </div>
+    );
+
 }
 
 export default MgmtArticle;

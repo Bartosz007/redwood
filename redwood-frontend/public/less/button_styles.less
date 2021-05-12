@@ -12,7 +12,7 @@ header{
     text-decoration: none;
     color: @mainColor;
     background: @backgroundColor;
-    width: 20%;
+    width: 25%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -26,10 +26,9 @@ header{
 
 }
 
-.menu_button{
+.menu_button, .user_mgmt_button, .user_article_mgmt_button{
   position: fixed;
   right: 0;
-  bottom: 10%;
   width: 6em;
   height: 6em;
   background: @backgroundColor;
@@ -39,3 +38,22 @@ header{
   align-items: center;
   border-radius: 1em 0 0 1em;
 }
+.menu_button:hover,
+.user_mgmt_button:hover,
+.user_article_mgmt_button:hover{
+  background-color: @backgroundHoverColor;
+}
+
+.menu_button{
+  bottom: 10%;
+}
+
+.user_article_mgmt_button{
+  bottom: 30%;
+}
+
+.user_mgmt_button{
+  bottom: 50%;
+}
+
+

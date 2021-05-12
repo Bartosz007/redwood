@@ -5,11 +5,14 @@ import {store} from "../../../storage/storage";
 import {useCookies} from "react-cookie";
 import {clearCookies} from "../../../scripts/cookiesScripts";
 import {setAllStates} from "../../../storage/actions";
+import {useHistory} from "react-router-dom";
 
 function LogoutForm(props) {
 
     const dispatch = store.dispatch
     const [cookies, setCookie] = useCookies(['redwood-cookie']);
+
+    const history = useHistory();
 
     const onClick = () =>{
         let alertBox = getCustomAlert("Wylogowano...");
@@ -27,7 +30,8 @@ function LogoutForm(props) {
 
         clearCookies(dispatch, setCookie, data);
 
-        props.hideSettingsMenu();
+        //props.hideSettingsMenu();
+        history.go(0);
     }
 
     return(

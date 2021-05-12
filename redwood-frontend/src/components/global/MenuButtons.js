@@ -8,7 +8,6 @@ function MenuButtons(){
             <Link to="/essayList">Eseje</Link>
             <Link to="/crossList">Krzyżówki</Link>
             <Link to="/userArticlesList">Wasze artytuły</Link>
-            <Link to="/about">O mnie ??</Link>
         </header>
     );
 }

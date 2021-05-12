@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import login from "../../../requests/security"
+import {login} from "../../../requests/security"
 import {store} from "../../../storage/storage";
 import {saveCredentials, showAlert} from "../../../storage/actions";
 import {useDispatch} from "react-redux";
 import AlertScreen from "../../global/AlertScreen";
-import {BrowserRouter as Router} from "react-router-dom";
+import {BrowserRouter as Router, useHistory} from "react-router-dom";
 import {getCustomAlert, changeAlertText} from "../../../scripts/alert"
 import {Alert} from "@material-ui/lab";
 import {useCookies} from "react-cookie";
@@ -17,7 +17,7 @@ function LoginForm(props){
     const [cookies, setCookie] = useCookies(['redwood-cookie']);
     const dispatch = store.dispatch
 
-
+    const history = useHistory();
 
     const onLoginClick =()=>{
 
@@ -40,10 +40,13 @@ function LoginForm(props){
                 saveCookies(dispatch, setCookie, objData);
                 console.log(props.hideSettingsMenu)
                 props.hideSettingsMenu(this);
-
+                changeAlertText("Zalogowano pomyślnie!")
+                history.go(0);
+            }else{
+                changeAlertText("Błędne hasło i/lub login!")
             }
 
-            changeAlertText(data.message)
+
         });
 
     }

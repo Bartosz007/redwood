@@ -1,21 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import MgmtArticle from "./basic_ingredients/MgmtArticle";
+import {getArticleListToVerification} from "../../requests/article";
+function MgmtArticleSection() {
+    const [data, setData] = useState();
+    const [loading, setLoading] = useState(false);
 
-class MgmtArticleSection extends React.Component{
-    render() {
-        return (
-            <section className="article_section">
-                <MgmtArticle/>
-                <MgmtArticle/>
-                <MgmtArticle/>
-                <MgmtArticle/>
-                <MgmtArticle/>
-                <MgmtArticle/>
-                <MgmtArticle/>
+    getArticleListToVerification().then((data) => {
+        setData(data);
+        setLoading(true)
+    })
 
-            </section>
-        );
-    }
+    return (
+        <section className="article_section">
+            {
+                loading ?
+                    data.map(
+                        val => <MgmtArticle key={val.idArticle} value={val}/>
+                    ) :
+                    null
+            }
+        </section>
+    );
+
 }
 
 export default MgmtArticleSection;
