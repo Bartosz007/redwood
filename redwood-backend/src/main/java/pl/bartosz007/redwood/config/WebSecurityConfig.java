@@ -50,6 +50,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login", "/register").permitAll()
                 .antMatchers("/essayList/**", "/article/**").permitAll()
                 .antMatchers("/userList").hasAuthority("USER")
+                .antMatchers("/addComment").hasAuthority("USER")
+                .antMatchers("/deleteComment","/warn", "userArticles").hasAuthority("MODERATOR")
+                .antMatchers("/userList","/saveSettings", "/ban", "/changePermit").hasAuthority("ADMIN")
+                .antMatchers("/deleteUser").hasAuthority("ADMIN")
+
                // .antMatchers(HttpMethod.GET, "/essayList/essays").hasAuthority("USER")
               //  .antMatchers(HttpMethod.GET, "/essayList/essays").hasRole("TEST")
                 .anyRequest().authenticated()

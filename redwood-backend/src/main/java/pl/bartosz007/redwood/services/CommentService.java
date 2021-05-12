@@ -29,7 +29,9 @@ public class CommentService {
     }
 
     public BasicResponseMessage addComment(CommentPayload commentPayload){
-        User currentUser = userRepository.getOne(commentPayload.getIdUser());
+        User currentUser = userRepository.getUserByEmail(commentPayload.getEmail());
+        System.out.println(currentUser);
+     //   User currentUser = userRepository.getOne(commentPayload.getIdUser());
         Article currentArticle = articleRepository.getOne(commentPayload.getIdArticle());
         Comment comment = commentPayload.buildComment(currentUser, currentArticle);
         commentRepository.save(comment);

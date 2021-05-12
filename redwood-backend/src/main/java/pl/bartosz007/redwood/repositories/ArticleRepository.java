@@ -16,22 +16,24 @@ public interface ArticleRepository extends JpaRepository<Article, Long>{
 
     @Query(value = """
             SELECT * FROM articles JOIN article_type 
-            USING(id_article_type) WHERE type=:type
+            USING(id_article_type) WHERE type=:type AND verificated=true
             ORDER BY date, time""", nativeQuery = true)
     List<Article> findByType(@Param("type") String type);
 
     @Query(value = """
             SELECT * FROM articles JOIN article_type 
-            USING(id_article_type) WHERE type=:typeOne OR type=:typeTwo
+            USING(id_article_type) WHERE (type=:typeOne OR type=:typeTwo) AND verificated=true
             ORDER BY date, time""", nativeQuery = true)
     List<Article> findByTwoTypes(@Param("typeOne") String typeOne,@Param("typeTwo") String typeTwo);
 
     @Query(value = """
             SELECT * FROM articles JOIN article_type USING(id_article_type) 
             JOIN users USING(id_user) JOIN users_data USING(id_user) 
-            WHERE permission=:level ORDER BY date, time""",
+            WHERE permission=:level AND verificated=true ORDER BY date, time""",
             nativeQuery = true)
     List<Article> findByUserPermissionLevel(@Param("level") int level);
+
+    List<Article> findAllByVerificatedFalse();
 
     @Override
     Article getOne(Long idArticle);

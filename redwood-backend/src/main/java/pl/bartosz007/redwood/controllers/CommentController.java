@@ -23,6 +23,7 @@ public class CommentController {
     @PostMapping("/addComment")
     @CrossOrigin(origins = "http://localhost:3000")
     public BasicResponseMessage addComment(@RequestBody CommentPayload commentPayload){
+        System.out.println(commentPayload);
         return commentService.addComment(commentPayload);
     }
 

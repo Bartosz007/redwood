@@ -55,5 +55,10 @@ public class UserController {
         return userService.changeUserPermission(extendedPayload);
     }
 
+    @DeleteMapping("/deleteUser")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public BasicResponseMessage deleteUser(@RequestBody BasicPayload basicPayload){
+        return userService.deleteUser(basicPayload);
+    }
 
 }

@@ -42,8 +42,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         String email = null;
         String token = null;
-//Bearer erwhuith43r8943ht4thgsdfgjksdfsd
+
         /* sprawdzenie poprawności nagłówka i ucięcie jego początku */
+
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             token = requestTokenHeader.substring(7);
 
@@ -70,7 +71,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                         user,
                         null,
                         user.getAuthorities());
-                //TODO tu można sróbować dodać role
+
                 usernamePasswordAuthenticationToken
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

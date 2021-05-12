@@ -20,6 +20,6 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
 
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Błędne hasło i/lub login!");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unautorized...");
     }
 }

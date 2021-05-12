@@ -16,7 +16,7 @@ public class CommentPayload {
     private Long idComment;
     private String text;
     private Long idArticle;
-    private Long idUser;
+    private String email;
 
     public Comment buildComment(User currentUser, Article currentArticle){
         LocalDate date = LocalDate.now();

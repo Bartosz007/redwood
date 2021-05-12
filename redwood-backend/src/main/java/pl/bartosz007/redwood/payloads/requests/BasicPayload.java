@@ -7,6 +7,4 @@ public class BasicPayload {
 
     private Long id;
 
-
-
 }

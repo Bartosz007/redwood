@@ -40,12 +40,23 @@ public class UserService {
     public BasicResponseMessage giveWarn(BasicPayload basicPayload){
         User user = userRepository.getOne(basicPayload.getId());
         int actualWarnLevel = user.getUserData().getWarnLevel();
-        user.getUserData().setWarnLevel(++actualWarnLevel);
+        if(actualWarnLevel > 10){
+            giveBan(basicPayload);
+            user.getUserData().setWarnLevel(0);
+        }else{
+            user.getUserData().setWarnLevel(++actualWarnLevel);
+        }
         userRepository.save(user);
         return new BasicResponseMessage(true, "Użytkownik otrzymał ostrzeżenie!");
     }
 
+    public BasicResponseMessage deleteUser( BasicPayload basicPayload){
+        userRepository.deleteById(basicPayload.getId());
+        return new BasicResponseMessage(true, "Usunięto użytkownika!");
+    }
+
     public BasicResponseMessage changeUserPermission(ExtendedPayload<PermissionLevels> extendedPayload){
+        System.out.println(extendedPayload);
         changePermission(extendedPayload.getId(), extendedPayload.getAdditionalPayload());
         return new BasicResponseMessage(true, "Pomyślnie zaktualizowano rolę!");
     }

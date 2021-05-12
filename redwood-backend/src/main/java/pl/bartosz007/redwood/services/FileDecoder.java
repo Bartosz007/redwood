@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class FileDecoder {
     private String fileName;
     private String body;
-    private static final String folder = "..\\images\\";
+    private static final String folder =  "..\\redwood-frontend\\public\\images\\";
     public FileDecoder(String base64String) {
         String[] strings = base64String.split(",");
         this.fileName = getCustomName(strings[0]);

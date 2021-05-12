@@ -14,4 +14,11 @@ public class ExtendedPayload<T> extends BasicPayload{
     public void setAdditionalPayload(T additionalPayload) {
         this.additionalPayload = additionalPayload;
     }
+
+    @Override
+    public String toString() {
+        return "ExtendedPayload{" +
+                "additionalPayload=" + additionalPayload +
+                '}';
+    }
 }

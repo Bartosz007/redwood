@@ -26,22 +26,27 @@ public class ArticlesListController {
     @GetMapping("/essays")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Article> getAllEssays(){
-//        return articleRepository
-//              .findByTwoTypes(Types.ESSAY.toString(),Types.GUIDE.toString());
-        return articleRepository.findAll();
+        return articleRepository
+              .findByTwoTypes(Types.ESSAY.name(),Types.GUIDE.name());
     }
 
     @GetMapping("/crosses")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Article> getAllCrosses(){
         return articleRepository
-                .findByType(Types.CROSS.toString());
+                .findByType(Types.CROSS.name());
     }
 
     @GetMapping("/userArticles")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Article> getAllUserArticles(){
         return articleRepository.findByUserPermissionLevel(PermissionLevels.USER.ordinal());
+    }
+
+    @GetMapping("/userArticleMgmtList")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Article> getUserArticlesToVerification(){
+        return articleRepository.findAllByVerificatedFalse();
     }
 
 }
