@@ -3,7 +3,6 @@ import {login} from "../../../requests/security"
 import {store} from "../../../storage/storage";
 import {saveCredentials, showAlert} from "../../../storage/actions";
 import {useDispatch} from "react-redux";
-import AlertScreen from "../../global/AlertScreen";
 import {BrowserRouter as Router, useHistory} from "react-router-dom";
 import {getCustomAlert, changeAlertText} from "../../../scripts/alert"
 import {Alert} from "@material-ui/lab";

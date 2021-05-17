@@ -9,10 +9,11 @@
     flex-direction: column;
     background: @backgroundColor;
     align-items: center;
-    overflow: hidden;
+    overflow: scroll;
     .header{
         display: flex;
         align-items: center;
+        
         h1{
             color:@mainColor;
             font-size: @headerFontSize;
@@ -28,34 +29,47 @@
     }
 
     .tag_container{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-gap: 1em;
-        width: 80%;
-        margin-bottom: 2em;
-        .tag{
-            display: flex;
-            justify-content: space-evenly;
-            background: @backgroundColor;
-            border-radius: 1em;
-            text-align: center;
-            padding: 0.3em 0 0.3em 0;
-            img{
-                width: 1em;
-                height: 1em;
-                cursor: pointer;
-            }
-        }
-
-    }
-
-    .tag_add{
         width: 100%;
         display: flex;
-        justify-content: center;
-        margin-bottom: 2em;
+        flex-direction: column;
+        align-items: center;
+        .tags{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-gap: 1em;
+            width: 90%;
+            margin-bottom: 2em;
+            .tag{
+                display: flex;
+                justify-content: space-evenly;
+                background: @backgroundColor;
+                border-radius: 1em;
+                text-align: center;
+                padding: 0.3em 0 0.3em 0;
+                img{
+                    width: 1em;
+                    height: 1em;
+                    cursor: pointer;
+                }
+            }
+
+        }
+
+        .tag_add{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2em;
+        }
     }
 
+    select{
+        background-color: @backgroundColor;
+        border-radius: 1em;
+        border: 0;
+        width: 18%;
+        margin-bottom: 1em;
+    }
     .article_data{
         display: flex;
         justify-content: space-evenly;
@@ -65,12 +79,7 @@
             width: 38%;
             font-size: 1em;
         }
-        select{
-            background-color: @backgroundColor;
-            border-radius: 1em;
-            border: 0;
-            width: 18%;
-        }
+
 
         label{
             width: 33%;
@@ -94,7 +103,7 @@
         textarea{
             resize: none;
             width: 60%;
-            height: 10em;
+            height: 9em;
             border: 0;
             outline: 0;
             border-radius: 1em;
@@ -122,9 +131,6 @@
 
     }
 
-    .button_container{
-
-    }
 
     input{
         width: 30%;

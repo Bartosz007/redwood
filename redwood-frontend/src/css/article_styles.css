@@ -16,9 +16,15 @@
   width: 23%;
   height: 60%;
 }
+.article_entire .image_section .smaller_image p {
+  color: rgba(255, 255, 255, 0.5);
+}
 .article_entire .image_section .bigger_image {
   width: 30%;
   height: 75%;
+}
+.article_entire .image_section .bigger_image p {
+  color: rgba(255, 255, 255, 0.5);
 }
 .article_entire .image_section img {
   width: 100%;

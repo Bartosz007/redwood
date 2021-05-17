@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import SearchBar from "./global/SearchBar";
 import ArticleSection from "./articles_list_ingredients/ArticleSection";
 import {getArticleList} from "../requests/article"
+import AddArticleSection from "./articles_list_ingredients/AddArticleSection";
 
 function ArticlesListPage(props) {
 
@@ -29,6 +30,7 @@ function ArticlesListPage(props) {
                 : null
             }
 
+            <AddArticleSection/>
         </main>
     );
 

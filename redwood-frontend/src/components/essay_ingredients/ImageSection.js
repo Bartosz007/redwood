@@ -6,12 +6,11 @@ import BiggerImage from "./basic_ingredients/BiggerImage";
 function ImageSection(props){
 
     const images = props.images.split(",");
-    console.log(images)
     return(
         <section className="image_section">
-            <SmallerImage source={images[0]}/>
-            <BiggerImage source={images[1]}/>
-            <SmallerImage source={images[2]}/>
+            <SmallerImage source={images[0]} type={props.type}/>
+            <BiggerImage source={images[1]} type={props.type}/>
+            <SmallerImage source={images[2]} type={props.type}/>
         </section>
     );
 }

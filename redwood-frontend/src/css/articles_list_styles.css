@@ -34,6 +34,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  position: relative;
 }
 .article_section .article .article_content * {
   width: 80%;
@@ -63,6 +64,28 @@
   border-radius: 0.8em;
   width: 30%;
   padding: 0.5em;
+}
+.article_section .article .article_content .add_article {
+  border: 0;
+  width: 30%;
+  height: 3em;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 1em;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+.article_section .article .article_content .add_article:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.article_section .article .article_content .comment_action {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 3em;
+  height: 2em;
+}
+.article_section .article .article_content .comment_action img {
+  width: 100%;
 }
 .article_section .article .article_action {
   width: 20%;

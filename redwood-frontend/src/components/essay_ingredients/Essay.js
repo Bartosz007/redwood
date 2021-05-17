@@ -17,7 +17,7 @@ function Essay(params) {
 
         getArticle(id).then((data) => {
             setLoading(true);
-            setImageSection(<ImageSection images={data.images}/>)
+            setImageSection(<ImageSection images={data.images} type={data.articleType.type}/>)
             setArticleSection(<ArticleSection articleData={data}/>)
             setCommentSection(<CommentSection comments={data.comments}/>)
 

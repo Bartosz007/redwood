@@ -24,12 +24,12 @@ import {loadCookies} from "./scripts/cookiesScripts";
 import Settings from "./components/settings_ingredients/Settings";
 import {useDispatch, useSelector} from "react-redux";
 import {store} from "./storage/storage";
-import AlertScreen from "./components/global/AlertScreen";
 import { Alert } from '@material-ui/lab';
 import UserManagmentButton from "./components/settings_ingredients/UserManagmentButton";
 import User from "./components/user_panel_ingredients/User";
 import UserArticleManagementButton from "./components/settings_ingredients/UserArticleManagementButton";
 import UserPanelPage from "./components/UserPanelPage";
+import AddArticlePage from "./components/AddArticlePage";
 
 function App() {
     const dispatch = store.dispatch;
@@ -102,9 +102,9 @@ function App() {
 
 
                 <Route
-                    path="/about"
-                    key="about"
-                    children={<ArticlesListMgmtPage/>}>
+                    path="/addArticle"
+                    key="addArticle"
+                    children={<AddArticlePage/>}>
                 </Route>
 
                 <Route path="/"

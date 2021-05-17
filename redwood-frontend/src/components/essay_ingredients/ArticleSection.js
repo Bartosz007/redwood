@@ -3,6 +3,7 @@ import Tags from "./basic_ingredients/Tags";
 
 
 function ImageSection(props){
+    console.log(props)
     return(
         <section className="article_section">
 

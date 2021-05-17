@@ -4,14 +4,15 @@ import {
     JSON_FAULT,
     NETWORK_ERROR_MESSAGE,
     POST_CONFIG,
-    POST_SECURED_CONFIG, PUT_CONFIG,
-    TOKEN,
+    PUT_CONFIG,
     URL
 } from "./constans"
 import {store} from "../storage/storage";
 
 export {
+    addArticle,
     getArticleList,
+    deleteArticle,
     getArticle,
     addComm,
     delComm,
@@ -19,6 +20,20 @@ export {
     verificateArticle
 }
 
+async function addArticle(data){
+
+    try {
+
+        const config = getSecuredConfig(data, POST_CONFIG)
+
+        const response = await fetch(URL + "addArticle", config)
+
+        return response.json();
+
+    } catch (error) {
+        return NETWORK_ERROR_MESSAGE;
+    }
+}
 
 async function getArticleList(param) {
 
@@ -67,6 +82,25 @@ async function getArticle(param) {
         } else {
             return JSON_FAULT;
         }
+
+    } catch (error) {
+        return NETWORK_ERROR_MESSAGE;
+    }
+
+}
+
+async function deleteArticle(param){
+    try {
+
+        const data = {
+            "id": param,
+        }
+
+        const config = getSecuredConfig(data, DELETE_CONFIG)
+
+        const response = await fetch(URL + "deleteArticle", config)
+
+        return response.json();
 
     } catch (error) {
         return NETWORK_ERROR_MESSAGE;
@@ -126,7 +160,7 @@ async function delComm(idComment) {
         }
 
         const config = getSecuredConfig(data, DELETE_CONFIG)
-        console.log(config)
+
         const response = await fetch(URL + "deleteComment", config)
 
         return response.json();
