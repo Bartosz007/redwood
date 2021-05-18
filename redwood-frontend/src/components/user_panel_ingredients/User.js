@@ -1,6 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {changePermit, deleteUser, giveWarn} from "../../requests/user";
 import {getCustomAlert} from "../../scripts/alert";
+import {
+    addBlockListener, addBlockStaticListener,
+    addFontListener, addListOfBlockListeners, addListOfBlockStaticListeners,
+    addListOfFontListeners,
+    refreshBetterColors
+} from "../../scripts/betterColors";
 
 function User(props) {
     const data = props.value
@@ -31,6 +37,34 @@ function User(props) {
             document.body.append(getCustomAlert(data.message))
         })
     }
+
+    useEffect(()=>{
+
+        addListOfBlockStaticListeners(document.querySelectorAll(".user"))
+        addListOfFontListeners(document.querySelectorAll(".user_nick"))
+        addListOfFontListeners(document.querySelectorAll(".user_name"))
+        addListOfFontListeners(document.querySelectorAll(".user_warns"))
+        addListOfFontListeners(document.querySelectorAll(".user_rang"))
+
+        addListOfFontListeners(document.querySelectorAll(".change_rang"))
+        addListOfFontListeners(document.querySelectorAll(".give_warn"))
+        addListOfFontListeners(document.querySelectorAll(".give_ban"))
+
+        addListOfBlockListeners(document.querySelectorAll("select"))
+
+        document.querySelectorAll("select").forEach(e=>{
+            addListOfFontListeners(e)
+        })
+/*
+        addBlockListener(document.querySelector(".article"))
+        addFontListener(document.querySelector("h1"))
+        addFontListener(document.querySelector(".article_fragment"))
+        addListOfFontListeners(document.querySelectorAll("p"))
+        addListOfFontListeners(document.querySelectorAll("a"))
+*/
+
+        refreshBetterColors();
+    },[0])
 
     return (
         <div className="user">

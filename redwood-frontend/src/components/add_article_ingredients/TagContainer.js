@@ -1,6 +1,14 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import BetterTag from "./basic_ingredients/BetterTag";
 import {Link} from "react-router-dom";
+import {
+    addBlockListener,
+    addBlockStaticListener,
+    addBlockStaticListenerRev,
+    addFontListener,
+    addListOfBlockListeners,
+    addListOfFontListeners, refreshBetterColors
+} from "../../scripts/betterColors";
 
 let tagList = [];
 

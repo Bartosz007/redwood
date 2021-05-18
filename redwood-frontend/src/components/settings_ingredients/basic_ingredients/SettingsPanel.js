@@ -1,129 +1,133 @@
 'use strict'
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { SketchPicker} from 'react-color';
+import {useCookies} from "react-cookie";
+import {store} from "../../../storage/storage";
+import {saveColors} from "../../../scripts/cookiesScripts";
+import {changeColors} from "../../../requests/user";
+import {getCustomAlert} from "../../../scripts/alert";
+import {addBlockListener, addListOfBlockListeners, refreshBetterColors} from "../../../scripts/betterColors";
 
-class SettingsPanel extends React.Component{
+function SettingsPanel(){
+    const [colorPicker, setColorPicker] = useState(false);
+    const [actualColor, setActualColor] = useState(0);
+    const [colors, setColors] = useState([
+        {r:0,g:0,b:0,a:1},
+        {r:255,g:255,b:255,a:0.5},
+        {r:255,g:255,b:255,a:0.7}
+        ])
+    const [tempColor, setTempColor] = useState({r:0,g:0,b:0,a:1});
+    const dispatch = store.dispatch;
+    const [cookie, setCookie] = useCookies(['redwood-cookie'])
 
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            colors:[
-                {r:0,g:0,b:0,a:1},
-                {r:255,g:255,b:255,a:0.5},
-                {r:255,g:255,b:255,a:0.7}
-
-              /*  "#ffffffA0",
-                "#fffffff0"*/
-            ],
-            colorPicker: false,
-            actualColor: 0
-        }
+    const openColorPicker = (number)=>{
+        setActualColor(number)
+        setColorPicker(true)
     }
-
-
-    openColorPicker = ()=>{
-        this.setState({colorPicker: true});
-    }
-    closeColorPicker= (e) =>{
+    const closeColorPicker= (e) =>{
         if(e.target.className == "color_picker_container")
-            this.setState({colorPicker: false});
+            setColorPicker(false)
     }
-
-    changeColor = (color) => {
-        const oldColor = this.state.colors;
-        oldColor[this.state.actualColor] = this.rgbaToString(color.rgb);
-        this.setState({colors: oldColor})
-
+    const colorHandler = (color) => {
+        setTempColor(color.rgb)
+        const newColor = colors;
+        newColor[actualColor] = color.rgb;
+        setColors(newColor)
     };
 
-    rgbaToString = (rgba) =>{
+    const rgbaToString = (rgba) =>{
         return `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a})`;
     }
 
-    changeColorComplete = (color) => {
-        console.log(color)
-    };
+    const saveChanges = () =>{
 
-    changeFontColor = ()=>{
-        this.openColorPicker();
-        this.setState({ actualColor: 0 });
+        const data ={
+            fontColor:rgbaToString(colors[0]),
+            fgColor:rgbaToString(colors[1]),
+            bgColor:rgbaToString(colors[2])
+        }
+        saveColors(dispatch, setCookie, data)
+        const mainState = store.getState();
+        const loginStatus = mainState.loginStatus;
+        const email = mainState.email;
+
+        if(loginStatus == true || loginStatus == "true"){
+
+            data.email = email;
+
+            changeColors(data).then(data => {
+                let alertBox = getCustomAlert(data.message);
+                document.body.append(alertBox);
+            })
+        }
+
+        refreshBetterColors()
+
     }
 
-    changeMainColor = ()=>{
-        this.openColorPicker();
-        this.setState({ actualColor: 1 });
+    const onMouseOut = ()=>{
+        document.querySelector(".demo_tile").style.backgroundColor = rgbaToString(colors[1]);
     }
 
-    changeSecondaryColor = ()=>{
-        this.openColorPicker();
-        this.setState({ actualColor: 2 });
-    }
-
-
-    onMouseOver = (e) =>{
-        if(e.target.className == "demo_tile")
-            e.target.style.backgroundColor = this.state.colors[2];
-    }
-
-    onMouseOut = (e) =>{
-        if(e.target.className == "demo_tile")
-            e.target.style.backgroundColor = this.state.colors[1];
+    const onMouseOver = () => {
+        document.querySelector(".demo_tile").style.backgroundColor = rgbaToString(colors[2]);
     }
 
 
-    render(){
-        return (
-            <form className="color_form">
-                <div className="color_changer">
-                    <p>Kolor czcionki:</p>
-                    <button type="button" onClick={this.changeFontColor} className="change_color">
-                        Zmień
-                    </button>
+
+    return (
+        <form className="color_form">
+            <div className="color_changer">
+                <p>Kolor czcionki:</p>
+                <button type="button" onClick={()=>openColorPicker(0)} className="change_color">
+                    Zmień
+                </button>
+            </div>
+
+            <div className="color_changer">
+                <p>Główny kolor:</p>
+                <button type="button" onClick={()=>openColorPicker(1)} className="change_color">Zmień</button>
+            </div>
+
+            <div className="color_changer">
+                <p>Pomocniczy kolor:</p>
+                <button type="button" onClick={()=>openColorPicker(2)} className="change_color">Zmień</button>
+            </div>
+
+
+            <div className="demo_colors">
+                <div className="demo_image_container">
+                    <img src="../images/redwood0.jpg" alt="tlo"/>
                 </div>
+                <div
+                    style={{background: rgbaToString(colors[1])}}
+                    className="demo_tile"
+                    onMouseOver={onMouseOver}
+                    onMouseOut={onMouseOut}>
 
-                <div className="color_changer">
-                    <p>Główny kolor:</p>
-                    <button type="button" onClick={this.changeMainColor}  className="change_color">Zmień</button>
+                    <p style={{color: rgbaToString(colors[0])}} className="demo_text">Demo text</p>
                 </div>
+            </div>
 
-                <div className="color_changer">
-                    <p>Pomocniczy kolor:</p>
-                    <button type="button" onClick={this.changeSecondaryColor}  className="change_color">Zmień</button>
+            <button type="button" onClick={saveChanges}>Zapisz</button>
+
+            {
+                colorPicker ?
+                (
+                    <div onClick={closeColorPicker} className="color_picker_container">
+                    <SketchPicker
+                        color={tempColor}
+                        onChange={(color)=>colorHandler(color)}
+                        onChangeComplete={(color)=>colorHandler(color)}
+                    />
                 </div>
+                )
+                : null
+            }
 
-
-                <div className="demo_colors">
-                    <div className="demo_image_container">
-                        <img src="../images/redwood0.jpg" alt="tlo"/>
-                    </div>
-                    <div
-                        style={{background:this.state.colors[1].toString()}}
-                        className="demo_tile"
-                        onMouseOver={this.onMouseOver}
-                        onMouseOut={this.onMouseOut}>
-
-                        <p style={{color: this.state.colors[0].toString()}} className="demo_text">Demo text</p>
-                    </div>
-                </div>
-
-                <button>Zapisz</button>
-
-                {this.state.colorPicker ?
-                    (<div onClick={this.closeColorPicker} className="color_picker_container">
-                        <SketchPicker
-                            color={this.state.colors[this.state.actualColor]}
-                            onChange={this.changeColor}
-                            onChangeComplete={this.changeColorComplete}
-
-                        />
-                    </div>)
-                    : null}
-
-            </form>
-        );
-    }
+        </form>
+    );
 
 }
 

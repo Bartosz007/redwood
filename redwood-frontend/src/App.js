@@ -7,7 +7,7 @@ import "./css/articles_list_styles.css";
 import "./css/user_panel_styles.css";
 import "./css/settings_styles.css";
 
-import React, {useState} from "react";
+import React, {useState, useEffect } from "react";
 import {BrowserRouter as Router, Route, Switch, useHistory} from "react-router-dom";
 import {useCookies} from 'react-cookie';
 
@@ -30,6 +30,14 @@ import User from "./components/user_panel_ingredients/User";
 import UserArticleManagementButton from "./components/settings_ingredients/UserArticleManagementButton";
 import UserPanelPage from "./components/UserPanelPage";
 import AddArticlePage from "./components/AddArticlePage";
+import {
+    addBlockListener,
+    addListenerToBetterColors, addListOfBlockListeners,
+    addListOfListeners, addListOfListenersToBetterColors,
+    initBetterColors,
+    refreshBetterColors,
+    refreshListenersColors
+} from "./scripts/betterColors";
 
 function App() {
     const dispatch = store.dispatch;
@@ -46,6 +54,9 @@ function App() {
     console.log(mainState)
     const permission = mainState.permission;
 
+    const managementPermission = (permission == "MODERATOR" || permission == "ADMIN");
+    const adminPermission = permission == "ADMIN";
+
     if(loading){
         loadCookies(cookies, setCookie, dispatch);
         setLoading(!loading);
@@ -57,6 +68,25 @@ function App() {
             setMenuState(false)
         }
     }
+
+
+
+    useEffect(() => {
+        addListOfBlockListeners(document.querySelector("header").childNodes)
+        addBlockListener(document.querySelector(".menu_button"))
+/*
+        console.log(userMgmt)
+        console.log(userArtMgmt)*/
+        if(adminPermission){
+            addBlockListener(document.querySelector(".user_mgmt_button"))
+        }
+
+        if(managementPermission){
+            addBlockListener(document.querySelector(".user_article_mgmt_button"))
+        }
+
+        refreshBetterColors()
+    })
 
     return (
 
@@ -123,12 +153,12 @@ function App() {
                 null
             }
 
-            { (permission == "MODERATOR" || permission == "ADMIN") ?
+            { managementPermission ?
                 <UserArticleManagementButton/> :
                 null
             }
 
-            {permission == "ADMIN" ?
+            { adminPermission ?
                 <UserManagmentButton/>:
                 null
             }

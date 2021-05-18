@@ -5,11 +5,11 @@ import {validateRegisterData} from "../../../scripts/validationScripts";
 import toBase64 from "../../../scripts/imageEncoder";
 
 function RegisterForm(){
-    const [name, setName] = useState("12345");
-    const [surname, setSurname] = useState("123456");
-    const [email, setEmail] = useState("fdf@bla.pl");
-    const [password, setPassword] = useState("passwd123");
-    const [repassword, setRepassword] = useState("passwd123");
+    const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [repassword, setRepassword] = useState("");
     const [photo, setPhoto] = useState("");
 
 

@@ -14,7 +14,8 @@ export {
     giveWarn,
     getUsers,
     changePermit,
-    deleteUser
+    deleteUser,
+    changeColors
 }
 
 async function getUsers(){
@@ -82,6 +83,20 @@ async function deleteUser(idUser){
         const config = getSecuredConfig(data, DELETE_CONFIG)
 
         const response = await fetch(URL + "deleteUser", config)
+
+        return response.json();
+
+    } catch (error) {
+        return NETWORK_ERROR_MESSAGE;
+    }
+}
+
+async function changeColors(data){
+    try {
+
+        const config = getSecuredConfig(data, PUT_CONFIG)
+
+        const response = await fetch(URL + "saveSettings", config)
 
         return response.json();
 

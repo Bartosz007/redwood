@@ -1,11 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import LoginForm from "./basic_ingredients/LoginForm";
 import RegisterForm from "./basic_ingredients/RegisterForm";
 import SettingsPanel from "./basic_ingredients/SettingsPanel";
+import {
+    addBlockListener,
+    addBlockStaticListener,
+    addListOfBlockStaticListenersRev, addListOfFontListeners,
+    refreshBetterColors
+} from "../../scripts/betterColors";
 
 
 function PreLoginSettings(props) {
-
 
     const [context, setContext] = useState(<LoginForm hideSettingsMenu={props.hideSettingsMenu}/>);
     const [textOfFirstButton, setTextOfFirstButton] = useState("Zarejestruj się");
@@ -45,6 +50,20 @@ function PreLoginSettings(props) {
         setTypeOfFirst(false);
 
     }
+
+    useEffect(() => {
+        addBlockListener(document.querySelector(".log_reg_button"))
+        addBlockListener(document.querySelector(".settings_button"))
+        addBlockStaticListener(document.querySelector(".settings_block"))
+
+        addListOfBlockStaticListenersRev(document.querySelectorAll("input"))
+        addListOfFontListeners(document.querySelectorAll("input"))
+
+        addListOfBlockStaticListenersRev(document.querySelectorAll("button"))
+        addListOfFontListeners(document.querySelectorAll("button"))
+
+        refreshBetterColors()
+    })
 
     return (
         <section className="settings_block">

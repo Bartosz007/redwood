@@ -75,10 +75,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 .add_form .article_data label input {
   width: 80%;
   font-size: 1em;
+  cursor: pointer;
 }
 .add_form .text_container {
   width: 100%;

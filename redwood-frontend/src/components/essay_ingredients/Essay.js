@@ -1,8 +1,14 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {getArticle} from "../../requests/article";
 import ImageSection from "./ImageSection";
 import ArticleSection from "./ArticleSection";
 import CommentSection from "./CommentSection";
+import {
+    addBlockListener,
+    addBlockStaticListener,
+    addListOfBlockListeners,
+    refreshBetterColors
+} from "../../scripts/betterColors";
 
 function Essay(params) {
     const id = params.idArticle;
@@ -16,14 +22,22 @@ function Essay(params) {
     if (!loading) {
 
         getArticle(id).then((data) => {
-            setLoading(true);
             setImageSection(<ImageSection images={data.images} type={data.articleType.type}/>)
             setArticleSection(<ArticleSection articleData={data}/>)
             setCommentSection(<CommentSection comments={data.comments}/>)
 
+            setLoading(true);
         });
 
     }
+    useEffect(() => {
+      //  addListOfBlockListeners(document.querySelector("header").childNodes)
+      //  addBlockListener(document.querySelector(".title"))
+      //  addBlockListener(document.querySelector(".user_article_mgmt_button"))
+      //  addBlockListener(document.querySelector(".menu_button"))
+      //  addBlockStaticListener(document.querySelector(".title"))
+        refreshBetterColors()
+    },[articleSection])
 
     return (
 

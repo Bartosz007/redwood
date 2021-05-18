@@ -3,6 +3,13 @@ import {delComm} from "../../../requests/article";
 import {changeAlertText, getCustomAlert} from "../../../scripts/alert";
 import {useHistory} from "react-router-dom";
 import {giveWarn} from "../../../requests/user";
+import {useEffect} from "react";
+import {
+    addBlockStaticListener,
+    addFontListener,
+    addListOfBlockListeners,
+    refreshBetterColors
+} from "../../../scripts/betterColors";
 
 
 function Comment(props){
@@ -34,6 +41,16 @@ function Comment(props){
         })
 
     }
+
+    useEffect(() => {
+        addBlockStaticListener(document.querySelector(".comment"))
+        addFontListener(document.querySelector(".user_data"))
+        addFontListener(document.querySelector(".comment_content"))
+        addFontListener(document.querySelector(".comment_data").childNodes[0])
+        addFontListener(document.querySelector(".comment_data").childNodes[1])
+        refreshBetterColors()
+    })
+
     return(
         <div className="comment">
 

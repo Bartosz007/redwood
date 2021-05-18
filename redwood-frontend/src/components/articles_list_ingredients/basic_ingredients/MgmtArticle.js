@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link, useHistory} from "react-router-dom";
 import {verificateArticle} from "../../../requests/article";
 import {getCustomAlert} from "../../../scripts/alert";
+import {
+    addBlockListener,
+    addFontListener, addListOfBlockStaticListenersRev,
+    addListOfFontListeners,
+    refreshBetterColors
+} from "../../../scripts/betterColors";
 
 
 function MgmtArticle(props) {
@@ -28,6 +34,16 @@ function MgmtArticle(props) {
     const goToArticle = () =>{
         history.push(`/article/${data.idArticle}`)
     }
+
+    useEffect(()=>{
+        addBlockListener(document.querySelector(".article"))
+        addFontListener(document.querySelector("h1"))
+        addFontListener(document.querySelector(".article_fragment"))
+        addListOfFontListeners(document.querySelectorAll("p"))
+        addListOfFontListeners(document.querySelectorAll("a"))
+
+        refreshBetterColors();
+    },[0])
 
     return (
         <div className="article">

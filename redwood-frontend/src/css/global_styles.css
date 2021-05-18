@@ -49,6 +49,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 12;
 }
 .alert_screen .alert_message {
   color: white;

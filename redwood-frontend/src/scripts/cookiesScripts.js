@@ -1,10 +1,11 @@
-import {setAllStates} from "../storage/actions";
+import {onSaveColors, setAllStates} from "../storage/actions";
 import  {INITIAL_STATE} from "../storage/reducer"
 const LIFE_TIME = 864000; //60 * 60 * 24 * 10 = 10 dni
 
 export {
     loadCookies,
     saveCookies,
+    saveColors,
     clearCookies
 }
 
@@ -26,6 +27,11 @@ const saveCookies = (dispatch, setCookie, data) =>{
 
     save(setCookie, data);
     saveCookiesInState(dispatch, data);
+}
+
+const saveColors = (dispatch, setCookie, data) =>{
+    saveColorsInCookies(setCookie, data)
+    dispatch(onSaveColors(data))
 }
 
 const clearCookies = (dispatch, setCookie, data) => {
@@ -54,6 +60,13 @@ const save = (setCookie, data) => {
     setCookie("email", data.email, {maxAge: LIFE_TIME});
     setCookie("token", data.token, {maxAge: LIFE_TIME});
     setCookie("permission", data.permission, {maxAge: LIFE_TIME});
+
+    saveColorsInCookies(setCookie, data)
+}
+
+
+const saveColorsInCookies = (setCookie, data)=>{
+    console.log(data)
     setCookie("fontColor", data.fontColor, {maxAge: LIFE_TIME});
     setCookie("bgColor", data.bgColor, {maxAge: LIFE_TIME});
     setCookie("fgColor", data.fgColor, {maxAge: LIFE_TIME});

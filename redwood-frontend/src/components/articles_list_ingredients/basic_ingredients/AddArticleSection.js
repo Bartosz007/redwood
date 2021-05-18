@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useHistory } from "react-router-dom";
+import {addBlockListener, addFontListener} from "../../../scripts/betterColors";
 
 function ArticleShort(props) {
 
@@ -8,6 +9,9 @@ function ArticleShort(props) {
     const goToAddArticle = () =>{
         history.push("/addArticle");
     }
+    useEffect(()=>{
+        addFontListener(document.querySelector(".add_article"))
+    })
 
     return (
         <section className="article_section" onClick={goToAddArticle}>
@@ -18,7 +22,7 @@ function ArticleShort(props) {
                 </div>
                 <div className="article_content">
 
-                    <div className="article_title"><h1>Miejsce na Twój artykuł</h1>
+                    <div className="article_title"><h1 className="title_text">Miejsce na Twój artykuł</h1>
                     </div>
 
                     <div className="article_fragment">

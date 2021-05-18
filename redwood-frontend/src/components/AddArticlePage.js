@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import TagContainer from "./add_article_ingredients/TagContainer";
 import EssayData from "./add_article_ingredients/EssayData";
 import CrossData from "./add_article_ingredients/CrossData";
@@ -7,6 +7,14 @@ import toBase64, {toBase64Multiple} from "../scripts/imageEncoder";
 import {validateArticleData} from "../scripts/validationScripts";
 import {getCustomAlert} from "../scripts/alert";
 import {addArticle} from "../requests/article";
+import {
+    addBlockListener,
+    addBlockStaticListener,
+    addBlockStaticListenerRev,
+    addFontListener, addListOfBlockListeners, addListOfFontListeners,
+    refreshBetterColors
+} from "../scripts/betterColors";
+import {useHistory} from "react-router-dom";
 
 function AddArticlePage() {
     const [title, setTitle] = useState("");
@@ -14,6 +22,9 @@ function AddArticlePage() {
     const [text, setText] = useState("");
     const [images, setImages] = useState();
     const [tags, setTags] = useState();
+
+    const history = useHistory()
+    const loginStatus = (store.getState().loginStatus==true || store.getState().loginStatus=="true")
 
     const changeType = (e) => {
         setType(e.target.value)
@@ -24,6 +35,11 @@ function AddArticlePage() {
         console.log(e)
     }
 
+    useEffect(()=>{
+       //
+        if(!loginStatus)
+            history.push("/")
+    })
 
 
     const onAddArticle = () =>{
@@ -49,8 +65,6 @@ function AddArticlePage() {
                 let alertBox = getCustomAlert(data.message);
                 document.body.append(alertBox)
             })
-
-            console.log(articleData)
         })
 
         }else{
@@ -61,6 +75,25 @@ function AddArticlePage() {
 
       //  console.log(validation);
     }
+
+    useEffect(() => {
+        addBlockStaticListenerRev(document.querySelector(".add_form"))
+        addFontListener(document.querySelector(".header").childNodes[0])
+
+        addListOfFontListeners(document.querySelectorAll("input"));
+        addListOfBlockListeners(document.querySelectorAll("input"))
+
+        addBlockStaticListener(document.querySelector(".add_form_text"))
+        addFontListener(document.querySelector(".add_form_text"))
+
+        addFontListener(document.querySelector(".add_form_button"))
+
+        addBlockStaticListener(document.querySelector(".select_category"))
+        addFontListener(document.querySelector(".select_category"))
+        addListOfFontListeners(document.querySelectorAll(".select_category")[0])
+
+        refreshBetterColors()
+    },[0])
 
     return (
         <main className="main_global">
@@ -91,11 +124,15 @@ function AddArticlePage() {
 
                 <div className="text_container">
                     <textarea maxLength="10000"
-                              name="text"
+                              className="add_form_text"
                               value={text}
                               onChange={e=>setText(e.target.value)}
                     ></textarea>
-                    <button type="button" onClick={onAddArticle}>Zatwierdź</button>
+                    <button
+                        type="button"
+                        onClick={onAddArticle}
+                        className="add_form_button">
+                        Zatwierdź</button>
                 </div>
 
             </form>

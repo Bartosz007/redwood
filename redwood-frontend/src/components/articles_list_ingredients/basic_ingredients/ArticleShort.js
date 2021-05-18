@@ -18,6 +18,7 @@ function ArticleShort(props) {
         if(e.target.className != "article_action")
             history.push("/article/"+data.idArticle)
     }
+
     const onArticleDelete = ()=>{
         deleteArticle(data.idArticle).then((data) => {
             let alertBox = getCustomAlert(data.message);
@@ -25,6 +26,7 @@ function ArticleShort(props) {
             history.go(0);
         })
     }
+
     const onWarnUser = ()=>{
         giveWarn(data.user.idUser).then((data) => {
             let alertBox = getCustomAlert(data.message);
@@ -40,22 +42,19 @@ function ArticleShort(props) {
             </div>
             <div className="article_content">
 
-                <div className="article_title"><h1>{data.title}</h1>
+                <div className="article_title">
+                    <h1 className="title_text">{data.title}</h1>
                 </div>
 
                 <div className="article_fragment">{data.text.slice(0,200)}
                 </div>
 
                 <div className="article_info">
-                    <p>{data.articleType.type}</p>
-                    <p>{author.name + " " + author.surname}</p>
-                    <p>Data publikacji: <br/> {data.date}</p>
+                    <p className="article_p">{data.articleType.type}</p>
+                    <p className="article_p">{author.name + " " + author.surname}</p>
+                    <p className="article_p">Data publikacji: <br/> {data.date}</p>
                 </div>
                 <div className="comment_action">
-
-
-
-
 
 
 

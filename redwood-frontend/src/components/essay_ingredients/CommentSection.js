@@ -1,15 +1,16 @@
 import Comment from "./basic_ingredients/Comment";
 import AddComment from "./basic_ingredients/AddComment";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {store} from "../../storage/storage";
+import {addListOfBlockListeners, refreshBetterColors} from "../../scripts/betterColors";
 
 function CommentSection(props){
     const comments = props.comments
 
-
     let loginStatus = store.getState().loginStatus ;
     let perms = store.getState().permission
     const commState = ((loginStatus == "true") || (loginStatus == true)) && (perms != "ZBANOWANY")
+
 
     return(
         <section className="comment_section">

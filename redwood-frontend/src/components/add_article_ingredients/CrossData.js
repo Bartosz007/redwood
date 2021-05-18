@@ -1,4 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {
+    addBlockListener,
+    addBlockStaticListener,
+    addBlockStaticListenerRev,
+    addFontListener, addListOfBlockListeners,
+    addListOfFontListeners, refreshBetterColors
+} from "../../scripts/betterColors";
 let photos = [null,null,null];
 function TagContainer(props) {
 
@@ -10,6 +17,14 @@ function TagContainer(props) {
         console.log(photos)
         setPhotos(photos);
     }
+    useEffect(() => {
+       // addBlockStaticListenerRev(document.querySelector("."))
+     //   addListOfBlockListeners(document.querySelectorAll("input"))
+     //   addListOfFontListeners(document.querySelectorAll("input"))
+        addListOfFontListeners(document.querySelectorAll("label"))
+
+        refreshBetterColors()
+    },[0])
 
     return (
         <div className="article_data">

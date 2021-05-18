@@ -1,12 +1,18 @@
 import {Link} from "react-router-dom";
+import {useEffect} from "react";
+import {addBlockStaticListener, addListOfBlockListeners, refreshBetterColors} from "../../../scripts/betterColors";
 
 
 function Tags(props){
+    useEffect(() => {
+        addListOfBlockListeners(document.querySelectorAll(".simpleTag"))
+        refreshBetterColors()
+    })
     return(
         <div className="tags">
             {
                 props.tagsData.map( tag =>{
-                    return <Link to="/" key={tag.idTag}>{tag.name}</Link>
+                    return <Link className="simpleTag" to="/" key={tag.idTag}>{tag.name}</Link>
                 })
             }
         </div>

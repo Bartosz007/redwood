@@ -14,14 +14,13 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return { ...state, alertMenu:false }
         }
 
-        case ACTIONS.HANDLE_LOGIN_MENU:{
-            return { ...state, alertMenu: action.item}
-        }
-        case ACTIONS.SET_ALERT_STATE:{
-            return state
-        }
-        case ACTIONS.GET_ALERT_STATE:{
-            return state
+        case ACTIONS.ON_SAVE_COLORS: {
+            return {
+                ...state,
+                fontColor: action.data.fontColor,
+                fgColor: action.data.fgColor,
+                bgColor: action.data.bgColor
+            }
         }
 
         default:

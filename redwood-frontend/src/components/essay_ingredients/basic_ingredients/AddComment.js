@@ -1,13 +1,26 @@
 import {addComm, getArticleList} from "../../../requests/article";
 import {useCookies} from "react-cookie";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {getCustomAlert} from "../../../scripts/alert";
 import {useHistory} from "react-router-dom";
+import {
+    addBlockListener,
+    addBlockStaticListener,
+    addFontListener,
+    refreshBetterColors
+} from "../../../scripts/betterColors";
 
 function AddComment(){
     const [cookies, setCookie] = useCookies(['redwood-cookie']);
     const [text, setText] = useState("");
     const history = useHistory();
+
+    useEffect(() => {
+        addBlockStaticListener(document.querySelector(".new_comment_text"))
+        addFontListener(document.querySelector(".new_comment_text"))
+        addBlockListener(document.querySelector(".add_comment_button"))
+        refreshBetterColors()
+    })
 
     const addComment = () =>{
 
@@ -28,10 +41,15 @@ function AddComment(){
     return(
         <div className="add_comment">
             <form>
-                <textarea name="new_comment_text"
+                <textarea name="new_comment_text" className="new_comment_text"
                           value={text} onChange={e=>setText(e.target.value)}
                           required maxLength="2000"></textarea>
-                <button type="button" onClick={addComment} name="addButton">Dodaj</button>
+                <button
+                    type="button"
+                    onClick={addComment}
+                    className="add_comment_button">
+                    Dodaj
+                </button>
             </form>
         </div>
     );
