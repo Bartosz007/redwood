@@ -1,5 +1,4 @@
 import React from 'react';
-import SearchBar from "./global/SearchBar";
 import UserSection from "./user_panel_ingredients/UserSection";
 
 function UserPanelPage() {

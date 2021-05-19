@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {verificateArticle} from "../../../requests/article";
 import {
-    addBlockListener,
-    addFontListener, addListOfBlockListeners, addListOfBlockStaticListenersRev,
+    addListOfBlockListeners,
     addListOfFontListeners,
     refreshBetterColors
 } from "../../../scripts/betterColors";
@@ -16,45 +15,43 @@ function MgmtArticle(props) {
     const user = data.user.userData
     const history = useHistory();
 
-    const verificationArticle = (state) =>{
-        verificateArticle(state, data.idArticle).then((data) =>{
+    const verificationArticle = (state) => {
+        verificateArticle(state, data.idArticle).then((data) => {
             betterAlert(data.message);
         })
     }
 
-    const acceptArticle = () =>{
+    const acceptArticle = () => {
         verificationArticle(true)
     }
 
-    const denyArticle = () =>{
+    const denyArticle = () => {
         verificationArticle(false)
     }
 
-    const goToArticle = () =>{
+    const goToArticle = () => {
         history.push(`/article/${data.idArticle}`)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         addListOfBlockListeners(document.querySelectorAll(".article"))
         addListOfFontListeners(document.querySelectorAll("h1"))
         addListOfFontListeners(document.querySelectorAll(".article_fragment"))
         addListOfFontListeners(document.querySelectorAll("p"))
         addListOfBlockListeners(document.querySelectorAll("a"))
-   //     addListOfFontListeners(document.querySelectorAll("a"))
-      //  addBlockListener(document.querySelector(".action_button"))
 
         refreshBetterColors();
-    },[0])
+    }, [0])
 
     return (
         <div className="article">
             <div className="article_image">
-                <img src={"../images/"+image} alt="{image}"/>
+                <img src={"../images/" + image} alt="{image}"/>
             </div>
             <div className="article_content">
                 <div className="article_title"><h1>{data.title}</h1>
                 </div>
-                <div className="article_fragment">{data.title.slice(0,200)}
+                <div className="article_fragment">{data.title.slice(0, 200)}
                 </div>
                 <div className="article_info">
                     <p>{data.articleType.type}</p>

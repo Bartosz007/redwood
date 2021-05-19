@@ -1,34 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 
-import LoginForm from "./basic_ingredients/LoginForm";
-import RegisterForm from "./basic_ingredients/RegisterForm";
-import SettingsPanel from "./basic_ingredients/SettingsPanel";
-import {store} from "../../storage/storage";
 import PreLoginSettings from "./PreLoginSettings";
 import PostLoginSettings from "./PostLoginSettings";
-import {
-    addBlockListener,
-    addListOfBlockListeners,
-    addListOfBlockStaticListenersRev, addListOfFontListeners,
-    refreshBetterColors
-} from "../../scripts/betterColors";
+import {refreshBetterColors} from "../../scripts/betterColors";
+import {isLogged} from "../../scripts/permissionScripts";
 
 function Settings(props) {
 
-    const loginStatus = store.getState().loginStatus
-    const login = (loginStatus == "true" || loginStatus == true)
-    useEffect(()=>{
-        //  addListOfBlockListeners(document.querySelector("header").childNodes)
-      //  addListOfBlockListeners(document.querySelectorAll("input"))
+    const loginStatus = isLogged()
 
-
+    useEffect(() => {
         refreshBetterColors()
-       // addBlockListener(document.querySelector(".logout_form"))
     })
+
     return (
         <div className="settings_container" onClick={props.hideSettingsMenu}>
             {
-                login?
+                loginStatus ?
                     <PostLoginSettings hideSettingsMenu={props.hideSettingsMenu}/>
                     :
                     <PreLoginSettings hideSettingsMenu={props.hideSettingsMenu}/>

@@ -7,10 +7,6 @@ import "./css/articles_list_styles.css";
 import "./css/user_panel_styles.css";
 import "./css/settings_styles.css";
 
-import React, {useState, useEffect } from "react";
-import {BrowserRouter as Router, Route, Switch, useHistory} from "react-router-dom";
-import {useCookies} from 'react-cookie';
-
 import MenuButtons from "./components/global/MenuButtons";
 import SettingsButton from "./components/settings_ingredients/SettingsButton";
 import Background from "./components/global/Background";
@@ -18,59 +14,46 @@ import StartPage from './components/StartPage';
 import EssayPage from "./components/EssayPage";
 import ArticlesListPage from "./components/ArticlesListPage";
 import ArticlesListMgmtPage from "./components/ArticlesListMgmtPage";
-
-
-import {loadCookies} from "./scripts/cookiesScripts";
-import Settings from "./components/settings_ingredients/Settings";
-import {useDispatch, useSelector} from "react-redux";
-import {store} from "./storage/storage";
-import UserManagmentButton from "./components/settings_ingredients/UserManagmentButton";
-import User from "./components/user_panel_ingredients/User";
+import UserManagementButton from "./components/settings_ingredients/UserManagementButton";
 import UserArticleManagementButton from "./components/settings_ingredients/UserArticleManagementButton";
+import Settings from "./components/settings_ingredients/Settings";
 import UserPanelPage from "./components/UserPanelPage";
 import AddArticlePage from "./components/AddArticlePage";
+
+import React, {useState, useEffect} from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {useCookies} from 'react-cookie';
+import {loadCookies} from "./scripts/cookiesScripts";
+
+import {store} from "./storage/storage";
 import {
     addBlockListener,
-    addListenerToBetterColors, addListOfBlockListeners,
-    addListOfListeners, addListOfListenersToBetterColors,
-    initBetterColors,
-    refreshBetterColors,
-    refreshListenersColors
+    addListOfBlockListeners,
+    refreshBetterColors
 } from "./scripts/betterColors";
-import betterAlert from "./scripts/betterAlert";
-import {ADMIN, isPermission, MODERATOR} from "./scripts/permissionScripts";
+
+import {isPermission, ADMIN, MODERATOR} from "./scripts/permissionScripts";
 
 function App() {
     const dispatch = store.dispatch;
 
-    let mainState =  store.getState();
-
     const [loading, setLoading] = useState(true);
-
     const [menuState, setMenuState] = useState(false);
-    const [userMgmt, setUserMgmt] = useState(false);
-    const [userArtMgmt, setUserArtMgmt] = useState(false);
 
     const [cookies, setCookie] = useCookies(['redwood']);
 
     const moderatorPermission = isPermission(MODERATOR) || isPermission(ADMIN)
     const adminPermission = isPermission(ADMIN)
 
-    /*
 
-        const managementPermission = (permission == "MODERATOR" || permission == "ADMIN");
-        const adminPermission = permission == "ADMIN";
-    */
-
-
-    if(loading){
+    if (loading) {
         loadCookies(cookies, setCookie, dispatch);
         setLoading(!loading);
     }
 
 
     const hideSettingsMenu = (e) => {
-        if (e == undefined || e.target.className == "settings_container") {
+        if (e === undefined || e.target.className === "settings_container") {
             setMenuState(false)
         }
     }
@@ -78,14 +61,13 @@ function App() {
     useEffect(() => {
         addListOfBlockListeners(document.querySelector("header").childNodes)
         addBlockListener(document.querySelector(".menu_button"))
-/*
-        console.log(userMgmt)
-        console.log(userArtMgmt)*/
-        if(adminPermission){
+
+
+        if (adminPermission) {
             addBlockListener(document.querySelector(".user_mgmt_button"))
         }
 
-        if(moderatorPermission){
+        if (moderatorPermission) {
             addBlockListener(document.querySelector(".user_article_mgmt_button"))
         }
 
@@ -152,18 +134,18 @@ function App() {
 
             <SettingsButton showSettingsMenu={() => setMenuState(true)}/>
 
-            { menuState ?
+            {menuState ?
                 <Settings hideSettingsMenu={hideSettingsMenu}/> :
                 null
             }
 
-            { moderatorPermission ?
+            {moderatorPermission ?
                 <UserArticleManagementButton/> :
                 null
             }
 
-            { adminPermission ?
-                <UserManagmentButton/>:
+            {adminPermission ?
+                <UserManagementButton/> :
                 null
             }
 
@@ -174,6 +156,5 @@ function App() {
     )
 
 }
-
 
 export default App;

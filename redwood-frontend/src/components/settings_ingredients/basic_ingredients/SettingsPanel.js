@@ -1,37 +1,36 @@
-'use strict'
-
 import React, {useEffect, useState} from 'react';
-import { SketchPicker} from 'react-color';
-import {useCookies} from "react-cookie";
 import {store} from "../../../storage/storage";
+import {SketchPicker} from 'react-color';
+import {useCookies} from "react-cookie";
+
 import {saveColors} from "../../../scripts/cookiesScripts";
 import {changeColors} from "../../../requests/user";
 import {
-    addBlockListener,
-    addBlockStaticListener, addBlockStaticListenerRev, addFontListener,
-    addListOfBlockListeners, addListOfBlockStaticListenersRev, addListOfFontListeners,
+    addFontListener,
+    addListOfBlockListeners,
     refreshBetterColors
 } from "../../../scripts/betterColors";
 import betterAlert from "../../../scripts/betterAlert";
+import {isLogged} from "../../../scripts/permissionScripts";
 
-function SettingsPanel(){
+function SettingsPanel() {
     const [colorPicker, setColorPicker] = useState(false);
     const [actualColor, setActualColor] = useState(0);
     const [colors, setColors] = useState([
-        {r:0,g:0,b:0,a:1},
-        {r:255,g:255,b:255,a:0.5},
-        {r:255,g:255,b:255,a:0.7}
-        ])
-    const [tempColor, setTempColor] = useState({r:0,g:0,b:0,a:1});
+        {r: 0, g: 0, b: 0, a: 1},
+        {r: 255, g: 255, b: 255, a: 0.5},
+        {r: 255, g: 255, b: 255, a: 0.7}
+    ])
+    const [tempColor, setTempColor] = useState({r: 0, g: 0, b: 0, a: 1});
     const dispatch = store.dispatch;
-    const [cookie, setCookie] = useCookies(['redwood'])
+    const [, setCookie] = useCookies(['redwood'])
 
-    const openColorPicker = (number)=>{
+    const openColorPicker = (number) => {
         setActualColor(number)
         setColorPicker(true)
     }
-    const closeColorPicker= (e) =>{
-        if(e.target.className == "color_picker_container")
+    const closeColorPicker = (e) => {
+        if (e.target.className == "color_picker_container")
             setColorPicker(false)
     }
     const colorHandler = (color) => {
@@ -41,23 +40,21 @@ function SettingsPanel(){
         setColors(newColor)
     };
 
-    const rgbaToString = (rgba) =>{
+    const rgbaToString = (rgba) => {
         return `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a})`;
     }
 
-    const saveChanges = () =>{
+    const saveChanges = () => {
 
-        const data ={
-            fontColor:rgbaToString(colors[0]),
-            fgColor:rgbaToString(colors[1]),
-            bgColor:rgbaToString(colors[2])
+        const data = {
+            fontColor: rgbaToString(colors[0]),
+            fgColor: rgbaToString(colors[1]),
+            bgColor: rgbaToString(colors[2])
         }
         saveColors(dispatch, setCookie, data)
-        const mainState = store.getState();
-        const loginStatus = mainState.loginStatus;
-        const email = mainState.email;
+        const email = store.getState().email;
 
-        if(loginStatus == true || loginStatus == "true"){
+        if (isLogged()) {
 
             data.email = email;
 
@@ -70,7 +67,7 @@ function SettingsPanel(){
 
     }
 
-    const onMouseOut = ()=>{
+    const onMouseOut = () => {
         document.querySelector(".demo_tile").style.backgroundColor = rgbaToString(colors[1]);
     }
 
@@ -78,12 +75,11 @@ function SettingsPanel(){
         document.querySelector(".demo_tile").style.backgroundColor = rgbaToString(colors[2]);
     }
 
-    useEffect(()=>{
-        document.querySelectorAll(".color_changer").forEach((parent)=>{
+    useEffect(() => {
+        document.querySelectorAll(".color_changer").forEach((parent) => {
             addFontListener(parent.querySelector("p"))
         })
         addListOfBlockListeners(document.querySelectorAll("button"))
-       // addListOfFontListeners(document.querySelectorAll("p"))
 
         refreshBetterColors()
     })
@@ -92,19 +88,19 @@ function SettingsPanel(){
         <form className="color_form">
             <div className="color_changer">
                 <p>Kolor czcionki:</p>
-                <button type="button" onClick={()=>openColorPicker(0)} className="change_color">
+                <button type="button" onClick={() => openColorPicker(0)} className="change_color">
                     Zmień
                 </button>
             </div>
 
             <div className="color_changer">
                 <p>Główny kolor:</p>
-                <button type="button" onClick={()=>openColorPicker(1)} className="change_color">Zmień</button>
+                <button type="button" onClick={() => openColorPicker(1)} className="change_color">Zmień</button>
             </div>
 
             <div className="color_changer">
                 <p>Pomocniczy kolor:</p>
-                <button type="button" onClick={()=>openColorPicker(2)} className="change_color">Zmień</button>
+                <button type="button" onClick={() => openColorPicker(2)} className="change_color">Zmień</button>
             </div>
 
 
@@ -126,16 +122,16 @@ function SettingsPanel(){
 
             {
                 colorPicker ?
-                (
-                    <div onClick={closeColorPicker} className="color_picker_container">
-                    <SketchPicker
-                        color={tempColor}
-                        onChange={(color)=>colorHandler(color)}
-                        onChangeComplete={(color)=>colorHandler(color)}
-                    />
-                </div>
-                )
-                : null
+                    (
+                        <div onClick={closeColorPicker} className="color_picker_container">
+                            <SketchPicker
+                                color={tempColor}
+                                onChange={(color) => colorHandler(color)}
+                                onChangeComplete={(color) => colorHandler(color)}
+                            />
+                        </div>
+                    )
+                    : null
             }
 
         </form>

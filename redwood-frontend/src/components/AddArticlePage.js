@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
+import {store} from "../storage/storage";
+
 import TagContainer from "./add_article_ingredients/TagContainer";
 import EssayData from "./add_article_ingredients/EssayData";
 import CrossData from "./add_article_ingredients/CrossData";
-import {store} from "../storage/storage";
-import toBase64, {toBase64Multiple} from "../scripts/imageEncoder";
+
+import {toBase64Multiple} from "../scripts/imageEncoder";
 import {validateArticleData} from "../scripts/validationScripts";
 import {addArticle} from "../requests/article";
 import {
@@ -32,22 +34,18 @@ function AddArticlePage() {
         setType(e.target.value)
     }
 
-    const setPhotos = (e) =>{
+    const setPhotos = (e) => {
         setImages(e)
-        console.log(e)
     }
 
-    useEffect(()=>{
-       //
-        if(!permission)
+    useEffect(() => {
+        if (!permission)
             history.push("/")
     })
 
 
-    const onAddArticle = () =>{
-        const email =  store.getState().email;
-      //  console.log(images.slice(0, 3))
-       // setImages(images.slice(0, 3));
+    const onAddArticle = () => {
+        const email = store.getState().email;
 
         const [validation, message] = validateArticleData(title, text, images, tags)
 
@@ -78,8 +76,6 @@ function AddArticlePage() {
             betterAlert(message);
         }
 
-
-      //  console.log(validation);
     }
 
     useEffect(() => {
@@ -100,7 +96,7 @@ function AddArticlePage() {
 
         addBlockListener(document.querySelector("button"))
         refreshBetterColors()
-    },[0])
+    }, [0])
 
     return (
         <main className="main_global">
@@ -108,7 +104,7 @@ function AddArticlePage() {
                 <div className="header"><h1>Dodaj artykuł</h1></div>
                 <div className="title">
                     <input value={title}
-                           onChange={e=>setTitle(e.target.value)}
+                           onChange={e => setTitle(e.target.value)}
                            type="text"
                            name="title"
                            placeholder="Tytuł"/>
@@ -119,13 +115,14 @@ function AddArticlePage() {
                 <select className="select_category" onChange={changeType}>
                     <option>Wybier kategorię</option>
                     <option>GUIDE</option>
-                    <option>ESSAY</option>select_category
+                    <option>ESSAY</option>
+                    select_category
                     <option>CROSS</option>
                 </select>
 
                 {
-                    type == "CROSS" ?
-                        <CrossData setPhotos={setPhotos}/>:
+                    type === "CROSS" ?
+                        <CrossData setPhotos={setPhotos}/> :
                         <EssayData setPhotos={setPhotos}/>
                 }
 
@@ -133,13 +130,14 @@ function AddArticlePage() {
                     <textarea maxLength="10000"
                               className="add_form_text"
                               value={text}
-                              onChange={e=>setText(e.target.value)}
+                              onChange={e => setText(e.target.value)}
                     ></textarea>
                     <button
                         type="button"
                         onClick={onAddArticle}
                         className="add_form_button">
-                        Zatwierdź</button>
+                        Zatwierdź
+                    </button>
                 </div>
 
             </form>

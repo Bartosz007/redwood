@@ -3,9 +3,11 @@ let alertMessage;
 let alert = null;
 let alertStatus = false;
 
-function betterAlert(text){
-    console.log(text)
-    if(alertStatus){
+export default betterAlert
+
+function betterAlert(text) {
+
+    if (alertStatus) {
         remove()
     }
 
@@ -16,11 +18,11 @@ function betterAlert(text){
 
 }
 
-function getAlertContext(text){
+function getAlertContext(text) {
     alertScreen = document.createElement('div');
     alertScreen.className = "alert_screen";
 
-    alertMessage= document.createElement('h3');
+    alertMessage = document.createElement('h3');
     alertMessage.className = "alert_message";
     alertMessage.textContent = text;
 
@@ -30,8 +32,6 @@ function getAlertContext(text){
 
 }
 
-const remove = () =>{
+const remove = () => {
     alert.remove();
 }
-
-export default betterAlert

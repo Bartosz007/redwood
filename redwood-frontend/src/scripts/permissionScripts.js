@@ -1,4 +1,5 @@
 import {store} from "../storage/storage";
+
 export {
     isLogged,
     isPermission,
@@ -12,17 +13,17 @@ const ZBANOWANY = "ZBANOWANY"
 const MODERATOR = "MODERATOR"
 const ADMIN = "ADMIN"
 
-function isLogged(){
+function isLogged() {
     const loginStatus = store.getState().loginStatus;
-    return (loginStatus=="true" || loginStatus==true);
 
+    return (loginStatus == "true" || loginStatus == true);
 }
 
-function isPermission(needed){
-    if(isLogged()){
+function isPermission(needed) {
+    if (isLogged()) {
         const permission = store.getState().permission;
         return (permission == needed)
-    }else{
+    } else {
         return false;
     }
 }

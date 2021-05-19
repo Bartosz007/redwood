@@ -1,25 +1,21 @@
 import React, {useState} from 'react';
+import {useHistory} from "react-router-dom";
 import MgmtArticle from "./basic_ingredients/MgmtArticle";
 import {getArticleListToVerification} from "../../requests/article";
-import ArticleShort from "./basic_ingredients/AddArticleSection";
-import AddArticleSection from "./basic_ingredients/AddArticleSection";
-import {useHistory} from "react-router-dom";
-import {store} from "../../storage/storage";
-import {ADMIN, isPermission, MODERATOR} from "../../scripts/permissionScripts";
+import {ADMIN, MODERATOR, isPermission} from "../../scripts/permissionScripts";
 
 function MgmtArticleSection() {
     const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
-
     const history = useHistory();
 
     const permission = isPermission(ADMIN) || isPermission(MODERATOR)
     getArticleListToVerification().then((data) => {
 
-        if(permission){
+        if (permission) {
             setData(data);
             setLoading(true)
-        }else{
+        } else {
             history.push("/")
         }
 

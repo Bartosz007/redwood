@@ -1,11 +1,9 @@
 import {useHistory} from "react-router-dom";
 
-
-function UserArticleManagementButton(){
+function UserManagementButton(){
     const history = useHistory();
 
     const openUsersMgmt = () => {
-        console.log("klik")
         history.push("/userPanel")
     }
 
@@ -16,4 +14,4 @@ function UserArticleManagementButton(){
     );
 }
 
-export default UserArticleManagementButton;
+export default UserManagementButton;

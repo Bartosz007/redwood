@@ -1,6 +1,5 @@
-
-function SearchBar(){
-    return(
+function SearchBar() {
+    return (
         <section className="search_section">
             <div className="search_bar">
                 <img src="../icons/loupe.svg" alt="lupa"/>

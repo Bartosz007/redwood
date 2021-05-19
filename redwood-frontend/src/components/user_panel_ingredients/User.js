@@ -1,47 +1,43 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
+
 import {changePermit, deleteUser, giveWarn} from "../../requests/user";
 import {
-    addBlockListener, addBlockStaticListener,
-    addFontListener, addListOfBlockListeners, addListOfBlockStaticListeners,
+    addListOfBlockListeners,
+    addListOfBlockStaticListeners,
     addListOfFontListeners,
     refreshBetterColors
 } from "../../scripts/betterColors";
 import betterAlert from "../../scripts/betterAlert";
-import {useHistory} from "react-router-dom";
 
 function User(props) {
     const data = props.value
     const userData = data.userData
-    const history = useHistory();
-    //console.log(data)
+    const onChangePermit = (e) => {
 
-    const onChangePermit = (e) =>{
-
-        changePermit(e.target.value, data.idUser).then((data) =>{
+        changePermit(e.target.value, data.idUser).then((data) => {
             betterAlert(data.message)
         })
     }
 
-    const onGiveWarn = () =>{
-        giveWarn(data.idUser).then((data) =>{
-            betterAlert(data.message)
-           // history.go(0)
-        })
-    }
-
-    const onGiveBan = () =>{
-        changePermit("ZBANOWANY", data.idUser).then((data) =>{
+    const onGiveWarn = () => {
+        giveWarn(data.idUser).then((data) => {
             betterAlert(data.message)
         })
     }
 
-    const onDelete = () =>{
-        deleteUser(data.idUser).then((data) =>{
+    const onGiveBan = () => {
+        changePermit("ZBANOWANY", data.idUser).then((data) => {
             betterAlert(data.message)
         })
     }
 
-    useEffect(()=>{
+    const onDelete = () => {
+        deleteUser(data.idUser).then((data) => {
+            betterAlert(data.message)
+        })
+    }
+
+    useEffect(() => {
 
         addListOfBlockStaticListeners(document.querySelectorAll(".user"))
         addListOfFontListeners(document.querySelectorAll(".user_nick"))
@@ -55,19 +51,13 @@ function User(props) {
 
         addListOfBlockListeners(document.querySelectorAll("select"))
 
-        document.querySelectorAll("select").forEach(e=>{
+        document.querySelectorAll("select").forEach(e => {
             addListOfFontListeners(e)
         })
-/*
-        addBlockListener(document.querySelector(".article"))
-        addFontListener(document.querySelector("h1"))
-        addFontListener(document.querySelector(".article_fragment"))
-        addListOfFontListeners(document.querySelectorAll("p"))
-        addListOfFontListeners(document.querySelectorAll("a"))
-*/
 
         refreshBetterColors();
-    },[0])
+
+    }, [0])
 
     return (
         <div className="user">
@@ -79,7 +69,7 @@ function User(props) {
                     Email:{data.email}
                 </div>
                 <div className="user_name">
-                    {userData.name+ " "+userData.surname}
+                    {userData.name + " " + userData.surname}
                 </div>
                 <div className="user_warns">
                     Liczba ostrzerzeń: {userData.warnLevel}

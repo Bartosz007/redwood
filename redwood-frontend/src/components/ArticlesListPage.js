@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import SearchBar from "./global/SearchBar";
+
 import ArticleSection from "./articles_list_ingredients/ArticleSection";
-import {getArticleList} from "../requests/article"
 import AddArticleSection from "./articles_list_ingredients/basic_ingredients/AddArticleSection";
+
+import {getArticleList} from "../requests/article"
 import {
-    addFontListener,
-    addListenerToBetterColors, addListOfBlockListeners, addListOfFontListeners,
-    addListOfListenersToBetterColors,
+    addListOfBlockListeners,
+    addListOfFontListeners,
     refreshBetterColors
 } from "../scripts/betterColors";
-import {store} from "../storage/storage";
 import {isLogged, isPermission, ZBANOWANY} from "../scripts/permissionScripts";
 
 function ArticlesListPage(props) {
@@ -36,7 +35,7 @@ function ArticlesListPage(props) {
         addListOfFontListeners(document.querySelectorAll(".title_text"))
         addListOfFontListeners(document.querySelectorAll(".article_p"))
         refreshBetterColors()
-    },[loading])
+    }, [loading])
 
 
     return (

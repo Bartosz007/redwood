@@ -1,16 +1,13 @@
 import React, {useEffect} from "react";
 import {
-    addBlockListener,
-    addBlockStaticListener,
-    addBlockStaticListenerRev,
-    addFontListener, addListOfBlockListeners,
+    addListOfBlockListeners,
     addListOfFontListeners, refreshBetterColors
 } from "../../scripts/betterColors";
-let photos = [null,null,null];
+
+let photos = [null, null, null];
+
 function TagContainer(props) {
-
     const setPhotos = props.setPhotos
-
 
     const addPhoto = (photo, index) => {
         photos[index] = photo[0];
@@ -18,32 +15,31 @@ function TagContainer(props) {
         setPhotos(photos);
     }
     useEffect(() => {
-       // addBlockStaticListenerRev(document.querySelector("."))
         addListOfBlockListeners(document.querySelectorAll("input"))
         addListOfFontListeners(document.querySelectorAll("input"))
         addListOfFontListeners(document.querySelectorAll("label"))
 
         refreshBetterColors()
-    },[0])
+    }, [0])
 
     return (
         <div className="article_data">
             <label>Cecha 1
                 <input type="file"
                        name="photos"
-                       onChange={(e) => addPhoto(e.target.files,0)}/>
+                       onChange={(e) => addPhoto(e.target.files, 0)}/>
             </label>
 
             <label>Krzyżówka
                 <input type="file"
                        name="photos"
-                       onChange={(e) => addPhoto(e.target.files,1)}/>
+                       onChange={(e) => addPhoto(e.target.files, 1)}/>
 
             </label>
             <label>Cecha 2
                 <input type="file"
                        name="photos"
-                       onChange={(e) => addPhoto(e.target.files,2)}/>
+                       onChange={(e) => addPhoto(e.target.files, 2)}/>
 
             </label>
         </div>

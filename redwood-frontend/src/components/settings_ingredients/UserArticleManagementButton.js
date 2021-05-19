@@ -1,7 +1,6 @@
 import {useHistory} from "react-router-dom";
 
-
-function UserArticleManagementButton(){
+function UserArticleManagementButton() {
 
     const history = useHistory();
 
@@ -9,8 +8,8 @@ function UserArticleManagementButton(){
         history.push("/userArticleMgmtList")
     }
 
-    return(
-        <div className="user_article_mgmt_button"onClick={openUsersArticleMgmt}>
+    return (
+        <div className="user_article_mgmt_button" onClick={openUsersArticleMgmt}>
             <img src="../icons/list.svg" alt="list"/>
         </div>
     );

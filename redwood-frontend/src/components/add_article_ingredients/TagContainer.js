@@ -1,14 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import BetterTag from "./basic_ingredients/BetterTag";
-import {Link} from "react-router-dom";
-import {
-    addBlockListener,
-    addBlockStaticListener,
-    addBlockStaticListenerRev,
-    addFontListener,
-    addListOfBlockListeners,
-    addListOfFontListeners, refreshBetterColors
-} from "../../scripts/betterColors";
+
 
 let tagList = [];
 
@@ -21,7 +13,7 @@ function TagContainer(props) {
 
     const addTag = (e) => {
 
-        if(e.keyCode == 13 && tagValue.length > 2){
+        if (e.keyCode == 13 && tagValue.length > 2) {
 
             tagList.push(tagValue)
 
@@ -33,11 +25,11 @@ function TagContainer(props) {
         }
     }
 
-    const removeTag = (e,value)=>{
+    const removeTag = (e, value) => {
 
-        for(let i =0;i<tagList.length;i++){
-            if(tagList[i] == value){
-                tagList.splice(i,1);
+        for (let i = 0; i < tagList.length; i++) {
+            if (tagList[i] == value) {
+                tagList.splice(i, 1);
                 break;
             }
         }
@@ -46,8 +38,8 @@ function TagContainer(props) {
 
     }
 
-    const generateTags = (tagList)=>{
-        return tagList.map(tag =>{
+    const generateTags = (tagList) => {
+        return tagList.map(tag => {
             const keyValue = Math.floor(Math.random() * 1000) + tag;
             return <BetterTag value={tag} key={keyValue} removeTag={removeTag}/>
         })

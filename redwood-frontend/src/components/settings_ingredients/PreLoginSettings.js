@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react";
 import LoginForm from "./basic_ingredients/LoginForm";
 import RegisterForm from "./basic_ingredients/RegisterForm";
 import SettingsPanel from "./basic_ingredients/SettingsPanel";
+
 import {
     addBlockListener,
     addBlockStaticListener,
-    addListOfBlockStaticListenersRev, addListOfFontListeners,
+    addListOfBlockStaticListenersRev,
+    addListOfFontListeners,
     refreshBetterColors
 } from "../../scripts/betterColors";
 
@@ -30,7 +32,6 @@ function PreLoginSettings(props) {
             setTextOfFirstButton("Zarejestruj się");
         }
 
-        //jakby się psuło dać w setTimeout
         setTextOfSecondButton("Ustawienia");
         setTypeOfSecond(true);
     }
@@ -75,7 +76,6 @@ function PreLoginSettings(props) {
                 <div className="settings_button"
                      onClick={secondButtonActions}>{textOfSecondButton}</div>
             </div>
-
 
             {context}
 

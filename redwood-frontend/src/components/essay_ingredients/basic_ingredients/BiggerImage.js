@@ -1,13 +1,11 @@
-
-
-function BiggerImage(props){
+function BiggerImage(props) {
     const type = props.type
-    return(
+    return (
         <div className="bigger_image">
-            <img src={`../images/${props.source}`}  alt="photo0"/>
+            <img src={`../images/${props.source}`} alt="photo0"/>
             <p>
                 {
-                    type=="CROSS" ? "Krzyżówka":null
+                    type == "CROSS" ? "Krzyżówka" : null
                 }
             </p>
         </div>

@@ -1,10 +1,9 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {deleteArticle} from "../../../requests/article";
 import {giveWarn} from "../../../requests/user";
-import {store} from "../../../storage/storage";
 import betterAlert from "../../../scripts/betterAlert";
-import {ADMIN, isPermission, MODERATOR} from "../../../scripts/permissionScripts";
+import {ADMIN, MODERATOR, isPermission} from "../../../scripts/permissionScripts";
 
 function ArticleShort(props) {
     const data = props.value;
@@ -14,21 +13,21 @@ function ArticleShort(props) {
     const history = useHistory();
     const permission = isPermission(ADMIN) || isPermission(MODERATOR)
 
-    const onArticleClick = (e) =>{
-        if(e.target.className != "article_action")
-            history.push("/article/"+data.idArticle)
+    const onArticleClick = (e) => {
+        if (e.target.className != "article_action")
+            history.push("/article/" + data.idArticle)
     }
 
-    const onArticleDelete = ()=>{
+    const onArticleDelete = () => {
         deleteArticle(data.idArticle).then((data) => {
             betterAlert(data.message);
-            setTimeout(()=>{
+            setTimeout(() => {
                 history.go(0);
-            },500)
+            }, 500)
         })
     }
 
-    const onWarnUser = ()=>{
+    const onWarnUser = () => {
         giveWarn(data.user.idUser).then((data) => {
             betterAlert(data.message);
         })
@@ -38,7 +37,7 @@ function ArticleShort(props) {
 
         <div className="article" onClick={onArticleClick}>
             <div className="article_image">
-                <img src={"../images/"+icon} alt="plant0"/>
+                <img src={"../images/" + icon} alt="plant0"/>
             </div>
             <div className="article_content">
 
@@ -46,7 +45,7 @@ function ArticleShort(props) {
                     <h1 className="title_text">{data.title}</h1>
                 </div>
 
-                <div className="article_fragment">{data.text.slice(0,200)}
+                <div className="article_fragment">{data.text.slice(0, 200)}
                 </div>
 
                 <div className="article_info">
@@ -57,23 +56,22 @@ function ArticleShort(props) {
                 <div className="comment_action">
 
 
-
-                {
-                    permission ?
-                        <img className="article_action"
-                             src="../icons/delete.svg"
-                             alt="delete"
-                             onClick={onArticleDelete}/> :
-                        null
-                }
-                {
-                    permission ?
-                        <img className="article_action"
-                             src="../icons/warn.svg"
-                             alt="delete"
-                             onClick={onWarnUser}/> :
-                        null
-                }
+                    {
+                        permission ?
+                            <img className="article_action"
+                                 src="../icons/delete.svg"
+                                 alt="delete"
+                                 onClick={onArticleDelete}/> :
+                            null
+                    }
+                    {
+                        permission ?
+                            <img className="article_action"
+                                 src="../icons/warn.svg"
+                                 alt="delete"
+                                 onClick={onWarnUser}/> :
+                            null
+                    }
 
                 </div>
 

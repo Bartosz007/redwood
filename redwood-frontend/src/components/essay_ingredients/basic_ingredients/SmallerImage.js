@@ -1,18 +1,15 @@
-
-
-function SmallerImage(props){
+function SmallerImage(props) {
     const type = props.type
-    return(
+    return (
         <div className="smaller_image">
             <img src={`../images/${props.source}`} alt="photo0"/>
             <p>
-            {
-                type=="CROSS" ? "Podkładka":null
-            }
+                {
+                    type == "CROSS" ? "Podkładka" : null
+                }
             </p>
         </div>
     );
 }
-
 
 export default SmallerImage;

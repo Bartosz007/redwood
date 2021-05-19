@@ -1,10 +1,13 @@
 import Tags from "./basic_ingredients/Tags";
 import {useEffect} from "react";
-import {addBlockStaticListener, addFontListener, refreshBetterColors} from "../../scripts/betterColors";
+import {
+    addBlockStaticListener,
+    addFontListener,
+    refreshBetterColors
+}
+    from "../../scripts/betterColors";
 
-
-
-function ImageSection(props){
+function ImageSection(props) {
 
     useEffect(() => {
         addBlockStaticListener(document.querySelector(".title"))
@@ -14,7 +17,7 @@ function ImageSection(props){
         refreshBetterColors()
     })
 
-    return(
+    return (
         <section className="article_section">
 
             <div className="title">
@@ -31,6 +34,5 @@ function ImageSection(props){
         </section>
     );
 }
-
 
 export default ImageSection;

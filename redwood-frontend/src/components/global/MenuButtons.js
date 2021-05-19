@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-function MenuButtons(){
+function MenuButtons() {
     return (
         <header>
             <Link to="/">Start</Link>
@@ -11,7 +11,5 @@ function MenuButtons(){
         </header>
     );
 }
-
-
 
 export default MenuButtons;

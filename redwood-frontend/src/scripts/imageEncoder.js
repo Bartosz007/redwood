@@ -1,5 +1,3 @@
-import async from "async";
-
 export {
     toBase64Multiple
 }
@@ -12,10 +10,10 @@ const toBase64 = file => new Promise((resolve, reject) => {
 });
 export default toBase64;
 
-const toBase64Multiple = async (images) =>{
-    let photosConverted=[];
+const toBase64Multiple = async (images) => {
+    let photosConverted = [];
 
-    for(let i =0;i<images.length;i++){
+    for (let i = 0; i < images.length; i++) {
         await toBase64(images[i]).then(data => {
             photosConverted.push(data)
         })

@@ -1,22 +1,22 @@
 import React, {useEffect} from 'react';
-import { useHistory } from "react-router-dom";
-import {addBlockListener, addFontListener} from "../../../scripts/betterColors";
+import {useHistory} from "react-router-dom";
+import {addBlockListener} from "../../../scripts/betterColors";
 
-function ArticleShort(props) {
+function ArticleShort() {
 
     const history = useHistory();
 
-    const goToAddArticle = () =>{
+    const goToAddArticle = () => {
         history.push("/addArticle");
     }
-    useEffect(()=>{
+    useEffect(() => {
         addBlockListener(document.querySelector(".add_article"))
     })
 
     return (
         <section className="article_section" onClick={goToAddArticle}>
 
-            <div className="article" >
+            <div className="article">
                 <div className="article_image">
                     <img src="../images/plant0.jpg" alt="plant0"/>
                 </div>

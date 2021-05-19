@@ -1,12 +1,10 @@
 import SmallerImage from "./basic_ingredients/SmallerImage";
 import BiggerImage from "./basic_ingredients/BiggerImage";
 
-
-
-function ImageSection(props){
+function ImageSection(props) {
 
     const images = props.images.split(",");
-    return(
+    return (
         <section className="image_section">
             <SmallerImage source={images[0]} type={props.type}/>
             <BiggerImage source={images[1]} type={props.type}/>
@@ -14,6 +12,5 @@ function ImageSection(props){
         </section>
     );
 }
-
 
 export default ImageSection;

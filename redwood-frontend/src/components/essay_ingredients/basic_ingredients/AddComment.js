@@ -1,16 +1,18 @@
-import {addComm, getArticleList} from "../../../requests/article";
-import {useCookies} from "react-cookie";
 import React, {useEffect, useState} from "react";
+import {useCookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
+
+import {addComm} from "../../../requests/article";
 import {
     addBlockListener,
     addBlockStaticListener,
     addFontListener,
     refreshBetterColors
 } from "../../../scripts/betterColors";
+
 import betterAlert from "../../../scripts/betterAlert";
 
-function AddComment(){
+function AddComment() {
     const [cookies, setCookie] = useCookies(['redwood']);
     const [text, setText] = useState("");
     const history = useHistory();
@@ -22,27 +24,27 @@ function AddComment(){
         refreshBetterColors()
     })
 
-    const addComment = () =>{
+    const addComment = () => {
 
-        if(text.length > 5){
+        if (text.length > 5) {
 
-           betterAlert("Dodawanie komentarza...");
+            betterAlert("Dodawanie komentarza...");
             const path = history.location.pathname.split("/")[2]
             addComm(text, cookies.email, path).then((data) => {
                 history.go(0);
             });
 
-        }else{
+        } else {
             betterAlert("Komentarz jest za krótki!");
         }
 
     }
 
-    return(
+    return (
         <div className="add_comment">
             <form>
                 <textarea name="new_comment_text" className="new_comment_text"
-                          value={text} onChange={e=>setText(e.target.value)}
+                          value={text} onChange={e => setText(e.target.value)}
                           required maxLength="2000"></textarea>
                 <button
                     type="button"

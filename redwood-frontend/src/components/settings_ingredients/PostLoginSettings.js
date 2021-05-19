@@ -1,39 +1,36 @@
 import React, {useEffect, useState} from "react";
-import LoginForm from "./basic_ingredients/LoginForm";
 import LogoutForm from "./basic_ingredients/LogoutForm";
 import SettingsPanel from "./basic_ingredients/SettingsPanel";
+
 import {
     addBlockListener,
     addBlockStaticListener,
-    addListOfBlockStaticListenersRev,
-    addListOfFontListeners,
     refreshBetterColors
 } from "../../scripts/betterColors";
-
-
 
 function PostLoginSettings(props) {
     const [context, setContext] = useState(<LogoutForm hideSettingsMenu={props.hideSettingsMenu}/>);
     const [textOfButton, setTextOfButton] = useState("Ustawienia");
     const [typeOfButton, setTypeOfButton] = useState(true);
 
-    const onButtonAction = () =>{
+    const onButtonAction = () => {
         setTypeOfButton(!typeOfButton);
-        if(typeOfButton){
+        if (typeOfButton) {
             setTextOfButton("Wyloguj się")
             setContext(<SettingsPanel/>)
-        }else{
+        } else {
             setTextOfButton("Ustawienia")
             setContext(<LogoutForm hideSettingsMenu={props.hideSettingsMenu}/>)
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         addBlockStaticListener(document.querySelector(".settings_block"))
         addBlockListener(document.querySelector(".settings2_button"))
 
         refreshBetterColors()
     })
+
     return (
         <section className="settings_block">
 

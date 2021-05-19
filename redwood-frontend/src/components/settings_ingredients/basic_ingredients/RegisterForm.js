@@ -3,9 +3,9 @@ import {register} from "../../../requests/security";
 import {validateRegisterData} from "../../../scripts/validationScripts";
 import toBase64 from "../../../scripts/imageEncoder";
 import {
-    addBlockListener,
-    addBlockStaticListener,
-    addListOfBlockStaticListenersRev, addListOfFontListeners, refreshBetterColors
+    addListOfBlockStaticListenersRev,
+    addListOfFontListeners,
+    refreshBetterColors
 } from "../../../scripts/betterColors";
 import {useHistory} from "react-router-dom";
 import betterAlert from "../../../scripts/betterAlert";
@@ -36,42 +36,18 @@ function RegisterForm(){
         const [validation, message] = validateRegisterData(name, surname, email, password, repassword, photo);
 
         if(validation){
-         /*    const encodedPhoto = getBase64(photo).then(()=>{
-
-             });*/
                 toBase64(photo).then((encodedPhoto)=>{
-                  //  console.log(photo)
-
                     register(name, surname, email, password, encodedPhoto).then(data => {
-                        history.go(0);
-                      //  console.log(data)
-                        // if(data.status == true){
-                        //
-                        // }
+                        betterAlert(data.message)
+                        setTimeout(()=>{
+                            history.go(0);
+                        },1000)
                     })
 
                 });
-             /*
-             console.log(photo)
-                 console.log(encodedPhoto)
-                 register(name, surname, email, password, encodedPhoto).then(data => {
-                     console.log(data)
-                     // if(data.status == true){
-                     //
-                     // }
-
-                 })
-              */
-
-
-
-
         }else{
-
             betterAlert(message);
-
         }
-      //  console.log(photo)
 
     }
 
@@ -97,6 +73,3 @@ function RegisterForm(){
 }
 
 export default RegisterForm;
-
-
-
