@@ -39,7 +39,9 @@ function MgmtArticle(props) {
         addListOfFontListeners(document.querySelectorAll("h1"))
         addListOfFontListeners(document.querySelectorAll(".article_fragment"))
         addListOfFontListeners(document.querySelectorAll("p"))
-        addListOfFontListeners(document.querySelectorAll("a"))
+        addListOfBlockListeners(document.querySelectorAll("a"))
+   //     addListOfFontListeners(document.querySelectorAll("a"))
+      //  addBlockListener(document.querySelector(".action_button"))
 
         refreshBetterColors();
     },[0])

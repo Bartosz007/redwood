@@ -8,26 +8,28 @@ import {ADMIN, isPermission} from "../../scripts/permissionScripts";
 
 function UserSection() {
     const [userList, setUserList] = useState();
-    const [loading, setLeading] = useState(false);
+    const [loaded, setLoaded] = useState(false);
     const state = store.getState()
     const email =  state.email;
     const history = useHistory();
     const perms = isPermission(ADMIN)
 
-    getUsers().then((data) => {
-        if(perms){
-            setUserList(data)
-            setLeading(true)
-        }else{
-            history.push("/")
-        }
-    })
+   // if(!loaded) {
+        getUsers().then((data) => {
+            if (perms) {
+                setUserList(data)
+                setLoaded(true)
+            } else {
+                history.push("/")
+            }
+        })
+
 
 
     return (
         <section className="user_section">
             {
-                loading?
+                loaded?
                 userList.filter(user => user.email!=email).map(
                     val => <User key={val.idUser} value={val}/>
                 ):

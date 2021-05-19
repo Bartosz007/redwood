@@ -1,13 +1,9 @@
 import {
-    DELETE_CONFIG,
-    getSecuredConfig,
-    getSecuredConfigGET,
-    JSON_FAULT,
-    NETWORK_ERROR_MESSAGE,
-    POST_CONFIG,
-    PUT_CONFIG,
-    URL
-} from "./constans";
+    DELETE,
+    GET,
+    PUT,
+    securedAjax
+} from "./basic";
 
 
 export {
@@ -18,89 +14,42 @@ export {
     changeColors
 }
 
-async function getUsers(){
-    try {
-        const config = getSecuredConfigGET()
+async function getUsers() {
 
-        const response = await fetch(URL + "userList", config)
+    return securedAjax("/userList", GET, null)
 
-        if (response.ok) {
-            return response.json();
-        } else {
-            return JSON_FAULT;
-        }
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
-    }
 }
 
 async function giveWarn(idUser) {
-    try {
 
-        const data = {
-            "id": idUser
-        }
-
-        const config = getSecuredConfig(data, PUT_CONFIG)
-
-        const response = await fetch(URL + "warn", config)
-
-        return response.json();
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
+    const data = {
+        "id": idUser
     }
+    return securedAjax("/warn", PUT, data)
 
 }
 
-async function changePermit(permit, idUser){
-    try {
+async function changePermit(permit, idUser) {
 
-        const data = {
-            "id": idUser,
-            "additionalPayload":permit
-        }
-
-        const config = getSecuredConfig(data, PUT_CONFIG)
-
-        const response = await fetch(URL + "changePermit", config)
-
-        return response.json();
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
+    const data = {
+        "id": idUser,
+        "additionalPayload": permit
     }
+    return securedAjax("/changePermit", PUT, data)
+
 }
 
-async function deleteUser(idUser){
-    try {
+async function deleteUser(idUser) {
 
-        const data = {
-            "id": idUser
-        }
-
-        const config = getSecuredConfig(data, DELETE_CONFIG)
-
-        const response = await fetch(URL + "deleteUser", config)
-
-        return response.json();
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
+    const data = {
+        "id": idUser
     }
+    return securedAjax("/deleteUser", DELETE, data)
+
 }
 
-async function changeColors(data){
-    try {
+async function changeColors(data) {
 
-        const config = getSecuredConfig(data, PUT_CONFIG)
+    return securedAjax("/saveSettings", PUT, data)
 
-        const response = await fetch(URL + "saveSettings", config)
-
-        return response.json();
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
-    }
 }

@@ -1,175 +1,83 @@
 import {
-    DELETE_CONFIG,
-    getSecuredConfig, getSecuredConfigGET,
-    JSON_FAULT,
-    NETWORK_ERROR_MESSAGE,
-    POST_CONFIG,
-    PUT_CONFIG,
-    URL
-} from "./constans"
-import {store} from "../storage/storage";
+    POST,
+    PUT,
+    DELETE,
+    GET,
+    securedAjax, ajax
+} from "./basic"
+
 
 export {
     addArticle,
-    getArticleList,
     deleteArticle,
     getArticle,
-    addComm,
-    delComm,
+    getArticleList,
     getArticleListToVerification,
-    verificateArticle
+    verificateArticle,
+    addComm,
+    delComm
 }
 
-async function addArticle(data){
 
-    try {
+async function addArticle(data) {
 
-        const config = getSecuredConfig(data, POST_CONFIG)
+    return securedAjax("/addArticle", POST, data)
 
-        const response = await fetch(URL + "addArticle", config)
-
-        return response.json();
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
-    }
 }
 
 async function getArticleList(param) {
 
-    try {
-
-        const response = await fetch(URL + "essayList/" + param)
-
-        if (response.ok) {
-            return response.json();
-        } else {
-            return JSON_FAULT;
-        }
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
-    }
+    return ajax("/essayList/" + param, null)
 
 }
 
-async function getArticleListToVerification(){
+async function getArticleListToVerification() {
 
-    try {
-        const config = getSecuredConfigGET()
+    return securedAjax("/essayList/userArticleMgmtList", GET, null)
 
-        const response = await fetch(URL + "essayList/userArticleMgmtList",config)
-
-        if (response.ok) {
-            return response.json();
-        } else {
-            return JSON_FAULT;
-        }
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
-    }
 }
 
 async function getArticle(param) {
 
-    try {
-
-        const response = await fetch(URL + "article/" + param)
-
-        if (response.ok) {
-            return response.json();
-        } else {
-            return JSON_FAULT;
-        }
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
-    }
+    return ajax("/article/" + param, null)
 
 }
 
-async function deleteArticle(param){
-    try {
+async function deleteArticle(param) {
 
-        const data = {
-            "id": param,
-        }
-
-        const config = getSecuredConfig(data, DELETE_CONFIG)
-
-        const response = await fetch(URL + "deleteArticle", config)
-
-        return response.json();
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
+    const data = {
+        "id": param,
     }
+
+    return securedAjax("/deleteArticle", DELETE, data)
 
 }
 
-async function verificateArticle(state, idArticle){
-
-    try {
-
-        const data = {
-            "id": idArticle,
-            "additionalPayload":state
-        }
-
-        const config = getSecuredConfig(data, PUT_CONFIG)
-
-        const response = await fetch(URL + "verification", config)
-
-        return response.json();
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
+async function verificateArticle(state, idArticle) {
+    const data = {
+        "id": idArticle,
+        "additionalPayload": state
     }
+    return securedAjax("/verification", PUT, data)
 
 }
 
-async function addComm(text, email,idArticle) {
+async function addComm(text, email, idArticle) {
 
-    try {
-
-        const data = {
-            "email": email,
-            "text": text,
-            "idArticle": idArticle
-        }
-
-        const config = getSecuredConfig(data, POST_CONFIG)
-
-        const response = await fetch(URL + "addComment", config)
-
-        return response.json();
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
+    const data = {
+        "email": email,
+        "text": text,
+        "idArticle": idArticle
     }
+    return securedAjax("/addComment", POST, data)
 
 }
 
 async function delComm(idComment) {
 
-    try {
-
-        const data = {
-            "id": idComment,
-        }
-
-        const config = getSecuredConfig(data, DELETE_CONFIG)
-
-        const response = await fetch(URL + "deleteComment", config)
-
-        return response.json();
-
-    } catch (error) {
-        return NETWORK_ERROR_MESSAGE;
+    const data = {
+        "id": idComment,
     }
+    return securedAjax("/deleteComment", DELETE, data)
 
 }
-
-
-

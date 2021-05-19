@@ -48,7 +48,6 @@ function validateArticleData(title, text, images, tags){
         return [false, "Nie dodano tagów!!"];
     }
 
-    console.log(images)
     if (images != undefined && images.length == 3) {
 
         for(let i =0;i< images.length;i++){
@@ -79,8 +78,9 @@ function validateEmail(email){
 }
 
 function validatePhoto(photo){
-
-    if(photo == null)
+    console.log(photo)
+    console.log("dupa")
+    if(photo == null || photo == "")
         return false
 
     const fileFormat = photo.name.split(".")[1].toLowerCase();

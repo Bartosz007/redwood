@@ -7,10 +7,12 @@ import {
     refreshBetterColors
 } from "../../scripts/betterColors";
 import betterAlert from "../../scripts/betterAlert";
+import {useHistory} from "react-router-dom";
 
 function User(props) {
     const data = props.value
     const userData = data.userData
+    const history = useHistory();
     //console.log(data)
 
     const onChangePermit = (e) =>{
@@ -23,6 +25,7 @@ function User(props) {
     const onGiveWarn = () =>{
         giveWarn(data.idUser).then((data) =>{
             betterAlert(data.message)
+           // history.go(0)
         })
     }
 

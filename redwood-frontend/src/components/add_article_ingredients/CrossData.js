@@ -19,8 +19,8 @@ function TagContainer(props) {
     }
     useEffect(() => {
        // addBlockStaticListenerRev(document.querySelector("."))
-     //   addListOfBlockListeners(document.querySelectorAll("input"))
-     //   addListOfFontListeners(document.querySelectorAll("input"))
+        addListOfBlockListeners(document.querySelectorAll("input"))
+        addListOfFontListeners(document.querySelectorAll("input"))
         addListOfFontListeners(document.querySelectorAll("label"))
 
         refreshBetterColors()

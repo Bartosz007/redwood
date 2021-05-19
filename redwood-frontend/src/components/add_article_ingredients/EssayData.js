@@ -11,6 +11,8 @@ function EssayData(props){
        /* addListOfBlockListeners(document.querySelectorAll("input"))
         addListOfFontListeners(document.querySelectorAll("input"))
 */
+        addListOfBlockListeners(document.querySelectorAll("input"))
+        addListOfFontListeners(document.querySelectorAll("input"))
         refreshBetterColors()
     },[0])
 
