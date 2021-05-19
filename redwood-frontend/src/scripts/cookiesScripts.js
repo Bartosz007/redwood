@@ -1,5 +1,6 @@
 import {onSaveColors, setAllStates} from "../storage/actions";
 import {INITIAL_STATE} from "../storage/reducer"
+import {isLogged} from "./permissionScripts";
 
 const LIFE_TIME = 864000; //60 * 60 * 24 * 10 = 10 dni
 
@@ -15,11 +16,10 @@ const loadCookies = (cookies, setCookie, dispatch) => {
     /*
         jeśli nie ma ciasteczek ładujemy domyślne
     */
-    const login = cookies.loginStatus
-    const loginStatus = (login == "true" || login == true);
+
+    const loginStatus = isLogged()
 
     if (Object.keys(cookies).length == 0 && !loginStatus) {
-        console.log("init cookies")
         const data = INITIAL_STATE
         save(setCookie, data);
 

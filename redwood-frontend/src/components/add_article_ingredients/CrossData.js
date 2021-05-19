@@ -11,7 +11,6 @@ function TagContainer(props) {
 
     const addPhoto = (photo, index) => {
         photos[index] = photo[0];
-        console.log(photos)
         setPhotos(photos);
     }
     useEffect(() => {

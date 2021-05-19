@@ -30,8 +30,6 @@ function RegisterForm(){
         refreshBetterColors()
     })
     const onRegister = () => {
-        console.log(photo)
-
 
         const [validation, message] = validateRegisterData(name, surname, email, password, repassword, photo);
 
