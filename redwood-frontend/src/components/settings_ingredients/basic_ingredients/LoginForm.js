@@ -4,24 +4,23 @@ import {store} from "../../../storage/storage";
 import {saveCredentials, showAlert} from "../../../storage/actions";
 import {useDispatch} from "react-redux";
 import {BrowserRouter as Router, useHistory} from "react-router-dom";
-import {getCustomAlert, changeAlertText} from "../../../scripts/alert"
+import betterAlert from "../../../scripts/betterAlert"
 import {Alert} from "@material-ui/lab";
 import {useCookies} from "react-cookie";
 import {saveCookies} from "../../../scripts/cookiesScripts";
 
 function LoginForm(props){
-    const [email, setEmail] = useState("admin")
-    const [password, setPassword] = useState("admin")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
-    const [cookies, setCookie] = useCookies(['redwood-cookie']);
+    const [cookies, setCookie] = useCookies(['redwood']);
     const dispatch = store.dispatch
 
     const history = useHistory();
 
     const onLoginClick =()=>{
 
-        let alertBox = getCustomAlert("Ładowanie...");
-        document.body.append(alertBox)
+        betterAlert("Ładowanie...")
 
         login(email,password).then((data)=>{
 
@@ -37,12 +36,16 @@ function LoginForm(props){
                 }
 
                 saveCookies(dispatch, setCookie, objData);
-                console.log(props.hideSettingsMenu)
                 props.hideSettingsMenu(this);
-                changeAlertText("Zalogowano pomyślnie!")
-                history.go(0);
+
+                betterAlert("Zalogowano pomyślnie!")
+
+                setTimeout(()=>{
+                    history.go(0);
+                },500)
+
             }else{
-                changeAlertText("Błędne hasło i/lub login!")
+                betterAlert("Błędne hasło i/lub login!")
             }
 
 

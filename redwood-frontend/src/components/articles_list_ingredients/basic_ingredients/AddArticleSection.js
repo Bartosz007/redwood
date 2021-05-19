@@ -10,7 +10,7 @@ function ArticleShort(props) {
         history.push("/addArticle");
     }
     useEffect(()=>{
-        addFontListener(document.querySelector(".add_article"))
+        addBlockListener(document.querySelector(".add_article"))
     })
 
     return (

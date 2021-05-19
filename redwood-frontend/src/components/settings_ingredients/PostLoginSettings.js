@@ -1,7 +1,14 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import LoginForm from "./basic_ingredients/LoginForm";
 import LogoutForm from "./basic_ingredients/LogoutForm";
 import SettingsPanel from "./basic_ingredients/SettingsPanel";
+import {
+    addBlockListener,
+    addBlockStaticListener,
+    addListOfBlockStaticListenersRev,
+    addListOfFontListeners,
+    refreshBetterColors
+} from "../../scripts/betterColors";
 
 
 
@@ -21,6 +28,12 @@ function PostLoginSettings(props) {
         }
     }
 
+    useEffect(()=>{
+        addBlockStaticListener(document.querySelector(".settings_block"))
+        addBlockListener(document.querySelector(".settings2_button"))
+
+        refreshBetterColors()
+    })
     return (
         <section className="settings_block">
 

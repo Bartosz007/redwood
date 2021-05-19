@@ -1,7 +1,6 @@
 import {addComm, getArticleList} from "../../../requests/article";
 import {useCookies} from "react-cookie";
 import React, {useEffect, useState} from "react";
-import {getCustomAlert} from "../../../scripts/alert";
 import {useHistory} from "react-router-dom";
 import {
     addBlockListener,
@@ -9,9 +8,10 @@ import {
     addFontListener,
     refreshBetterColors
 } from "../../../scripts/betterColors";
+import betterAlert from "../../../scripts/betterAlert";
 
 function AddComment(){
-    const [cookies, setCookie] = useCookies(['redwood-cookie']);
+    const [cookies, setCookie] = useCookies(['redwood']);
     const [text, setText] = useState("");
     const history = useHistory();
 
@@ -25,15 +25,15 @@ function AddComment(){
     const addComment = () =>{
 
         if(text.length > 5){
-            let alertBox = getCustomAlert("Dodawanie komentarza...");
-            document.body.append(alertBox)
+
+           betterAlert("Dodawanie komentarza...");
             const path = history.location.pathname.split("/")[2]
             addComm(text, cookies.email, path).then((data) => {
                 history.go(0);
             });
+
         }else{
-            let alertBox = getCustomAlert("Komentarz jest za krótki!");
-            document.body.append(alertBox)
+            betterAlert("Komentarz jest za krótki!");
         }
 
     }

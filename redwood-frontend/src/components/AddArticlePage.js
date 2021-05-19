@@ -5,7 +5,6 @@ import CrossData from "./add_article_ingredients/CrossData";
 import {store} from "../storage/storage";
 import toBase64, {toBase64Multiple} from "../scripts/imageEncoder";
 import {validateArticleData} from "../scripts/validationScripts";
-import {getCustomAlert} from "../scripts/alert";
 import {addArticle} from "../requests/article";
 import {
     addBlockListener,
@@ -15,6 +14,7 @@ import {
     refreshBetterColors
 } from "../scripts/betterColors";
 import {useHistory} from "react-router-dom";
+import betterAlert from "../scripts/betterAlert";
 
 function AddArticlePage() {
     const [title, setTitle] = useState("");
@@ -25,6 +25,7 @@ function AddArticlePage() {
 
     const history = useHistory()
     const loginStatus = (store.getState().loginStatus==true || store.getState().loginStatus=="true")
+        && store.getState().permission != "ZBANOWANY"
 
     const changeType = (e) => {
         setType(e.target.value)
@@ -47,29 +48,33 @@ function AddArticlePage() {
       //  console.log(images.slice(0, 3))
        // setImages(images.slice(0, 3));
 
-        const [validation, message] = validateArticleData(title, text, images)
-        console.log(validation)
-        if(validation){
+        const [validation, message] = validateArticleData(title, text, images, tags)
 
-        toBase64Multiple(images).then((data)=>{
-            const articleData = {
-                "title":title,
-                "images":data,
-                "text":text,
-                "articleType": type,
-                "tags":tags,
-                "email": email
-            }
+        if (validation) {
+            betterAlert("Dodaję artykuł...");
 
-            addArticle(articleData).then(data =>{
-                let alertBox = getCustomAlert(data.message);
-                document.body.append(alertBox)
+            toBase64Multiple(images).then((data) => {
+                const articleData = {
+                    "title": title,
+                    "images": data,
+                    "text": text,
+                    "articleType": type,
+                    "tags": tags,
+                    "email": email
+                }
+
+                addArticle(articleData).then(data => {
+                    betterAlert(data.message)
+
+                    setTimeout(() => {
+                        history.push("/")
+                    }, 1000)
+
+                })
             })
-        })
 
-        }else{
-            let alertBox = getCustomAlert(message);
-            document.body.append(alertBox)
+        } else {
+            betterAlert(message);
         }
 
 
@@ -92,6 +97,7 @@ function AddArticlePage() {
         addFontListener(document.querySelector(".select_category"))
         addListOfFontListeners(document.querySelectorAll(".select_category")[0])
 
+        addBlockListener(document.querySelector("button"))
         refreshBetterColors()
     },[0])
 

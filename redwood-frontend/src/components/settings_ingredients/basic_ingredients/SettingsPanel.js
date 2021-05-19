@@ -6,8 +6,13 @@ import {useCookies} from "react-cookie";
 import {store} from "../../../storage/storage";
 import {saveColors} from "../../../scripts/cookiesScripts";
 import {changeColors} from "../../../requests/user";
-import {getCustomAlert} from "../../../scripts/alert";
-import {addBlockListener, addListOfBlockListeners, refreshBetterColors} from "../../../scripts/betterColors";
+import {
+    addBlockListener,
+    addBlockStaticListener, addBlockStaticListenerRev, addFontListener,
+    addListOfBlockListeners, addListOfBlockStaticListenersRev, addListOfFontListeners,
+    refreshBetterColors
+} from "../../../scripts/betterColors";
+import betterAlert from "../../../scripts/betterAlert";
 
 function SettingsPanel(){
     const [colorPicker, setColorPicker] = useState(false);
@@ -19,7 +24,7 @@ function SettingsPanel(){
         ])
     const [tempColor, setTempColor] = useState({r:0,g:0,b:0,a:1});
     const dispatch = store.dispatch;
-    const [cookie, setCookie] = useCookies(['redwood-cookie'])
+    const [cookie, setCookie] = useCookies(['redwood'])
 
     const openColorPicker = (number)=>{
         setActualColor(number)
@@ -57,8 +62,7 @@ function SettingsPanel(){
             data.email = email;
 
             changeColors(data).then(data => {
-                let alertBox = getCustomAlert(data.message);
-                document.body.append(alertBox);
+                betterAlert(data.message);
             })
         }
 
@@ -74,7 +78,15 @@ function SettingsPanel(){
         document.querySelector(".demo_tile").style.backgroundColor = rgbaToString(colors[2]);
     }
 
+    useEffect(()=>{
+        document.querySelectorAll(".color_changer").forEach((parent)=>{
+            addFontListener(parent.querySelector("p"))
+        })
+        addListOfBlockListeners(document.querySelectorAll("button"))
+       // addListOfFontListeners(document.querySelectorAll("p"))
 
+        refreshBetterColors()
+    })
 
     return (
         <form className="color_form">

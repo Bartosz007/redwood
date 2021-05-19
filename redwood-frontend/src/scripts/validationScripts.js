@@ -34,7 +34,7 @@ function validateRegisterData(name, surname, email, password, repassword, photo)
     return [true, "Validacja zakończona sukcesem!"]
 }
 
-function validateArticleData(title, text, images){
+function validateArticleData(title, text, images, tags){
 
     if(!validateLength(title,8)){
         return [false, "Tytuł jest za krótki!"];
@@ -42,6 +42,10 @@ function validateArticleData(title, text, images){
 
     if (!validateLength(text, 200)) {
         return [false, "Tekst jest za krótki!"];
+    }
+
+    if (!validateLength(tags, 1)) {
+        return [false, "Nie dodano tagów!!"];
     }
 
     console.log(images)
@@ -58,7 +62,7 @@ function validateArticleData(title, text, images){
     }
 
 
-    return [true, "Validacja zakończona sukcesem!"]
+    return [true, "Walidacja zakończona sukcesem!"]
 }
 
 function validateLength(text, length){

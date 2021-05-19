@@ -6,7 +6,7 @@ function UserPanelPage() {
 
     return (
         <main className="main_global">
-            <UserSection/>
+            <UserSection key="userSection"/>
         </main>
     );
 

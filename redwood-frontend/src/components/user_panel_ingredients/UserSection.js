@@ -8,10 +8,12 @@ import {useHistory} from "react-router-dom";
 function UserSection() {
     const [userList, setUserList] = useState();
     const [loading, setLeading] = useState(false);
-    const email =  store.getState().email;
+    const state = store.getState()
+    const email =  state.email;
     const history = useHistory();
+    const perms = state.permission == "ADMIN"
     getUsers().then((data) => {
-        if(data.state){
+        if(perms){
             setUserList(data)
             setLeading(true)
         }else{

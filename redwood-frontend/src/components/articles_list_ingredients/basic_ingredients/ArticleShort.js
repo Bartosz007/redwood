@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import {deleteArticle} from "../../../requests/article";
-import {getCustomAlert} from "../../../scripts/alert";
 import {giveWarn} from "../../../requests/user";
 import {store} from "../../../storage/storage";
+import betterAlert from "../../../scripts/betterAlert";
 
 function ArticleShort(props) {
     const data = props.value;
@@ -21,16 +21,16 @@ function ArticleShort(props) {
 
     const onArticleDelete = ()=>{
         deleteArticle(data.idArticle).then((data) => {
-            let alertBox = getCustomAlert(data.message);
-            document.body.append(alertBox)
-            history.go(0);
+            betterAlert(data.message);
+            setTimeout(()=>{
+                history.go(0);
+            },500)
         })
     }
 
     const onWarnUser = ()=>{
         giveWarn(data.user.idUser).then((data) => {
-            let alertBox = getCustomAlert(data.message);
-            document.body.append(alertBox)
+            betterAlert(data.message);
         })
     }
 

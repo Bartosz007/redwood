@@ -14,8 +14,12 @@ const loadCookies = (cookies, setCookie, dispatch) =>{
     /*
         jeśli nie ma ciasteczek ładujemy domyślne
     */
-    if(Object.keys(cookies).length == 0) {
+    console.log("init cookies")
+    const login = cookies.loginStatus
+    const loginStatus = (login == "true" || login == true);
 
+    if(Object.keys(cookies).length == 0 && !loginStatus) {
+        console.log("init cookies")
         const data = INITIAL_STATE
         save(setCookie, data);
 
@@ -56,10 +60,11 @@ const saveCookiesInState = (dispatch, data) =>{
 }
 
 const save = (setCookie, data) => {
-    setCookie("loginStatus", data.loginStatus, {maxAge: LIFE_TIME});
-    setCookie("email", data.email, {maxAge: LIFE_TIME});
-    setCookie("token", data.token, {maxAge: LIFE_TIME});
-    setCookie("permission", data.permission, {maxAge: LIFE_TIME});
+    console.log("load cookies!")
+    setCookie("loginStatus", data.loginStatus, {maxAge: LIFE_TIME, path: '/'});
+    setCookie("email", data.email, {maxAge: LIFE_TIME, path: '/'});
+    setCookie("token", data.token, {maxAge: LIFE_TIME, path: '/'});
+    setCookie("permission", data.permission, {maxAge: LIFE_TIME, path: '/'});
 
     saveColorsInCookies(setCookie, data)
 }
@@ -67,7 +72,9 @@ const save = (setCookie, data) => {
 
 const saveColorsInCookies = (setCookie, data)=>{
     console.log(data)
-    setCookie("fontColor", data.fontColor, {maxAge: LIFE_TIME});
-    setCookie("bgColor", data.bgColor, {maxAge: LIFE_TIME});
-    setCookie("fgColor", data.fgColor, {maxAge: LIFE_TIME});
+
+    console.log("load colors cookies!")
+    setCookie("fontColor", data.fontColor, {maxAge: LIFE_TIME, path: '/'});
+    setCookie("bgColor", data.bgColor, {maxAge: LIFE_TIME, path: '/'});
+    setCookie("fgColor", data.fgColor, {maxAge: LIFE_TIME, path: '/'});
 }

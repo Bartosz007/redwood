@@ -14,16 +14,15 @@ function BetterTag(props){
 
     useEffect(() => {
 
-        addFontListener(document.querySelector(".tag").childNodes[0])
-        addBlockListener(document.querySelector(".tag"))
-
+        addListOfFontListeners(document.querySelectorAll(".tag_text"))
+        addListOfBlockListeners(document.querySelectorAll(".tag"))
         refreshBetterColors()
 
     },[0])
 
     return(
         <div className="tag" onClick={e => selfDestroy(e,props.value)}>
-            <div>{props.value}</div>
+            <div className="tag_text">{props.value}</div>
             <img src="../icons/delete.svg" alt="delete"/>
         </div>
     );

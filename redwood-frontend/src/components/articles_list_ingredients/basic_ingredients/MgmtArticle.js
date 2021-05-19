@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import {Link, useHistory} from "react-router-dom";
 import {verificateArticle} from "../../../requests/article";
-import {getCustomAlert} from "../../../scripts/alert";
 import {
     addBlockListener,
-    addFontListener, addListOfBlockStaticListenersRev,
+    addFontListener, addListOfBlockListeners, addListOfBlockStaticListenersRev,
     addListOfFontListeners,
     refreshBetterColors
 } from "../../../scripts/betterColors";
+import betterAlert from "../../../scripts/betterAlert";
 
 
 function MgmtArticle(props) {
@@ -18,8 +18,7 @@ function MgmtArticle(props) {
 
     const verificationArticle = (state) =>{
         verificateArticle(state, data.idArticle).then((data) =>{
-            let alertBox = getCustomAlert(data.message);
-            document.body.append(alertBox)
+            betterAlert(data.message);
         })
     }
 
@@ -36,9 +35,9 @@ function MgmtArticle(props) {
     }
 
     useEffect(()=>{
-        addBlockListener(document.querySelector(".article"))
-        addFontListener(document.querySelector("h1"))
-        addFontListener(document.querySelector(".article_fragment"))
+        addListOfBlockListeners(document.querySelectorAll(".article"))
+        addListOfFontListeners(document.querySelectorAll("h1"))
+        addListOfFontListeners(document.querySelectorAll(".article_fragment"))
         addListOfFontListeners(document.querySelectorAll("p"))
         addListOfFontListeners(document.querySelectorAll("a"))
 

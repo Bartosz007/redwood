@@ -16,7 +16,9 @@ function ArticlesListPage(props) {
     const listType = props.type
     const [articleList, setArticleList] = useState();
     const [loading, setLoading] = useState(false);
+
     const loginStatus = (store.getState().loginStatus==true || store.getState().loginStatus=="true")
+        && store.getState().permission != "ZBANOWANY"
 
     if (!loading) {
 

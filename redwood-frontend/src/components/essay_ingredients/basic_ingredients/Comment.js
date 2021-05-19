@@ -1,13 +1,13 @@
 import {store} from "../../../storage/storage";
 import {delComm} from "../../../requests/article";
-import {changeAlertText, getCustomAlert} from "../../../scripts/alert";
+import betterAlert from "../../../scripts/betterAlert";
 import {useHistory} from "react-router-dom";
 import {giveWarn} from "../../../requests/user";
 import {useEffect} from "react";
 import {
     addBlockStaticListener,
     addFontListener,
-    addListOfBlockListeners,
+    addListOfBlockListeners, addListOfBlockStaticListeners, addListOfFontListeners,
     refreshBetterColors
 } from "../../../scripts/betterColors";
 
@@ -22,32 +22,31 @@ function Comment(props){
     const deleteComment = () =>{
         delComm(data.idComment).then((data)=>{
             if(data.status){
-                let alertBox = getCustomAlert("Pomyślnie usuniętko komentarz!");
-                document.body.append(alertBox)
-                history.go(0);
+
+                betterAlert("Pomyślnie usunięto komentarz!");
+                setTimeout(()=>{
+                    history.go(0);
+                },1000)
             }else{
-                let alertBox = getCustomAlert("Błą z usuwaniem!");
-                document.body.append(alertBox)
+                betterAlert("Błąd z usuwaniem!");
             }
         })
     }
 
     const onGiveWarn = () =>{
-        let alertBox = getCustomAlert("...");
-        document.body.append(alertBox)
+        betterAlert("...");
 
         giveWarn(data.user.idUser).then((data)=>{
-            changeAlertText(data.message)
+            betterAlert(data.message)
         })
 
     }
 
     useEffect(() => {
-        addBlockStaticListener(document.querySelector(".comment"))
-        addFontListener(document.querySelector(".user_data"))
-        addFontListener(document.querySelector(".comment_content"))
-        addFontListener(document.querySelector(".comment_data").childNodes[0])
-        addFontListener(document.querySelector(".comment_data").childNodes[1])
+        addListOfBlockStaticListeners(document.querySelectorAll(".comment"))
+        addListOfFontListeners(document.querySelectorAll(".user_data"))
+        addListOfFontListeners(document.querySelectorAll(".comment_content"))
+        addListOfFontListeners(document.querySelectorAll("p"))
         refreshBetterColors()
     })
 

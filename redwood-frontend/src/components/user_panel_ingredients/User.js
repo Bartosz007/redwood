@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {changePermit, deleteUser, giveWarn} from "../../requests/user";
-import {getCustomAlert} from "../../scripts/alert";
 import {
     addBlockListener, addBlockStaticListener,
     addFontListener, addListOfBlockListeners, addListOfBlockStaticListeners,
     addListOfFontListeners,
     refreshBetterColors
 } from "../../scripts/betterColors";
+import betterAlert from "../../scripts/betterAlert";
 
 function User(props) {
     const data = props.value
@@ -16,25 +16,25 @@ function User(props) {
     const onChangePermit = (e) =>{
 
         changePermit(e.target.value, data.idUser).then((data) =>{
-            document.body.append(getCustomAlert(data.message))
+            betterAlert(data.message)
         })
     }
 
     const onGiveWarn = () =>{
         giveWarn(data.idUser).then((data) =>{
-            document.body.append(getCustomAlert(data.message))
+            betterAlert(data.message)
         })
     }
 
     const onGiveBan = () =>{
         changePermit("ZBANOWANY", data.idUser).then((data) =>{
-            document.body.append(getCustomAlert(data.message))
+            betterAlert(data.message)
         })
     }
 
     const onDelete = () =>{
         deleteUser(data.idUser).then((data) =>{
-            document.body.append(getCustomAlert(data.message))
+            betterAlert(data.message)
         })
     }
 

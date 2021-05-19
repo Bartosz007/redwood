@@ -1,8 +1,14 @@
-import React, {useState} from "react";
-import {getCustomAlert} from "../../../scripts/alert";
+import React, {useEffect, useState} from "react";
 import {register} from "../../../requests/security";
 import {validateRegisterData} from "../../../scripts/validationScripts";
 import toBase64 from "../../../scripts/imageEncoder";
+import {
+    addBlockListener,
+    addBlockStaticListener,
+    addListOfBlockStaticListenersRev, addListOfFontListeners, refreshBetterColors
+} from "../../../scripts/betterColors";
+import {useHistory} from "react-router-dom";
+import betterAlert from "../../../scripts/betterAlert";
 
 function RegisterForm(){
     const [name, setName] = useState("");
@@ -12,7 +18,17 @@ function RegisterForm(){
     const [repassword, setRepassword] = useState("");
     const [photo, setPhoto] = useState("");
 
+    const history = useHistory();
 
+    useEffect(() => {
+
+        addListOfBlockStaticListenersRev(document.querySelectorAll("input"))
+        addListOfFontListeners(document.querySelectorAll("input"))
+        addListOfBlockStaticListenersRev(document.querySelectorAll("button"))
+        addListOfFontListeners(document.querySelectorAll("button"))
+
+        refreshBetterColors()
+    })
     const onRegister = () => {
         console.log(photo)
 
@@ -27,7 +43,8 @@ function RegisterForm(){
                   //  console.log(photo)
 
                     register(name, surname, email, password, encodedPhoto).then(data => {
-                        console.log(data)
+                        history.go(0);
+                      //  console.log(data)
                         // if(data.status == true){
                         //
                         // }
@@ -50,8 +67,9 @@ function RegisterForm(){
 
 
         }else{
-            let alertBox = getCustomAlert(message);
-            document.body.append(alertBox)
+
+            betterAlert(message);
+
         }
       //  console.log(photo)
 

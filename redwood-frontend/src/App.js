@@ -24,7 +24,6 @@ import {loadCookies} from "./scripts/cookiesScripts";
 import Settings from "./components/settings_ingredients/Settings";
 import {useDispatch, useSelector} from "react-redux";
 import {store} from "./storage/storage";
-import { Alert } from '@material-ui/lab';
 import UserManagmentButton from "./components/settings_ingredients/UserManagmentButton";
 import User from "./components/user_panel_ingredients/User";
 import UserArticleManagementButton from "./components/settings_ingredients/UserArticleManagementButton";
@@ -38,6 +37,7 @@ import {
     refreshBetterColors,
     refreshListenersColors
 } from "./scripts/betterColors";
+import betterAlert from "./scripts/betterAlert";
 
 function App() {
     const dispatch = store.dispatch;
@@ -50,12 +50,13 @@ function App() {
     const [userMgmt, setUserMgmt] = useState(false);
     const [userArtMgmt, setUserArtMgmt] = useState(false);
 
-    const [cookies, setCookie] = useCookies(['redwood-cookie']);
-    console.log(mainState)
+    const [cookies, setCookie] = useCookies(['redwood']);
+
     const permission = mainState.permission;
 
     const managementPermission = (permission == "MODERATOR" || permission == "ADMIN");
     const adminPermission = permission == "ADMIN";
+
 
     if(loading){
         loadCookies(cookies, setCookie, dispatch);
@@ -68,8 +69,6 @@ function App() {
             setMenuState(false)
         }
     }
-
-
 
     useEffect(() => {
         addListOfBlockListeners(document.querySelector("header").childNodes)
@@ -138,7 +137,7 @@ function App() {
                 </Route>
 
                 <Route path="/"
-                       key="defaultpath"
+                       key="defaultPath"
                        children={<StartPage/>}>
                 </Route>
 
