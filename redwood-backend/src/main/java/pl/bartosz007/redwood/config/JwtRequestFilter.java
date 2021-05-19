@@ -1,7 +1,6 @@
 package pl.bartosz007.redwood.config;
 
 import java.io.IOException;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -23,8 +21,8 @@ import pl.bartosz007.redwood.services.SecurityService;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    private SecurityService securityService;
-    private JwtTokenUtil jwtTokenUtil;
+    private final SecurityService securityService;
+    private final JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     public JwtRequestFilter(SecurityService securityService, JwtTokenUtil jwtTokenUtil) {

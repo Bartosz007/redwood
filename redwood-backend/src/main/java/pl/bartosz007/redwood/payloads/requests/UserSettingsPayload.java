@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserSettingsPayload {
-    private long idUser;
+    private String email;
     private String fontColor;
     private String fgColor;
     private String bgColor;

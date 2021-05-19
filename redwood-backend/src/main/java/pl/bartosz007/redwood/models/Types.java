@@ -17,6 +17,6 @@ public enum Types implements Serializable {
 
     @Override
     public String toString() {
-        return "Types."+this.name();
+        return "Types." + this.name();
     }
 }

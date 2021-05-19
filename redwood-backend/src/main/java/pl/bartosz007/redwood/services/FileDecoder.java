@@ -9,18 +9,19 @@ import java.time.format.DateTimeFormatter;
 
 
 public class FileDecoder {
-    private String fileName;
-    private String body;
-    private static final String folder =  "..\\redwood-frontend\\public\\images\\";
+    private final String fileName;
+    private final String body;
+    private static final String FOLDER = "..\\redwood-frontend\\public\\images\\";
+
     public FileDecoder(String base64String) {
         String[] strings = base64String.split(",");
         this.fileName = getCustomName(strings[0]);
         this.body = strings[1];
     }
 
-    public void saveByte64ToFile(){
+    public void saveByte64ToFile() {
 
-        File file = new File(folder+fileName);
+        File file = new File(FOLDER + fileName);
 
         byte[] data = DatatypeConverter.parseBase64Binary(body);
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
@@ -32,24 +33,19 @@ public class FileDecoder {
 
     }
 
-    private static String getCustomName(String extension){
+    private static String getCustomName(String extension) {
 
-        StringBuffer fileNameBuffer = new StringBuffer();
+        StringBuilder fileNameBuffer = new StringBuilder();
         fileNameBuffer.append(new RandomString(10).nextString());
         fileNameBuffer.append("_");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd");
         fileNameBuffer.append(LocalDate.now().format(formatter));
 
-        switch (extension) {//check image's extension
-            case "data:image/jpeg;base64":
-                fileNameBuffer.append(".jpeg");
-                break;
-            case "data:image/png;base64":
-                fileNameBuffer.append(".png");
-                break;
-            default:
-                fileNameBuffer.append(".jpg");
-                break;
+        //check image's extension
+        switch (extension) {
+            case "data:image/jpeg;base64" -> fileNameBuffer.append(".jpeg");
+            case "data:image/png;base64" -> fileNameBuffer.append(".png");
+            default -> fileNameBuffer.append(".jpg");
         }
 
         return fileNameBuffer.toString();

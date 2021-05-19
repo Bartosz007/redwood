@@ -1,14 +1,12 @@
 package pl.bartosz007.redwood.config;
 
 import java.io.Serializable;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -18,10 +16,6 @@ import pl.bartosz007.redwood.models.User;
 
 @Component
 public class JwtTokenUtil implements Serializable {
-
-    private static final long serialVersionUID = -2550185165626007488L;
-
-    public static final long JWT_TOKEN_VALIDITY = 5*60*60*1000;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -65,7 +59,6 @@ public class JwtTokenUtil implements Serializable {
 
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role","USER");
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(user.getUsername())

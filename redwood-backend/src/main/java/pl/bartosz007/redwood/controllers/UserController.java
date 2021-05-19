@@ -16,8 +16,8 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private UserRepository userRepository;
-    private UserService userService;
+    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserRepository userRepository, UserService userService) {
@@ -27,37 +27,37 @@ public class UserController {
 
     @GetMapping("/userList")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<User> getUserList(){
+    public List<User> getUserList() {
         return userRepository.findAll();
     }
 
     @PutMapping("/saveSettings")
     @CrossOrigin(origins = "http://localhost:3000")
-    public BasicResponseMessage saveSettings(@RequestBody UserSettingsPayload userSettingsPayload){
+    public BasicResponseMessage saveSettings(@RequestBody UserSettingsPayload userSettingsPayload) {
         return userService.updateUserSettings(userSettingsPayload);
     }
 
     @PutMapping("/ban")
     @CrossOrigin(origins = "http://localhost:3000")
-    public BasicResponseMessage ban(@RequestBody BasicPayload basicPayload){
+    public BasicResponseMessage ban(@RequestBody BasicPayload basicPayload) {
         return userService.giveBan(basicPayload);
     }
 
     @PutMapping("/warn")
     @CrossOrigin(origins = "http://localhost:3000")
-    public BasicResponseMessage warn(@RequestBody BasicPayload basicPayload){
+    public BasicResponseMessage warn(@RequestBody BasicPayload basicPayload) {
         return userService.giveWarn(basicPayload);
     }
 
     @PutMapping("/changePermit")
     @CrossOrigin(origins = "http://localhost:3000")
-    public BasicResponseMessage changePermit(@RequestBody ExtendedPayload<PermissionLevels> extendedPayload){
+    public BasicResponseMessage changePermit(@RequestBody ExtendedPayload<PermissionLevels> extendedPayload) {
         return userService.changeUserPermission(extendedPayload);
     }
 
     @DeleteMapping("/deleteUser")
     @CrossOrigin(origins = "http://localhost:3000")
-    public BasicResponseMessage deleteUser(@RequestBody BasicPayload basicPayload){
+    public BasicResponseMessage deleteUser(@RequestBody BasicPayload basicPayload) {
         return userService.deleteUser(basicPayload);
     }
 

@@ -1,9 +1,6 @@
 package pl.bartosz007.redwood.payloads.requests;
 
-import lombok.Data;
-
-
-public class ExtendedPayload<T> extends BasicPayload{
+public class ExtendedPayload<T> extends BasicPayload {
 
     private T additionalPayload;
 

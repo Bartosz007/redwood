@@ -8,9 +8,7 @@ import pl.bartosz007.redwood.models.Types;
 import pl.bartosz007.redwood.repositories.ArticleRepository;
 
 import javax.annotation.security.RolesAllowed;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/essayList")

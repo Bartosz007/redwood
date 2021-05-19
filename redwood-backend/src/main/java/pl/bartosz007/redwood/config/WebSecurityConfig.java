@@ -1,8 +1,8 @@
 package pl.bartosz007.redwood.config;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -13,7 +13,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import pl.bartosz007.redwood.models.PermissionLevels;
 import pl.bartosz007.redwood.services.SecurityService;
 
 @Configuration
@@ -48,16 +47,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login", "/register").permitAll()
-                .antMatchers("/essayList/**", "/article/**").permitAll()
-                .antMatchers("/userList").hasAuthority("USER")
-                .antMatchers("/addComment").hasAuthority("USER")
-                .antMatchers("/deleteComment","/warn", "userArticles").hasAuthority("MODERATOR")
-                .antMatchers("/userList","/saveSettings", "/ban", "/changePermit").hasAuthority("ADMIN")
-                .antMatchers("/deleteUser").hasAuthority("ADMIN")
+                .antMatchers(
+                        "/essayList/essays",
+                        "/essayList/crosses",
+                        "/essayList/userArticles")
+                .permitAll()
 
-               // .antMatchers(HttpMethod.GET, "/essayList/essays").hasAuthority("USER")
-              //  .antMatchers(HttpMethod.GET, "/essayList/essays").hasRole("TEST")
-                .anyRequest().authenticated()
+                .antMatchers("/article/**").permitAll()
+                .antMatchers("/saveSettings").hasAuthority("ZBANOWANY")
+                .antMatchers("/userList", "/addComment", "/addArticle").hasAuthority("USER")
+                .antMatchers(
+                        "/deleteComment",
+                        "/warn",
+                        "/essayList/userArticleMgmtList",
+                        "/verification",
+                        "/deleteArticle")
+                .hasAuthority("MODERATOR")
+
+                .antMatchers(
+                        "/userList",
+                        "/ban",
+                        "/changePermit",
+                        "/deleteUser")
+                .hasAuthority("ADMIN")
+
+                .anyRequest().denyAll()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
@@ -67,16 +81,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
-
-/*
-
-    TODO: przetestować czy to działa
-
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedMethods("GET", "PUT", "POST", "DELETE");
-    }*/
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -88,6 +92,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
 
 }

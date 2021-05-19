@@ -3,8 +3,6 @@ package pl.bartosz007.redwood.models;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -12,8 +10,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.Type;
-import pl.bartosz007.redwood.payloads.requests.ArticlePayload;
-
 
 @Data
 @Entity(name = "articles")
@@ -64,15 +60,6 @@ public class Article implements Serializable {
         this.idArticle = idArticle;
     }
 
-    public void editValues(ArticlePayload articlePayload) {
-        this.title = articlePayload.getTitle();
-        this.images = articlePayload.getImages();
-        this.text = articlePayload.getText();
-        this.date = LocalDate.now();
-        this.time = LocalTime.now();
-        this.articleType = articlePayload.getArticleType();
-        this.tags = articlePayload.getTags(this);
-    }
 
     @Override
     public String toString() {
@@ -89,7 +76,7 @@ public class Article implements Serializable {
                 ", comments=" + comments +
                 ", user=" + user +
                 '}';
-    }
 
+    }
 
 }

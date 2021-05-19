@@ -2,20 +2,13 @@ package pl.bartosz007.redwood.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.userdetails.*;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.bartosz007.redwood.exceptions.DataInsertException;
 import pl.bartosz007.redwood.models.User;
-import pl.bartosz007.redwood.models.UserData;
-import pl.bartosz007.redwood.payloads.requests.LoginPayload;
 import pl.bartosz007.redwood.payloads.requests.UserPayload;
 import pl.bartosz007.redwood.payloads.responses.BasicResponseMessage;
-import pl.bartosz007.redwood.payloads.responses.ExtendedResponseMessage;
 import pl.bartosz007.redwood.repositories.UserRepository;
 
 import java.sql.SQLException;
@@ -23,7 +16,7 @@ import java.sql.SQLException;
 @Service
 public class SecurityService implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public SecurityService(UserRepository userRepository) {
@@ -70,6 +63,5 @@ public class SecurityService implements UserDetailsService {
             throw new DataInsertException("Another problem with insert", e.getMostSpecificCause());
         }
     }
-
 
 }

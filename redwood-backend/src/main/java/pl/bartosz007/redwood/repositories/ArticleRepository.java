@@ -1,6 +1,5 @@
 package pl.bartosz007.redwood.repositories;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public interface ArticleRepository extends JpaRepository<Article, Long>{
+public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Query(value = """
             SELECT * FROM articles JOIN article_type 
@@ -24,7 +23,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long>{
             SELECT * FROM articles JOIN article_type 
             USING(id_article_type) WHERE (type=:typeOne OR type=:typeTwo) AND verificated=true
             ORDER BY date, time""", nativeQuery = true)
-    List<Article> findByTwoTypes(@Param("typeOne") String typeOne,@Param("typeTwo") String typeTwo);
+    List<Article> findByTwoTypes(@Param("typeOne") String typeOne, @Param("typeTwo") String typeTwo);
 
     @Query(value = """
             SELECT * FROM articles JOIN article_type USING(id_article_type) 

@@ -1,12 +1,10 @@
 package pl.bartosz007.redwood.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -21,7 +19,7 @@ public class ArticleType implements Serializable {
     @Column(length = 20)
     private Types type;
 
-    @OneToMany(mappedBy = "articleType", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "articleType", cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<Article> articles;
 

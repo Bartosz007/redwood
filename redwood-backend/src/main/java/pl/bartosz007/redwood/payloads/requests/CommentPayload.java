@@ -5,8 +5,6 @@ import pl.bartosz007.redwood.models.Article;
 import pl.bartosz007.redwood.models.Comment;
 import pl.bartosz007.redwood.models.User;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -18,7 +16,7 @@ public class CommentPayload {
     private Long idArticle;
     private String email;
 
-    public Comment buildComment(User currentUser, Article currentArticle){
+    public Comment buildComment(User currentUser, Article currentArticle) {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 

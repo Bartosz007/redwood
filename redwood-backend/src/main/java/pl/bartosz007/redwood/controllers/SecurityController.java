@@ -1,15 +1,11 @@
 package pl.bartosz007.redwood.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pl.bartosz007.redwood.config.JwtTokenUtil;
@@ -18,33 +14,26 @@ import pl.bartosz007.redwood.models.User;
 import pl.bartosz007.redwood.payloads.requests.LoginPayload;
 import pl.bartosz007.redwood.payloads.requests.UserPayload;
 import pl.bartosz007.redwood.payloads.responses.BasicResponseMessage;
-import pl.bartosz007.redwood.payloads.responses.ExtendedResponseMessage;
 import pl.bartosz007.redwood.payloads.responses.LoginResponseMessage;
-import pl.bartosz007.redwood.repositories.UserRepository;
-import pl.bartosz007.redwood.services.FileDecoder;
 import pl.bartosz007.redwood.services.SecurityService;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.Objects;
 
 
 @RestController
 public class SecurityController {
 
-    private final UserRepository userRepository;
     private final SecurityService securityService;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SecurityController(UserRepository userRepository,
-                              SecurityService securityService,
+    public SecurityController(SecurityService securityService,
                               JwtTokenUtil jwtTokenUtil,
                               AuthenticationManager authenticationManager,
                               PasswordEncoder passwordEncoder) {
 
-        this.userRepository = userRepository;
         this.securityService = securityService;
         this.jwtTokenUtil = jwtTokenUtil;
         this.authenticationManager = authenticationManager;
