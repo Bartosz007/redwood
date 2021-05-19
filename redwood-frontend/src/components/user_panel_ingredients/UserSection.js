@@ -4,6 +4,7 @@ import {getUsers} from "../../requests/user";
 import {store} from "../../storage/storage";
 import ArticleSection from "../articles_list_ingredients/ArticleSection";
 import {useHistory} from "react-router-dom";
+import {ADMIN, isPermission} from "../../scripts/permissionScripts";
 
 function UserSection() {
     const [userList, setUserList] = useState();
@@ -11,7 +12,8 @@ function UserSection() {
     const state = store.getState()
     const email =  state.email;
     const history = useHistory();
-    const perms = state.permission == "ADMIN"
+    const perms = isPermission(ADMIN)
+
     getUsers().then((data) => {
         if(perms){
             setUserList(data)

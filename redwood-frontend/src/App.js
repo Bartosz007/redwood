@@ -38,6 +38,7 @@ import {
     refreshListenersColors
 } from "./scripts/betterColors";
 import betterAlert from "./scripts/betterAlert";
+import {ADMIN, isPermission, MODERATOR} from "./scripts/permissionScripts";
 
 function App() {
     const dispatch = store.dispatch;
@@ -52,10 +53,14 @@ function App() {
 
     const [cookies, setCookie] = useCookies(['redwood']);
 
-    const permission = mainState.permission;
+    const moderatorPermission = isPermission(MODERATOR) || isPermission(ADMIN)
+    const adminPermission = isPermission(ADMIN)
 
-    const managementPermission = (permission == "MODERATOR" || permission == "ADMIN");
-    const adminPermission = permission == "ADMIN";
+    /*
+
+        const managementPermission = (permission == "MODERATOR" || permission == "ADMIN");
+        const adminPermission = permission == "ADMIN";
+    */
 
 
     if(loading){
@@ -80,7 +85,7 @@ function App() {
             addBlockListener(document.querySelector(".user_mgmt_button"))
         }
 
-        if(managementPermission){
+        if(moderatorPermission){
             addBlockListener(document.querySelector(".user_article_mgmt_button"))
         }
 
@@ -152,7 +157,7 @@ function App() {
                 null
             }
 
-            { managementPermission ?
+            { moderatorPermission ?
                 <UserArticleManagementButton/> :
                 null
             }

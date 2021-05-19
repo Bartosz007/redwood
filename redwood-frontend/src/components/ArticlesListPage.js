@@ -10,6 +10,7 @@ import {
     refreshBetterColors
 } from "../scripts/betterColors";
 import {store} from "../storage/storage";
+import {isLogged, isPermission, ZBANOWANY} from "../scripts/permissionScripts";
 
 function ArticlesListPage(props) {
 
@@ -17,8 +18,7 @@ function ArticlesListPage(props) {
     const [articleList, setArticleList] = useState();
     const [loading, setLoading] = useState(false);
 
-    const loginStatus = (store.getState().loginStatus==true || store.getState().loginStatus=="true")
-        && store.getState().permission != "ZBANOWANY"
+    const permission = isLogged() && !isPermission(ZBANOWANY)
 
     if (!loading) {
 
@@ -51,7 +51,7 @@ function ArticlesListPage(props) {
             }
 
             {
-                loginStatus ?
+                permission ?
                     <AddArticleSection/> :
                     null
             }

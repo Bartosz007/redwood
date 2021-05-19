@@ -4,6 +4,7 @@ import {deleteArticle} from "../../../requests/article";
 import {giveWarn} from "../../../requests/user";
 import {store} from "../../../storage/storage";
 import betterAlert from "../../../scripts/betterAlert";
+import {ADMIN, isPermission, MODERATOR} from "../../../scripts/permissionScripts";
 
 function ArticleShort(props) {
     const data = props.value;
@@ -11,8 +12,7 @@ function ArticleShort(props) {
     const author = data.user.userData;
 
     const history = useHistory();
-    const permsBasic = store.getState().permission;
-    const perms = (permsBasic == "ADMIN") ||  (permsBasic == "MODERATOR")
+    const permission = isPermission(ADMIN) || isPermission(MODERATOR)
 
     const onArticleClick = (e) =>{
         if(e.target.className != "article_action")
@@ -59,7 +59,7 @@ function ArticleShort(props) {
 
 
                 {
-                    perms ?
+                    permission ?
                         <img className="article_action"
                              src="../icons/delete.svg"
                              alt="delete"
@@ -67,7 +67,7 @@ function ArticleShort(props) {
                         null
                 }
                 {
-                    perms ?
+                    permission ?
                         <img className="article_action"
                              src="../icons/warn.svg"
                              alt="delete"

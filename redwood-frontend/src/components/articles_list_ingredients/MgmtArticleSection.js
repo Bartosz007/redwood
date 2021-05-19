@@ -5,17 +5,18 @@ import ArticleShort from "./basic_ingredients/AddArticleSection";
 import AddArticleSection from "./basic_ingredients/AddArticleSection";
 import {useHistory} from "react-router-dom";
 import {store} from "../../storage/storage";
+import {ADMIN, isPermission, MODERATOR} from "../../scripts/permissionScripts";
 
 function MgmtArticleSection() {
     const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
 
     const history = useHistory();
-    const permsBasic = store.getState().permission;
-    const perms = (permsBasic == "ADMIN") ||  (permsBasic == "MODERATOR")
+
+    const permission = isPermission(ADMIN) || isPermission(MODERATOR)
     getArticleListToVerification().then((data) => {
 
-        if(perms){
+        if(permission){
             setData(data);
             setLoading(true)
         }else{

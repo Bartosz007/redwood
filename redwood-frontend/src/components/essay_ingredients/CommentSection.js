@@ -3,14 +3,12 @@ import AddComment from "./basic_ingredients/AddComment";
 import React, {useEffect, useState} from "react";
 import {store} from "../../storage/storage";
 import {addListOfBlockListeners, refreshBetterColors} from "../../scripts/betterColors";
+import {isLogged, isPermission, ZBANOWANY} from "../../scripts/permissionScripts";
 
 function CommentSection(props){
     const comments = props.comments
 
-    let loginStatus = store.getState().loginStatus ;
-    let perms = store.getState().permission
-    const commState = ((loginStatus == "true") || (loginStatus == true)) && (perms != "ZBANOWANY")
-
+    const permission = isLogged() && !isPermission(ZBANOWANY)
 
     return(
         <section className="comment_section">
@@ -20,7 +18,7 @@ function CommentSection(props){
                 )
             }
 
-            {commState ?
+            {permission ?
                 <AddComment/> :
                 null
             }

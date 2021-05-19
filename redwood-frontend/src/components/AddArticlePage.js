@@ -15,6 +15,7 @@ import {
 } from "../scripts/betterColors";
 import {useHistory} from "react-router-dom";
 import betterAlert from "../scripts/betterAlert";
+import {isLogged, isPermission, ZBANOWANY} from "../scripts/permissionScripts";
 
 function AddArticlePage() {
     const [title, setTitle] = useState("");
@@ -24,8 +25,8 @@ function AddArticlePage() {
     const [tags, setTags] = useState();
 
     const history = useHistory()
-    const loginStatus = (store.getState().loginStatus==true || store.getState().loginStatus=="true")
-        && store.getState().permission != "ZBANOWANY"
+
+    const permission = isLogged() && !isPermission(ZBANOWANY)
 
     const changeType = (e) => {
         setType(e.target.value)
@@ -38,7 +39,7 @@ function AddArticlePage() {
 
     useEffect(()=>{
        //
-        if(!loginStatus)
+        if(!permission)
             history.push("/")
     })
 

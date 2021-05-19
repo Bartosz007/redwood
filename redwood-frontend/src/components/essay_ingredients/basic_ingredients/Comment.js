@@ -10,14 +10,15 @@ import {
     addListOfBlockListeners, addListOfBlockStaticListeners, addListOfFontListeners,
     refreshBetterColors
 } from "../../../scripts/betterColors";
+import {ADMIN, isPermission, MODERATOR} from "../../../scripts/permissionScripts";
 
 
 function Comment(props){
     const data = props.value
     const user = data.user.userData
     const history = useHistory();
-    const permsBasic = store.getState().permission;
-    const perms = (permsBasic == "ADMIN") ||  (permsBasic == "MODERATOR")
+
+    const permissions = isPermission(ADMIN) || isPermission(MODERATOR)
 
     const deleteComment = () =>{
         delComm(data.idComment).then((data)=>{
@@ -62,12 +63,12 @@ function Comment(props){
             <div className="comment_container">
                 <div className="comment_action">
                     {
-                        perms ?
+                        permissions ?
                             <img onClick={deleteComment} src="../icons/delete.svg" alt="delete"/> :
                             null
                     }
                     {
-                        perms ?
+                        permissions ?
                             <img onClick={onGiveWarn} src="../icons/warn.svg" alt="delete"/>:
                             null
                     }
