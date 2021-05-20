@@ -14,7 +14,7 @@
 ##### Roles:
 
 |   | not logged in  |  ZBANOWANY |USER |MODERATOR|ADMIN|
-| ------------ | ------------ | ------------ | ------------ |
+| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
 | viewing articles and comments  | +  |  + | +  |+ |+ |
 |color settings |  + |+   |+   |+|+ |
 |saving settings in database |  - |  + |+   |+ |+ |
