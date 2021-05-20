@@ -1,0 +1,127 @@
+.add_form {
+  width: 50vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.5);
+  align-items: center;
+  overflow: scroll;
+}
+.add_form .header {
+  display: flex;
+  align-items: center;
+}
+.add_form .header h1 {
+  color: black;
+  font-size: 2em;
+}
+.add_form .title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+.add_form .tag_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.add_form .tag_container .tags {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1em;
+  width: 90%;
+  margin-bottom: 2em;
+}
+.add_form .tag_container .tags .tag {
+  display: flex;
+  justify-content: space-evenly;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 1em;
+  text-align: center;
+  padding: 0.3em 0 0.3em 0;
+}
+.add_form .tag_container .tags .tag img {
+  width: 1em;
+  height: 1em;
+  cursor: pointer;
+}
+.add_form .tag_container .tag_add {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+.add_form select {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 1em;
+  border: 0;
+  width: 18%;
+  margin-bottom: 1em;
+}
+.add_form .article_data {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 2em;
+  width: 100%;
+}
+.add_form .article_data input {
+  width: 38%;
+  font-size: 1em;
+}
+.add_form .article_data label {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.add_form .article_data label input {
+  width: 80%;
+  font-size: 1em;
+  cursor: pointer;
+}
+.add_form .text_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.add_form .text_container textarea {
+  resize: none;
+  width: 60%;
+  height: 9em;
+  border: 0;
+  outline: 0;
+  border-radius: 1em;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-family: "Cambria Math";
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+.add_form .text_container button {
+  width: 20%;
+  height: 3em;
+  text-align: center;
+  border: 0;
+  outline: 0;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: 1em;
+  font-size: 1.2em;
+}
+.add_form .text_container button:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+.add_form input {
+  width: 30%;
+  font-size: 1.2em;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 1em;
+  padding: 0.4em 0 0.4em 0;
+  border: 0;
+  outline: 0;
+  text-align: center;
+}
+/*# sourceMappingURL=add_article_styles.css.map */

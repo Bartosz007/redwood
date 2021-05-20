@@ -1,0 +1,140 @@
+.article_section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.article_section .article {
+  width: 60vw;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  margin-bottom: 2em;
+  border-radius: 1em;
+}
+.article_section .article .article_image {
+  width: 30%;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.article_section .article .article_image img {
+  width: 9.5em;
+  height: 9.5em;
+  object-fit: cover;
+  border-radius: 1em;
+}
+.article_section .article .article_content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+}
+.article_section .article .article_content * {
+  width: 80%;
+  text-align: center;
+  font-family: "Cambria Math";
+}
+.article_section .article .article_content .article_title {
+  display: flex;
+  justify-content: center;
+}
+.article_section .article .article_content .article_title h1 {
+  margin: 0;
+  font-size: 1.5em;
+  text-align: center;
+}
+.article_section .article .article_content .article_fragment {
+  font-size: 1.2em;
+}
+.article_section .article .article_content .article_info {
+  display: flex;
+  justify-content: space-evenly;
+}
+.article_section .article .article_content .article_href {
+  font-size: 1.8em;
+  font-family: "Cambria Math";
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0.8em;
+  width: 30%;
+  padding: 0.5em;
+}
+.article_section .article .article_content .add_article {
+  border: 0;
+  width: 30%;
+  height: 3em;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 1em;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+.article_section .article .article_content .add_article:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.article_section .article .article_content .comment_action {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 3em;
+  height: 2em;
+}
+.article_section .article .article_content .comment_action img {
+  width: 100%;
+}
+.article_section .article .article_action {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.article_section .article .article_action a {
+  padding: 0.5em 1em 0.5em 1em;
+  border-radius: 0.8em;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.5);
+  font-family: "Cambria Math";
+  font-size: 1.2em;
+}
+.article_section .article .article_action a:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+.article_section .article:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+.search_section {
+  width: 100%;
+  display: flex;
+  height: 5vh;
+  justify-content: center;
+  position: relative;
+  margin: 3em 0 3em 0;
+}
+.search_section .search_bar {
+  display: flex;
+}
+.search_section .search_bar img {
+  width: 70%;
+  height: 70%;
+  position: absolute;
+  top: 20%;
+  left: -30%;
+  z-index: -1;
+}
+.search_section .search_bar input {
+  text-align: center;
+  border: 0;
+  border-radius: 1em;
+  background: rgba(255, 255, 255, 0.5);
+  outline: none;
+  font-size: 1.2em;
+  font-family: "Cambria Math";
+}
+/*# sourceMappingURL=articles_list_styles.css.map */

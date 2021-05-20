@@ -1,0 +1,52 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10vh;
+  display: flex;
+}
+header a {
+  text-decoration: none;
+  color: black;
+  background: rgba(255, 255, 255, 0.5);
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Cambria Math";
+  font-size: 2em;
+}
+header a:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+.menu_button,
+.user_mgmt_button,
+.user_article_mgmt_button {
+  position: fixed;
+  right: 0;
+  width: 6em;
+  height: 6em;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1em 0 0 1em;
+}
+.menu_button:hover,
+.user_mgmt_button:hover,
+.user_article_mgmt_button:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.menu_button {
+  bottom: 10%;
+}
+.user_article_mgmt_button {
+  bottom: 30%;
+}
+.user_mgmt_button {
+  bottom: 50%;
+}
+/*# sourceMappingURL=button_styles.css.map */

@@ -9,7 +9,29 @@ redwood-backend/build
 
 redwood-backend/HELP.md
 
+# dependencies
+redwood-frontend/node_modules
+redwood-frontend/.pnp
+redwood-frontend/.pnp.js
+
+# testing
+redwood-frontend/coverage
+
+# production
+redwood-frontend/build
+
+# misc
+redwood-frontend/.DS_Store
+redwood-frontend/.env.local
+redwood-frontend/.env.development.local
+redwood-frontend/.env.test.local
+redwood-frontend/.env.production.local
+
+redwood-frontend/npm-debug.log*
+redwood-frontend/yarn-debug.log*
+redwood-frontend/yarn-error.log*
+
+
+redwood-frontend/.idea
+>>>>>>> front-end-2
 .idea
-
-
-
