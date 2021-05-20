@@ -13,7 +13,7 @@
 
 ##### Roles:
 
-|   | not logged in  |  ZBANOWANY |USER |MODERATOR|ADMIN
+|   | not logged in  |  ZBANOWANY |USER |MODERATOR|ADMIN|
 | ------------ | ------------ | ------------ | ------------ |
 | viewing articles and comments  | +  |  + | +  |+ |+ |
 |color settings |  + |+   |+   |+|+ |
